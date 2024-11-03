@@ -1,3 +1,4 @@
+import AddToBag from '@/app/components/AddToBag';
 import ImageGallery from '@/app/components/ImageGallery';
 import { fullProduct } from '@/app/interface';
 import { client } from '@/app/lib/sanity';
@@ -15,6 +16,7 @@ async function getData(slug: string){
           description,
           "slug": slug.current,
           "categoryName": category->name,
+          price_id
         }
     `
     const data = await client.fetch(query);
@@ -54,9 +56,7 @@ export default async function ProductPge({params}: {params: {slug: string}}){
                         </div>
                         
                         <div className='flex gap-2.5'>
-                            <Button>
-                                Add to Bag
-                            </Button>
+                            <AddToBag currency='NOK' description={data.description} image={data.images[0]} name={data.name} price={data.price} key={data._id} price_id={data.price_id}/>
                             <Button variant='secondary'>
                                 Buy Now
                             </Button>

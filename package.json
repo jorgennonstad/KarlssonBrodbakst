@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "@sanity/image-url": "^1.1.0",
     "@stripe/stripe-js": "^4.9.0",
@@ -17,8 +18,8 @@
     "lucide-react": "^0.454.0",
     "next": "15.0.2",
     "next-sanity": "^9.8.8",
-    "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "stripe": "^17.3.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
