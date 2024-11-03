@@ -1,4 +1,5 @@
 import AddToBag from '@/app/components/AddToBag';
+import CheckoutNow from '@/app/components/CheckOutNow';
 import ImageGallery from '@/app/components/ImageGallery';
 import { fullProduct } from '@/app/interface';
 import { client } from '@/app/lib/sanity';
@@ -22,6 +23,8 @@ async function getData(slug: string){
     const data = await client.fetch(query);
     return data
 }
+
+export const dynamic = "force-dynamic";
 
 export default async function ProductPge({params}: {params: {slug: string}}){
     const data: fullProduct = await getData(params.slug);
@@ -56,10 +59,24 @@ export default async function ProductPge({params}: {params: {slug: string}}){
                         </div>
                         
                         <div className='flex gap-2.5'>
-                            <AddToBag currency='NOK' description={data.description} image={data.images[0]} name={data.name} price={data.price} key={data._id} price_id={data.price_id}/>
-                            <Button variant='secondary'>
-                                Buy Now
-                            </Button>
+                            <AddToBag
+                                currency="USD"
+                                description={data.description}
+                                image={data.images[0]}
+                                name={data.name}
+                                price={data.price}
+                                key={data._id}
+                                price_id={data.price_id}
+                            />
+                            <CheckoutNow
+                                currency="USD"
+                                description={data.description}
+                                image={data.images[0]}
+                                name={data.name}
+                                price={data.price}
+                                key={data._id}
+                                price_id={data.price_id}
+                            />
                         </div>
 
                         <p className='mt-12 text-base text-gray-500 tracking-white'>{data.description}</p>
