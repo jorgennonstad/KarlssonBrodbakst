@@ -48,7 +48,7 @@ export default async function Hero() {
                             <Link href="/Foccacia" className='flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray200'>
                                 Foccacia
                             </Link>
-                            <Link href="/Brød" className='flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray200'>
+                            <Link href="/Brod" className='flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray200'>
                                 Brød
                             </Link>
                             <Link href="/Aioli" className='flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray200'>
