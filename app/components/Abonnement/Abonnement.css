@@ -23,13 +23,13 @@
    
   }
   
-  h1 {
+  .abonnement h1 {
     font-size: 50px;
     margin-left: 150px;
     font-weight: bold;
   }
   
-  p {
+  .abonnement p {
     margin-left: 150px;
     font-size: 20px;
   }
