@@ -1,0 +1,52 @@
+.abonnement {
+    position: relative;
+    background-image: url('./Abonnement.png'); /* Replace with the path to your image */
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    height: 600px; /* Adjust as needed */
+    overflow: hidden;
+    color: white;
+  }
+  
+  .abonnement_overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+   
+  }
+  
+  h1 {
+    font-size: 50px;
+    margin-left: 150px;
+    font-weight: bold;
+  }
+  
+  p {
+    margin-left: 150px;
+    font-size: 20px;
+  }
+  
+  .subscribe-button {
+    background-color: #f1d6b8; /* Replace with the exact color */
+    border: none;
+    padding: 10px 70px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+    margin-top: 40px;
+    margin-left: 150px;
+  }
+  
+  .subscribe-button:hover {
+    background-color: #e7c1a0; /* Slightly darker shade */
+  }
+  
