@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { client, urlFor } from '../lib/sanity'
+import { client, urlFor } from '../../lib/sanity'
 import Link from "next/link";
 
 async function getData(){
@@ -45,13 +45,16 @@ export default async function Hero() {
 
                     <div className='flex flex-col item-center justify-between gap-8 md:flex-row'>
                         <div className='flex h-12 w-64 divide-x overflow-hidden rounded-lg border'>
-                            <Link href="/Foccacia" className='flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray200'>
+                            <Link href="/Foccacia" className='flex w-1/4 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray200'>
                                 Foccacia
                             </Link>
-                            <Link href="/Brod" className='flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray200'>
+                            <Link href="/Brod" className='flex w-1/4 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray200'>
                                 Brød
                             </Link>
-                            <Link href="/Aioli" className='flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray200'>
+                            <Link href="/Abonoment" className='flex w-1/4 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray200'>
+                            Abonoment
+                            </Link>
+                            <Link href="/Aioli" className='flex w-1/4 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray200'>
                                 Aioli
                             </Link>
                             

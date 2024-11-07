@@ -1,6 +1,6 @@
-import AddToBag from '@/app/components/AddToBag';
-import CheckoutNow from '@/app/components/CheckOutNow';
-import ImageGallery from '@/app/components/ImageGallery';
+import AddToBag from '@/app/components/AddToBag/AddToBag';
+import CheckoutNow from '@/app/components/CheckOutNow/CheckOutNow';
+import ImageGallery from '@/app/components/ImageGallery/ImageGallery';
 import { fullProduct } from '@/app/interface';
 import { client } from '@/app/lib/sanity';
 import { Button } from '@/components/ui/button';

@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { simplifiedProduct } from "../interface";
-import { client } from "../lib/sanity"
+import { simplifiedProduct } from "../../interface";
+import { client } from "../../lib/sanity"
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 

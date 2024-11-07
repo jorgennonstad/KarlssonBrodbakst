@@ -12,6 +12,7 @@ const links = [
     {name: 'Brod', href: '/Brod'},
     {name: 'Foccacia', href: '/Foccacia'},
     {name: 'Aioli', href: '/Aioli'},
+    {name: 'Abonoment', href: '/Abonoment'},
 ]
 
 export default function NavBar(){
