@@ -20,12 +20,6 @@ export default function NavBar() {
     return (
        <header className="navbar">
             <div className="navbar-container">
-                <Link href="/">
-                    <h1 className="navbar-logo">
-                        Next<span className="navbar-logo-highlight">Commerce</span>
-                    </h1>
-                </Link>
-
                 <nav className="navbar-links">
                     {links.map((link, idx) => (
                         <div key={idx}>
