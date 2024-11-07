@@ -53,7 +53,7 @@ export default function AllProductsPage() {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className='bg-white'>
+        <div className='bg-white' id='products-scroll'>
             <div className='mx-auto'>
                 {/* Grid container for product cards */}
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full'>

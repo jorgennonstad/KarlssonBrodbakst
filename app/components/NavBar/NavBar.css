@@ -1,0 +1,114 @@
+/* NavBar.css */
+
+/* Positioning the navbar over the hero image */
+.navbar {
+    position: absolute;
+    top: 0; /* Align it to the top of the page */
+    left: 0; /* Align it to the left */
+    width: 100%; /* Full width */
+    z-index: 10; /* Ensure it's above other content */
+    padding: 1rem 2rem; /* Add padding for spacing */
+    background-color: transparent; /* No background */
+    box-shadow: none; /* Remove any box shadow */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+/* Navbar container setup */
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Logo styling */
+.navbar-logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white; /* White text for contrast over the image */
+    text-align: center;
+}
+
+/* Navigation links container */
+.navbar-links {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+
+/* Link styling */
+.navbar-link {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: white; /* White text for contrast */
+    transition: color 0.1s ease;
+}
+
+.navbar-link:hover {
+    color: #ff6600; /* Primary color on hover */
+}
+
+.navbar-link-active {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ff6600; /* Active link color */
+}
+
+/* Cart button container */
+.navbar-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-cart-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    width: 3rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem; /* Rounded corners */
+}
+
+.navbar-cart-text {
+    display: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+}
+
+.navbar-cart-button:hover .navbar-cart-text {
+    display: block;
+}
+
+/* Responsive Styling */
+@media (min-width: 1024px) {
+    .navbar-links {
+        justify-content: space-evenly; /* Evenly distribute the links */
+    }
+
+    .navbar-cart-button {
+        height: 4rem;
+        width: 4rem;
+    }
+
+    .navbar-cart-text {
+        display: block; /* Show text on larger screens */
+    }
+}
+
+@media (max-width: 1024px) {
+    .navbar-links {
+        display: none; /* Hide the links on smaller screens */
+    }
+
+    .navbar-cart-button {
+        height: 3rem;
+        width: 3rem;
+    }
+}
