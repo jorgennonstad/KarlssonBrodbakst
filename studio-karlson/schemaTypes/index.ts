@@ -1,6 +1,7 @@
 import product from "./product";
 import category from "./category";
 import heroImages from "./heroImages";
+import abonnement from "./abonnement";
 
-export const schemaTypes = [product, category, heroImages];
+export const schemaTypes = [product, category, heroImages, abonnement];
 

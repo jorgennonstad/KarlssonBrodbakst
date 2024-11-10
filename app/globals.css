@@ -65,3 +65,7 @@
 html{
   scroll-behavior: smooth;
 }
+
+.all-products-container, .abonnement-container{
+  background: url('./src//img/wood_wallpaper2.png') fixed;
+}
