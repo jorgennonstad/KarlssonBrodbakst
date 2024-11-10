@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useShoppingCart } from "use-shopping-cart";
 import { urlFor } from "../../lib/sanity";
+import "./AddToBag.css";
 
 export interface ProductCart {
   name: string;
@@ -32,7 +33,9 @@ export default function AddToBag({
       price_id: price_id,
     };
     return(
-            <Button onClick={() => {
+            <Button 
+            className="add-to-bag"
+            onClick={() => {
                 addItem(product), handleCartClick();
             }}>
                 Add to Bag

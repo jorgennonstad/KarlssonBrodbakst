@@ -91,15 +91,6 @@ export default function AllProductsPage() {
                                     key={`${product._id}-add-to-bag`}
                                     price_id={product.price_id}
                                 />
-                                <CheckoutNow
-                                    currency="USD"
-                                    description={product.description}
-                                    image={product.images[0]}
-                                    name={product.name}
-                                    price={product.price}
-                                    key={`${product._id}-checkout-now`}  
-                                    price_id={product.price_id}
-                                />
                             </div>
 
                         </div>

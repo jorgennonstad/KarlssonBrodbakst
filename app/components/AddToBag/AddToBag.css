@@ -1,0 +1,12 @@
+.add-to-bag{
+    height: 70px;
+    background-color: #FBE0B1;
+    color: #633E1D;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.add-to-bag:hover{
+    background-color: #633E1D;
+    color: #FBE0B1;
+}

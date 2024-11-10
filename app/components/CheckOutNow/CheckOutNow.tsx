@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useShoppingCart } from "use-shopping-cart";
 import { urlFor } from "../../lib/sanity";
 import { ProductCart } from "../AddToBag/AddToBag";
+import "./CheckOutNow.css";
 
 export default function CheckoutNow({
   currency,

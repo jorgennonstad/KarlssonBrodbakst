@@ -1,6 +1,7 @@
 /* All Products Container */
 .all-products-container {
-    background-color: white;
+    background-image: url("../../src/img/wood_wallpaper2.png");
+    padding: 50px;
 }
 
 .product-grid-container {
@@ -11,13 +12,13 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
     width: 100%;
-    grid-gap: 0; /* Remove gaps between columns and rows */
+    grid-gap: 50px; /* Remove gaps between columns and rows */
 }
 
 .product-card {
     position: relative;
     min-height: 90vh;
-    background-color: white;
+    background-color: black;
 }
 
 /* Product Image */
@@ -29,6 +30,7 @@
     object-fit: cover;
     width: 100%;
     height: 90vh;
+    opacity: 82%;
 }
 
 /* Product Link */
@@ -77,10 +79,12 @@
 .overlay-content {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100%;
+    align-items: flex-start; /* Align items to the top */
+    height: 77%;
     padding: 16px;
+    margin-top: 33%; /* Push content down to approximately 1/3 from the top */
 }
+
 
 .product-description {
     font-size: 1.25rem;
@@ -90,7 +94,7 @@
 /* Action Buttons */
 .product-action-buttons {
     position: absolute;
-    bottom: 16px;
+    bottom: 30px;
     left: 16px;
     right: 16px;
     z-index: 20;
