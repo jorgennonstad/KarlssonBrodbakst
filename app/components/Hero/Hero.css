@@ -34,7 +34,7 @@
 
 .hero-text-content {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -54,4 +54,42 @@
     max-width: 600px;
     color: #f0f0f0;
     margin: 0 auto;
+}
+
+
+
+.hero-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+    gap: 50px;
+}
+
+.hero-link {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    gap: 20px;
+}
+
+.hero-link svg{
+    height: 70px;
+    width: 70px;
+}
+
+.hero-link-text {
+    font-size: 16px;
+}
+
+.hero-link:hover {
+    color: #ff7f50; /* Change color on hover */
+}
+
+.hero-link:hover .hero-icon {
+    color: #ff7f50; /* Change icon color on hover */
 }

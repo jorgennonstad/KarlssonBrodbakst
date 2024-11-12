@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
+
 /* Container for the abonnement card */
 .abonnement-container {
   padding: 50px;
@@ -26,10 +29,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);  /* Semi-transparent overlay */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)); /* Left-to-right black gradient */
   padding: 80px 80px;
   gap: 20px;  /* Add space between left and right content */
 }
+
 
 /* Left section (Text content) */
 .abonnement-left {
@@ -50,7 +54,7 @@
 /* Subtitle style */
 .abonnement-left h2, .abonnement-left h3 {
   font-size: 2rem;
-  font-weight: bold;
+  font-family: inknut antiqua;
   margin: 5px 0;
 }
 
@@ -60,12 +64,12 @@
   position: absolute;
   border: none;
   padding: 10px 70px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 1.5rem;
   cursor: pointer;
   color: black;
   margin-top: 20px;
   width: 25%;
+  height: 77px;
   min-width: 200px;
   bottom: 50px;
 }
@@ -85,38 +89,11 @@
 
 /* Description style */
 .abonnement-right p {
-  font-size: 20px;
+  font-size: 1.3rem;
   margin-top: 20px;
   line-height: 1.5;
+  font-weight: lighter;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  .abonnement_overlay h1 {
-    font-size: 2rem;
-  }
 
-  .abonnement-right p {
-    font-size: 1rem;
-  }
 
-  .subscribe-button {
-    padding: 12px 30px;
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .abonnement_overlay h1 {
-    font-size: 1.6rem;
-  }
-
-  .abonnement-right p {
-    font-size: 0.9rem;
-  }
-
-  .subscribe-button {
-    padding: 10px 25px;
-    font-size: 0.9rem;
-  }
-}

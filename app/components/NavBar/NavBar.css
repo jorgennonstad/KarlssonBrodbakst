@@ -6,7 +6,7 @@
     top: 0; /* Align it to the top of the page */
     left: 0; /* Align it to the left */
     width: 100%; /* Full width */
-    z-index: 10; /* Ensure it's above other content */
+    z-index: 100; /* Ensure it's above other content */
     padding: 2rem 2rem; /* Add padding for spacing */
     background-color: transparent; /* No background */
     box-shadow: none; /* Remove any box shadow */
@@ -52,8 +52,8 @@
 }
 
 .navbar-link-active {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 300;
     color: #ff6600; /* Active link color */
 }
 
@@ -64,7 +64,12 @@
     justify-content: center;
 }
 
+.navbar-cart button{
+    height: 60px;
+    width: 60px;
+}
 .navbar-cart-button {
+    height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,11 +84,7 @@
     display: none;
     font-size: 0.875rem;
     font-weight: 600;
-    color: white;
-}
-
-.navbar-cart-button:hover .navbar-cart-text {
-    display: block;
+    color: black;
 }
 
 /* Responsive Styling */
@@ -94,21 +95,83 @@
 
     .navbar-cart-button {
         height: 4rem;
-        width: 4rem;
+        width: auto;
     }
 
-    .navbar-cart-text {
-        display: block; /* Show text on larger screens */
+    .navbar-cart-button .lucide-shopping-bag {
+        font-size: 1.75rem;
     }
 }
 
+
+
+/* Hamburger menu button for mobile view */
+.navbar-hamburger {
+    display: none; /* Hide by default */
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Show hamburger button on smaller screens */
 @media (max-width: 1024px) {
-    .navbar-links {
-        display: none; /* Hide the links on smaller screens */
+    .navbar-container{
+        justify-content: space-between;
     }
 
-    .navbar-cart-button {
-        height: 3rem;
-        width: 3rem;
+    .navbar-hamburger {
+        display: block;
     }
+    
+    .navbar-links {
+        display: none; /* Hide links on smaller screens */
+    }
+}
+
+/* Overlay menu styles */
+.overlay-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9); /* Dark overlay */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    transition: opacity 0.3s ease;
+}
+
+/* Close button for overlay */
+.overlay-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Links within overlay */
+.overlay-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.overlay-link {
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.overlay-link:hover {
+    color: #ff6600; /* Highlight color */
 }

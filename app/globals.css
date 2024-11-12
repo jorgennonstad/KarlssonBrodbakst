@@ -68,4 +68,9 @@ html{
 
 .all-products-container, .abonnement-container{
   background: url('./src//img/wood_wallpaper2.png') fixed;
+  background-color: black;
+}
+
+*{
+  font-family: 'Inknut Antiqua', serif;
 }

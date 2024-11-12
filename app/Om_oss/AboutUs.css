@@ -1,0 +1,94 @@
+/* AboutUs.css */
+
+.about-us-page {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    padding: 60px 20px;
+    color: #333;
+}
+
+.about-us-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.about-us-header h1 {
+    font-size: 3rem;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.intro-text {
+    font-size: 1.2rem;
+    color: #777;
+    font-style: italic;
+}
+
+.about-us-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.about-us-content h2 {
+    font-size: 2rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.about-us-content p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.mission-statement,
+.our-team,
+.company-values {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.mission-statement h2,
+.our-team h2,
+.company-values h2 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.company-values ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.company-values li {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 10px 0;
+}
+
+.company-values li strong {
+    color: #ff6600;
+}
+
+.contact-section {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contact-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.contact-section p {
+    font-size: 1.1rem;
+    color: #555;
+}

@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Hero from "./components/Hero/Hero";
 import Newest from "./components/Newest/Newest";
+import Footer from "./components/Footer/footer";
 import AllProductsPage from "./components/AllProductsPage/AllProductsPage";
 import Abonnement from "./components/Abonnement/Abonnement";
+import Head from "next/head";
+
 
 
 export const dynamic = "force-dynamic";
@@ -13,7 +16,7 @@ export default function Home() {
       <Hero />
       <AllProductsPage />
       <Abonnement />
-      <Newest />
+      <Footer />
     </div>
   );
 }
