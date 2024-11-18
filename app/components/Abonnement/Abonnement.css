@@ -58,18 +58,16 @@
 /* Button */
 .subscribe-button {
   background-color: #f1d6b8;
-  position: absolute;
   border: none;
-  padding: 10px 70px;
+  padding: 10px 5%;
   font-size: 1.5rem;
   cursor: pointer;
   color: black;
   margin-top: 20px;
-  width: 25%;
-  height: 77px;
-  min-width: 200px;
-  bottom: 50px;
-  left: 100px;
+  max-width: 300px; /* Limit max width to prevent over-scaling */
+  height: auto; /* Let the height adapt */
+  min-width: 200px; /* Keep a minimum width for smaller screens */
+  align-self: flex-start; /* Adjust based on parent container */
 }
 
 .subscribe-button:hover {
@@ -126,11 +124,9 @@
 
   .subscribe-button {
     align-self: center;
-    padding: 10px 30px;
+    padding: 10px 20px;
     font-size: 1rem;
-    bottom: 20px;
-    position: static;
-   
+    width: 100%; /* Ensure it scales with the screen */
   }
 }
 
@@ -145,7 +141,7 @@
   }
 
   .subscribe-button {
-    padding: 8px 20px;
+    padding: 8px 10px;
     font-size: 0.9rem;
   }
 }
