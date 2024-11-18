@@ -2,8 +2,11 @@
     height: 70px;
     background-color: #FBE0B1;
     color: #633E1D;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: bold;
+    width: 60%;
+    min-width: 190px;
+    margin: 0 auto;
 }
 
 .add-to-bag:hover{
