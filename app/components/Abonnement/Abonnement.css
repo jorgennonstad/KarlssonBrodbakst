@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
 
-
 /* Container for the abonnement card */
 .abonnement-container {
   padding: 50px;
@@ -9,18 +8,18 @@
   justify-content: center;
 }
 
-/* Make the abonnement element take full height and width */
+/* Main abonnement element */
 .abonnement {
   position: relative;
   width: 100%;
   height: 600px;
-  background-size: cover;  /* Ensure the background image covers the container */
-  background-position: center; /* Center the image */
+  background-size: cover;
+  background-position: center;
   overflow: hidden;
   color: white;
 }
 
-/* Overlay content that sits on top of the background image */
+/* Overlay content */
 .abonnement_overlay {
   position: absolute;
   display: grid;
@@ -29,13 +28,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)); /* Left-to-right black gradient */
-  padding: 80px 80px;
-  gap: 20px;  /* Add space between left and right content */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  padding: 80px;
+  gap: 20px;
 }
 
-
-/* Left section (Text content) */
+/* Left section */
 .abonnement-left {
   display: flex;
   flex-direction: column;
@@ -44,21 +42,20 @@
   min-width: 245px;
 }
 
-/* Heading style */
+/* Headings */
 .abonnement-left h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-/* Subtitle style */
 .abonnement-left h2, .abonnement-left h3 {
-  font-size: 2rem;
-  font-family: inknut antiqua;
+  font-size: 1.5rem;
+  font-family: 'Inknut Antiqua', serif;
   margin: 5px 0;
 }
 
-/* Button style */
+/* Button */
 .subscribe-button {
   background-color: #f1d6b8;
   position: absolute;
@@ -72,14 +69,15 @@
   height: 77px;
   min-width: 200px;
   bottom: 50px;
+  left: 100px;
 }
 
 .subscribe-button:hover {
-    background-color: #633E1D;
-    color: #FBE0B1;
+  background-color: #633E1D;
+  color: #FBE0B1;
 }
 
-/* Right section (Description) */
+/* Right section */
 .abonnement-right {
   display: flex;
   flex-direction: column;
@@ -87,7 +85,7 @@
   align-items: flex-start;
 }
 
-/* Description style */
+/* Description */
 .abonnement-right p {
   font-size: 1.3rem;
   margin-top: 20px;
@@ -95,5 +93,59 @@
   font-weight: lighter;
 }
 
+/* Mobile view */
+@media screen and (max-width: 768px) {
+  .abonnement_overlay {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  }
 
+  .abonnement-left {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
 
+  .abonnement-left h1, .abonnement-left h2, .abonnement-left h3 {
+    font-size: 1.5rem;
+  }
+
+  .abonnement-right {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .abonnement-right p {
+    font-size: 1rem;
+    margin-top: 10px; /* Ensure paragraph appears below headings */
+  }
+
+  .subscribe-button {
+    align-self: center;
+    padding: 10px 30px;
+    font-size: 1rem;
+    bottom: 20px;
+    position: static;
+   
+  }
+}
+
+/* Extra small screens */
+@media screen and (max-width: 480px) {
+  .abonnement-left h1, .abonnement-left h2, .abonnement-left h3 {
+    font-size: 1.2rem;
+  }
+
+  .abonnement-right p {
+    font-size: 0.9rem;
+  }
+
+  .subscribe-button {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
+}
