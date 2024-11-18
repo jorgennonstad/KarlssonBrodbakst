@@ -1,5 +1,3 @@
-// /app/Nyheter/page.tsx
-
 "use client";
 
 import Link from 'next/link';
@@ -9,7 +7,7 @@ import './Nyheter.css';
 const mockNews = [
   {
     _id: '1',
-    title: 'Nyhet 1: Vår nye butikkåpning!',
+    title: 'Vår nye butikkåpning!',
     publishedDate: '2024-11-10',
     slug: 'nyhet-1',
     image: '/images/placeholder-image.jpg',
@@ -17,7 +15,7 @@ const mockNews = [
   },
   {
     _id: '2',
-    title: 'Nyhet 2: Nye produkter i butikken!',
+    title: 'Nye produkter i butikken!',
     publishedDate: '2024-10-30',
     slug: 'nyhet-2',
     image: '/images/placeholder-image.jpg',
@@ -25,7 +23,7 @@ const mockNews = [
   },
   {
     _id: '3',
-    title: 'Nyhet 3: Søndagskampanje!',
+    title: 'Søndagskampanje!',
     publishedDate: '2024-10-20',
     slug: 'nyhet-3',
     image: '/images/placeholder-image.jpg',
@@ -46,7 +44,7 @@ export default function NyheterPage() {
 
   return (
     <div className='news-container'>
-      <h1>Nyheter</h1>
+      <h1 className='news-header'>Nyheter</h1>
       <div className='news-list'>
         {news.map((newsItem) => (
           <div key={newsItem._id} className='news-card'>
@@ -55,11 +53,13 @@ export default function NyheterPage() {
               alt={newsItem.title} 
               className="news-image"
             />
-            <h2 className='news-title'>{newsItem.title}</h2>
-            <p className='news-body'>{newsItem.body.slice(0, 150)}...</p>
-            <Link href={`/nyheter/${newsItem.slug}`} className='news-link'>
-              Les mer
-            </Link>
+            <div className='news-content'>
+              <h2 className='news-title'>{newsItem.title}</h2>
+              <p className='news-body'>{newsItem.body.slice(0, 120)}...</p>
+              <Link href={`/nyheter/${newsItem.slug}`} className='news-link'>
+                Les mer
+              </Link>
+            </div>
           </div>
         ))}
       </div>
