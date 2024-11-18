@@ -2,7 +2,8 @@
 
 .about-us-page {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f9;
+    background: url('../src/img/wood_wallpaper2.png') fixed;
+  background-color: black;
     padding: 60px 20px;
     color: #333;
 }
@@ -15,14 +16,14 @@
 
 .about-us-header h1 {
     font-size: 3rem;
-    color: #333;
+    color: white;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
 .intro-text {
     font-size: 1.2rem;
-    color: #777;
+    color: white;
     font-style: italic;
 }
 
