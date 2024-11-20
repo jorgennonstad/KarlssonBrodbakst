@@ -10,11 +10,7 @@ import "./NavBar.css";
 
 const links = [
     { name: 'Hjem', href: '/' },
-    { name: 'Nyheter', href: '/Nyheter' },
     { name: 'Om oss', href: '/Om_oss' },
-    { name: 'Kontakt oss', href: '/kontakt_oss' }
-
-
 ];
 
 export default function NavBar() {

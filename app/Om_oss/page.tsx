@@ -1,49 +1,39 @@
-// pages/Om_oss.tsx
-
-import React from 'react';
 import './AboutUs.css';
+import Footer from "../components/Footer/footer";
 
 const AboutUs = () => {
     return (
         <div className="about-us-page">
-            <header className="about-us-header">
-                <h1>Om Oss</h1>
-                <p className="intro-text">Vi er et dedikert team som streber etter å gjøre din opplevelse best mulig.</p>
-            </header>
-
-            <section className="about-us-content">
-                <div className="mission-statement">
-                    <h2>Vår Visjon</h2>
-                    <p>
-                        Vår visjon er å revolusjonere kjøpsopplevelsen med kvalitetsprodukter til konkurransedyktige priser. 
-                        Vi er lidenskapelig opptatt av å levere produkter som forbedrer våre kunders liv.
-                    </p>
+            <div className="about-us-hero-container">
+                <div className="about-us-hero-images-container">
+                    <div className="about-us-hero-overlay"></div>
+                    <div className="about-us-hero-text-content">
+                        <h1 className="about-us-hero-title">Om Oss</h1>
+                        <p className="about-us-hero-subtitle">
+                            Hvem er vi som driver bakeriet
+                        </p>
+                    </div>
                 </div>
+            </div>
 
-                <div className="our-team">
-                    <h2>Vårt Team</h2>
-                    <p>
-                        Vi er et team av dedikerte fagfolk med et felles mål om å gjøre handleopplevelsen enklere, raskere og mer personlig. 
-                        Vi er alltid tilgjengelig for å svare på spørsmål og hjelpe deg med det du trenger.
-                    </p>
-                </div>
+            {/* Section for two side-by-side placeholders */}
+            <div className="about-us-images-section">
+                <div className="about-us-image-placeholder">Bilde 1</div>
+                <div className="about-us-image-placeholder">Bilde 2</div>
+            </div>
 
-                <div className="company-values">
-                    <h2>Våre Verdier</h2>
-                    <ul>
-                        <li><strong>Engasjement:</strong> Vi bryr oss om våre kunder og deres opplevelse.</li>
-                        <li><strong>Innovasjon:</strong> Vi søker alltid etter nye måter å forbedre oss på.</li>
-                        <li><strong>Integritet:</strong> Vi handler ærlig og åpent med våre kunder og partnere.</li>
-                    </ul>
-                </div>
-            </section>
+            {/* Section for one wider image */}
+            <div className="about-us-wide-image-container">
+                <div className="about-us-wide-image">
+                    <h1>Vår Historie</h1>    
+                </div> {/* This div will hold the image */}
+            </div>
 
-            <section className="contact-section">
-                <h2>Kontakt Oss</h2>
-                <p>
-                    Har du spørsmål? Ta kontakt med oss via e-post på <strong>support@butikken.no</strong>.
-                </p>
-            </section>
+            <div className="about-us-text-container">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                Quidem eius laudantium autem soluta veniam maiores hic minima accusamus mollitia voluptates quaerat corporis natus corrupti temporibus, eaque eveniet amet voluptate debitis? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem dolorem soluta dolores sapiente sed explicabo placeat corrupti nemo quibusdam maiores? Natus recusandae adipisci excepturi eum! Natus inventore accusamus quas temporibus. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates magni dolores velit esse odio obcaecati ad, quas quaerat incidunt maiores, sunt, fugit voluptatibus quisquam suscipit. Aspernatur impedit ut quaerat minima.</p>
+            </div>
+            <Footer />
         </div>
     );
 };

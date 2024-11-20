@@ -1,96 +1,118 @@
-/* AboutUs.css */
-
 .about-us-page {
-    font-family: 'Roboto', sans-serif;
-    background: url('../src/img/wood_wallpaper2.png') fixed;
-  background-color: black;
-    padding: 60px 20px;
-    color: #333;
+    background-image: url('../src/img/wood_wallpaper2.png'); /* Define the wood wallpaper image */
+    background-size: auto; /* Keep the original size of the wallpaper image */
+    background-repeat: repeat; /* Make the background image repeat */
+    background-position: top left; /* Position the image at the top left */
 }
 
-.about-us-header {
-    text-align: center;
-    margin-bottom: 40px;
-    margin-top: 50px;
+
+.about-us-hero-container {
+    position: relative;
+    width: 100%;
+    height: 600px; /* Adjust height as needed */
 }
 
-.about-us-header h1 {
-    font-size: 3rem;
-    color: white;
-    font-weight: 700;
-    margin-bottom: 10px;
+.about-us-hero-images-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: url('../src/img/TwoBakers.jpeg'); /* Define the background image */
+    background-size: cover; /* Ensure the image covers the entire container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating the image */
 }
 
-.intro-text {
+.about-us-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 1;
+}
+
+.about-us-images-section {
+    display: flex; /* Use flexbox to align images side-by-side */
+    justify-content: center; /* Center the images horizontally */
+    gap: 50px; /* Add spacing between the images */
+    padding: 50px; /* Optional: Add some padding for responsiveness */
+}
+
+.about-us-image-placeholder {
+    width: 100%;
+    max-width: 100%; /* Limit the maximum width of each image */
+    height: 500px; /* Set a fixed height for the placeholders */
+    background-color: #ddd; /* Light gray background for the placeholder */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1.2rem;
+    color: #555; /* Placeholder text color */
+    border: 2px dashed #ccc; /* Dashed border to indicate a placeholder */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */ 
+}
+
+.about-us-wide-image-container {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Adjust height as needed for your layout */
+    box-sizing: border-box; /* Include padding and margin inside the element's width */
+    padding: 0 50px;
+}
+
+.about-us-text-container {
+    height: 500px;
+    height: 500px;
+    background-color: rgb(251, 224, 177);
+    margin: 0 50px 50px;
+}
+
+.about-us-wide-image {
+    width: 100%;
+    height: 100%;
+    background-image: url('../src/img/Abonnement.png'); /* Define the background image */
+    background-size: cover; /* Ensure the image covers the entire container */
+    background-position: center center; /* Ensure the image is centered */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+}
+
+.about-us-wide-image h1 {
+    position: absolute;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.about-us-text-container p {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    font-weight: lighter;
+    padding: 20px;
+}
+
+.about-us-hero-text-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: white;
-    font-style: italic;
-}
-
-.about-us-content {
-    max-width: 1100px;
-    margin: 0 auto;
-    line-height: 1.8;
-}
-
-.about-us-content h2 {
-    font-size: 2rem;
-    color: #444;
-    margin-bottom: 10px;
-}
-
-.about-us-content p {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.mission-statement,
-.our-team,
-.company-values {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
-
-.mission-statement h2,
-.our-team h2,
-.company-values h2 {
-    font-size: 1.8rem;
-    color: #333;
-}
-
-.company-values ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.company-values li {
-    font-size: 1.1rem;
-    color: #555;
-    margin: 10px 0;
-}
-
-.company-values li strong {
-    color: #ff6600;
-}
-
-.contact-section {
     text-align: center;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 2;
 }
 
-.contact-section h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
+.about-us-hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
 }
 
-.contact-section p {
-    font-size: 1.1rem;
-    color: #555;
+.about-us-hero-subtitle {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
 }
+
+/* Add more styles for content sections */
