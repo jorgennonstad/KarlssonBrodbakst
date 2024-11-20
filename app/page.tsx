@@ -4,6 +4,7 @@ import Newest from "./components/Newest/Newest";
 import Footer from "./components/Footer/footer";
 import AllProductsPage from "./components/AllProductsPage/AllProductsPage";
 import Abonnement from "./components/Abonnement/Abonnement";
+import NewsSlider from "./components/NewsSlider/NewsSlider";
 import Head from "next/head";
 
 
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <AllProductsPage />
       <Abonnement />
+      <NewsSlider />
       <Footer />
     </div>
   );
