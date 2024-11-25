@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import React, { useState, useEffect } from "react";
 import { client } from "@/app/lib/sanity";
@@ -13,7 +13,7 @@ interface AbonnementData {
   backgroundImage: string; // Background image URL
   price: number;
   stripeProductId: string;
-  stripePriceId: string;
+  stripePriceId: string; // This is what we need for the Stripe session
 }
 
 // Fetch subscription data from Sanity
@@ -54,21 +54,24 @@ export default function Abonnement() {
   }, []);
 
   const handleSubscribe = async () => {
+    if (!abonnement) return;
+
     try {
-      const response = await fetch("http://localhost:5000/create-checkout-session", {
+      // Send stripePriceId from Sanity to the backend
+      const response = await fetch("http://localhost:5001/create-subscription-session", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ quantity: 1 }),
+        body: JSON.stringify({ quantity: 1, priceId: abonnement.stripePriceId }), // Send priceId from Sanity
       });
-  
+
       if (!response.ok) {
         const error = await response.json();
         console.error("Server error:", error.error || "Unknown error");
         return;
       }
-  
+
       const data = await response.json();
       if (data.url) {
         window.location.href = data.url; // Redirect to Stripe
@@ -79,9 +82,6 @@ export default function Abonnement() {
       console.error("Failed to initiate checkout:", e);
     }
   };
-  
-  
-  
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;

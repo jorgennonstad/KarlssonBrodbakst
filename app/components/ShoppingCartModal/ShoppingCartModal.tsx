@@ -11,20 +11,43 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button';
 
 export default function ShoppingCartModal() {
-    const { cartCount, shouldDisplayCart, handleCartClick, cartDetails, removeItem, totalPrice, redirectToCheckout} = useShoppingCart();
-    
+    const { cartCount, shouldDisplayCart, handleCartClick, cartDetails, removeItem, totalPrice } = useShoppingCart();
 
     async function handleCheckoutClick(event: any) {
         event.preventDefault();
+        
+        // Prepare the cart items for checkout
+        const items = Object.values(cartDetails ?? {}).map((entry) => ({
+          priceId: entry.price_id,  // Correctly using price_id here
+          quantity: entry.quantity,  // Quantity of the item
+        }));
+        console.log(items);
+        
+        // Send the cart items to the backend to create a Stripe checkout session
         try {
-            const result = await redirectToCheckout();
-          if (result?.error) {
-            console.log(result);
+          const response = await fetch('http://localhost:5001/create-onetime-session', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ items }), // Send the priceId and quantity to the backend
+          });
+        
+          const { url } = await response.json();
+        
+          // Redirect to Stripe Checkout
+          if (url) {
+            window.location.href = url;
+          } else {
+            console.error("Failed to create Stripe session");
           }
         } catch (error) {
-          console.log(error);
+          console.log("Error creating checkout session", error);
         }
       }
+      
+      
+    
 
     return (
         <Sheet open={shouldDisplayCart} onOpenChange={handleCartClick}>
@@ -43,38 +66,38 @@ export default function ShoppingCartModal() {
                                     {Object.values(cartDetails ?? {}).map((entry) => {
                                         return (
                                             <li key={entry.id} className="flex py-6">
-                                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 relative"> {/* Added relative positioning */}
+                                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 relative">
                                                     <Image 
                                                         src={entry.image as string} 
                                                         alt="product image" 
-                                                        layout="fill"  // Use layout "fill"
-                                                        objectFit="cover" // Ensures the image covers the div
+                                                        layout="fill"  
+                                                        objectFit="cover" 
                                                     />
                                                 </div>
 
                                                 <div className="ml-4 flex flex-1 flex-col">
                                                     <div>
-                                                    <div className="flex justify-between text-base font-medium text-gray-900">
-                                                        <h3>{entry.name}</h3>
-                                                        <p className="ml-4">${entry.price}</p>
-                                                    </div>
-                                                    <p className="mt-1 text-sm text-gray-500 w-[90%] line-clamp-2">
-                                                        {entry.description}
-                                                    </p>
+                                                        <div className="flex justify-between text-base font-medium text-gray-900">
+                                                            <h3>{entry.name}</h3>
+                                                            <p className="ml-4">${entry.price}</p>
+                                                        </div>
+                                                        <p className="mt-1 text-sm text-gray-500 w-[90%] line-clamp-2">
+                                                            {entry.description}
+                                                        </p>
                                                     </div>
 
                                                     <div className="flex flex-1 items-end justify-between text-sm">
-                                                    <p className="text-gray-500">QTY: {entry.quantity}</p>
+                                                        <p className="text-gray-500">QTY: {entry.quantity}</p>
 
-                                                    <div className="flex">
-                                                        <button
-                                                        type="button"
-                                                        onClick={() => removeItem(entry.id)}
-                                                        className="font-medium text-primary hover:text-primary/80"
-                                                        >
-                                                        Remove
-                                                        </button>
-                                                    </div>
+                                                        <div className="flex">
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => removeItem(entry.id)}
+                                                                className="font-medium text-primary hover:text-primary/80"
+                                                            >
+                                                                Remove
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </li>
@@ -94,14 +117,14 @@ export default function ShoppingCartModal() {
                             Shipping and taxes are calculated at checkout.
                         </p>
                         <div className="m t-6">
-                        <Button onClick={handleCheckoutClick} className="w-full">
-                            Checkout
-                        </Button>
+                            <Button onClick={handleCheckoutClick} className="w-full">
+                                Checkout
+                            </Button>
                         </div>
                         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                             <p>
                                 OR {""} 
-                                <button onClick={()=> handleCartClick()} className="font-md text-primary hover:text-primary/80">Continue Shopping</button>
+                                <button onClick={() => handleCartClick()} className="font-md text-primary hover:text-primary/80">Continue Shopping</button>
                             </p>
                         </div>
                     </div>
