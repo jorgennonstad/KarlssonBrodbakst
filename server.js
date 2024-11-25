@@ -92,24 +92,41 @@ app.post("/create-subscription-session", async (req, res) => {
 
 app.post("/create-onetime-session", async (req, res) => {
   try {
-    const { items } = req.body; // Items should be passed in the body
+    const { items } = req.body;
 
-    const lineItems = items.map(item => ({
-      price: item.priceId, // Use the priceId directly here
+    const lineItems = items.map((item) => ({
+      price: item.priceId,
       quantity: item.quantity,
     }));
+
+    // Lag en oppsummering av kjøpte produkter
+    const productSummary = items
+      .map((item) => `Product: ${item.name}, Quantity: ${item.quantity}`)
+      .join("; ");
 
     const session = await stripe.checkout.sessions.create({
       success_url: `${CLIENT_URL}?success=true`,
       cancel_url: `${CLIENT_URL}?canceled=true`,
-      line_items: lineItems, // This is the list of items with priceId and quantity
-      mode: "payment", // One-time payment mode
+      line_items: lineItems,
+      mode: "payment",
       phone_number_collection: {
         enabled: true,
       },
       billing_address_collection: "required",
       shipping_address_collection: {
-        allowed_countries: ["US", "NO", "SE", "FI", "DK"],
+        allowed_countries: ["NO"], // Begrens til Norge
+      },
+      shipping_options: [
+        {
+          shipping_rate: "shr_1QP7xDRtIk8znp089kpVe4aY", // ID for "Henting"
+        },
+        {
+          shipping_rate: "shr_1QNz6gRtIk8znp08A4D4TWNX", // ID for "Levering"
+        },
+      ],
+      
+      metadata: {
+        order_summary: productSummary, // Legg til oppsummering her
       },
     });
 
@@ -119,6 +136,7 @@ app.post("/create-onetime-session", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 
 
