@@ -118,6 +118,11 @@
         grid-template-columns: 1fr; /* 1 column for phone-sized screens */
         grid-gap: 20px; /* Optional: Adjust gap for smaller screens */
     }
+
+    .all-products-container {
+        padding: 20px;
+    }
+
     .product-card {
         min-height: 50vh;
     }

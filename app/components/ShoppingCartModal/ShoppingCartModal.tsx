@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 
 export default function ShoppingCartModal() {
     const { cartCount, shouldDisplayCart, handleCartClick, cartDetails, removeItem, totalPrice, redirectToCheckout} = useShoppingCart();
-
+    
 
     async function handleCheckoutClick(event: any) {
         event.preventDefault();
