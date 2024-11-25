@@ -1,10 +1,3 @@
-.about-us-page {
-    background-image: url('../src/img/wood_wallpaper2.png'); /* Define the wood wallpaper image */
-    background-size: auto; /* Keep the original size of the wallpaper image */
-    background-repeat: repeat; /* Make the background image repeat */
-    background-position: top left; /* Position the image at the top left */
-}
-
 
 .about-us-hero-container {
     position: relative;

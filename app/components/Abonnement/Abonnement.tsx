@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { client } from '@/app/lib/sanity';
-import './Abonnement.css';
+import React, { useState, useEffect } from "react";
+import { client } from "@/app/lib/sanity";
+import "./Abonnement.css";
 
 // TypeScript interface for the Abonnement data
 interface AbonnementData {
@@ -10,7 +10,7 @@ interface AbonnementData {
   subtitle1: string;
   subtitle2: string;
   description: string;
-  backgroundImage: string;  // Background image URL
+  backgroundImage: string; // Background image URL
   price: number;
   stripeProductId: string;
   stripePriceId: string;
@@ -53,6 +53,36 @@ export default function Abonnement() {
     fetchAbonnement();
   }, []);
 
+  const handleSubscribe = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ quantity: 1 }),
+      });
+  
+      if (!response.ok) {
+        const error = await response.json();
+        console.error("Server error:", error.error || "Unknown error");
+        return;
+      }
+  
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url; // Redirect to Stripe
+      } else {
+        console.error("No URL returned from server");
+      }
+    } catch (e) {
+      console.error("Failed to initiate checkout:", e);
+    }
+  };
+  
+  
+  
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -71,7 +101,9 @@ export default function Abonnement() {
           <div className="abonnement-right">
             <p>{abonnement.description}</p>
           </div>
-          <button className="subscribe-button">Abonner</button>
+          <button className="subscribe-button" onClick={handleSubscribe}>
+            Abonner
+          </button>
         </div>
       </div>
     </div>
