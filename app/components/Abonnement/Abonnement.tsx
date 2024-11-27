@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { client } from "@/app/lib/sanity";
@@ -51,6 +51,30 @@ export default function Abonnement() {
       }
     }
     fetchAbonnement();
+
+    // Function to handle moving the button dynamically
+    const handleResize = () => {
+      const button = document.querySelector(".subscribe-button");
+      const rightSection = document.querySelector(".abonnement-right");
+      const leftSection = document.querySelector(".abonnement-left");
+
+      if (button && rightSection && leftSection) {
+        if (window.innerWidth <= 768) {
+          rightSection.appendChild(button); // Move button to .abonnement-right
+        } else {
+          leftSection.appendChild(button); // Move button back to .abonnement-left
+        }
+      }
+    };
+
+    // Initial check and listener setup
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const handleSubscribe = async () => {
@@ -97,13 +121,13 @@ export default function Abonnement() {
             <h1>{abonnement.title}</h1>
             <h2>{abonnement.subtitle1}</h2>
             <h3>{abonnement.subtitle2}</h3>
+            <button className="subscribe-button" onClick={handleSubscribe}>
+              Abonner
+            </button>
           </div>
           <div className="abonnement-right">
             <p>{abonnement.description}</p>
           </div>
-          <button className="subscribe-button" onClick={handleSubscribe}>
-            Abonner
-          </button>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { client } from "@/app/lib/sanity"; // Assuming you have this file setup to initialize your Sanity client
+import { ArrowLeft, ArrowRight } from "lucide-react"; // Import arrow icons
 import "./NewsSlider.css"; // Ensure you have the appropriate CSS styles
 
 // Define the image type structure
@@ -30,6 +31,7 @@ const query = `*[_type == "sliderImage"]{
 export default function NewsSlider() {
   const [images, setImages] = useState<SliderImage[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   // Fetch images from Sanity
   useEffect(() => {
@@ -55,11 +57,11 @@ export default function NewsSlider() {
 
   // Add interval to automatically change images
   useEffect(() => {
-    if (images.length > 0) {
-      const interval = setInterval(nextSlide, 5000); // Change image every 3 seconds
-      return () => clearInterval(interval); // Cleanup on unmount
+    if (images.length > 0 && !isHovered) {
+      const interval = setInterval(nextSlide, 5000); // Change image every 5 seconds
+      return () => clearInterval(interval); // Cleanup on unmount or when hover changes
     }
-  }, [images]);
+  }, [images, isHovered]); // Re-run the effect when hover state changes
 
   // If images are still loading, show a loading state
   if (images.length === 0) {
@@ -69,10 +71,15 @@ export default function NewsSlider() {
   return (
     <div className="outer-container">
       <h1 className="newsTitle">Nyheter</h1>
-      <div className="slider-container">
+      <div
+        className="slider-container"
+        onMouseEnter={() => setIsHovered(true)} // Stop slide on hover
+        onMouseLeave={() => setIsHovered(false)} // Resume slide when hover ends
+      >
         <div className="slider">
+          {/* Previous Button with Arrow */}
           <button onClick={prevSlide} className="prev-button">
-            Prev
+            <ArrowLeft size={24} />
           </button>
           <div className="slider-images">
             <div
@@ -95,8 +102,9 @@ export default function NewsSlider() {
               ))}
             </div>
           </div>
+          {/* Next Button with Arrow */}
           <button onClick={nextSlide} className="next-button">
-            Next
+            <ArrowRight size={24} />
           </button>
         </div>
       </div>
