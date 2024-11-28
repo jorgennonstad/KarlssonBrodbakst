@@ -28,9 +28,10 @@ const Footer: React.FC = () => {
 
         <div className="footer-section contact-section">
           <h3>Kontaktinformasjon</h3>
-          <p><strong>Telefon:</strong> +47 123 45 678</p>
-          <p><strong>E-post:</strong> kontakt@eksempel.no</p>
-          <p><strong>Adresse:</strong> Eksempelgate 12, 1234 Oslo, Norge</p>
+          <p><strong>Telefon:</strong> +47 907 09 117</p>
+          <p><strong>E-post:</strong> karlsson-brodbakst@hotmail.com</p>
+          <p><strong>Adresse:</strong> Smakfullt hunnsvegen 4B 2821 Gjøvik</p>
+          <p><strong>Org. Nr.:</strong> 931 346 113</p>
         </div>
 
         <div className="footer-section hours-section">
