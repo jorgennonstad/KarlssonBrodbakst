@@ -18,7 +18,7 @@ interface SliderImage {
 }
 
 // Sanity query to fetch images
-const query = `*[_type == "sliderImage"]{
+const query = `*[_type == "sliderImage"] | order(priority asc){
   _id,
   image {
     asset -> {
@@ -27,6 +27,7 @@ const query = `*[_type == "sliderImage"]{
   },
   altText
 }`;
+
 
 export default function NewsSlider() {
   const [images, setImages] = useState<SliderImage[]>([]);
@@ -53,6 +54,11 @@ export default function NewsSlider() {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
+  };
+
+   // Go to a specific slide when a dot is clicked
+   const goToSlide = (index: number) => {
+    setCurrentIndex(index);
   };
 
   // Add interval to automatically change images
@@ -106,6 +112,16 @@ export default function NewsSlider() {
           <button onClick={nextSlide} className="next-button">
             <ArrowRight size={24} />
           </button>
+        </div>
+        {/* Dots Pagination */}
+        <div className="dots-container">
+          {images.map((_, index) => (
+            <div
+              key={index}
+              className={`dot ${currentIndex === index ? "active" : ""}`}
+              onClick={() => goToSlide(index)}
+            ></div>
+          ))}
         </div>
       </div>
     </div>

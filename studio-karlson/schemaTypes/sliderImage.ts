@@ -1,4 +1,3 @@
-// ./schemas/sliderImage.js
 export default {
   name: 'sliderImage',
   title: 'Slider Image',
@@ -6,7 +5,7 @@ export default {
   fields: [
     {
       name: 'image',
-      title: 'Image',
+      title: 'Image (16:9 ratio)',
       type: 'image',
       options: {
         hotspot: true, // Allows for cropping/zooming of the image
@@ -16,6 +15,13 @@ export default {
       name: 'altText',
       title: 'Alt Text',
       type: 'string',
+    },
+    {
+      name: 'priority',
+      title: 'Priority',
+      type: 'number',
+      description: 'Use this field to control the order of the images. Lower numbers appear first.',
+      validation: (Rule) => Rule.min(0).integer(), // Ensure positive integers
     },
   ],
 };
