@@ -21,29 +21,97 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
     z-index: 1;
 }
 
 .about-us-images-section {
-    display: flex; /* Use flexbox to align images side-by-side */
+    display: flex; /* Align images side-by-side */
     justify-content: center; /* Center the images horizontally */
-    gap: 50px; /* Add spacing between the images */
-    padding: 50px; /* Optional: Add some padding for responsiveness */
+    gap: 50px; /* Space between images */
+    padding: 50px;
 }
 
-.about-us-image-placeholder {
+.about-us-image {
+    position: relative;
+    width: 100%; /* Full width of container */
+    max-width: 100%; /* Limit the maximum width */
+    height: 500px; /* Fixed height */
+    background-size: cover; /* Ensure the image covers the container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Clip overflowing elements */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.3s ease; /* Optional hover scaling */
+}
+
+.about-us-image:hover {
+    transform: scale(1.02); /* Slight zoom effect on hover */
+}
+
+/* Overlay for darkening effect */
+.about-us-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 100%; /* Limit the maximum width of each image */
-    height: 500px; /* Set a fixed height for the placeholders */
-    background-color: #ddd; /* Light gray background for the placeholder */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Initial semi-transparent overlay */
+    transition: background-color 0.3s ease-in-out;
+    z-index: 1;
+}
+
+.about-us-image:hover::before {
+    background-color: rgba(0, 0, 0, 0.6); /* Darkened overlay on hover */
+}
+
+.hover-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    opacity: 0; /* Initially hidden */
+    z-index: 2;
+    transition: opacity 0.3s ease-in-out;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6); /* Darkened background for better contrast */
+    border-radius: 10px;
+    width: 80%; /* Restrict the text width for better legibility */
+    box-sizing: border-box;
+}
+
+/* Show text on hover */
+.about-us-image:hover .hover-text {
+    opacity: 1;
+}
+
+/* Specific styles for headings */
+.hover-text h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Specific styles for paragraphs */
+.hover-text p {
     font-size: 1.2rem;
-    color: #555; /* Placeholder text color */
-    border: 2px dashed #ccc; /* Dashed border to indicate a placeholder */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */ 
+    line-height: 1.6;
+    font-weight: lighter;
+}
+
+/* Specific styles for each image */
+.bilde-1 {
+    background-image: url('../src/img/baker1.jpeg'); /* Replace with your image path */
+}
+
+.bilde-2 {
+    background-image: url('../src/img/baker2.jpeg'); /* Replace with your image path */
 }
 
 .about-us-wide-image-container {
@@ -64,10 +132,20 @@
 .about-us-wide-image {
     width: 100%;
     height: 100%;
-    background-image: url('../src/img/Abonnement.png'); /* Define the background image */
+    background-image: url('../src/img/bakery.jpeg'); /* Define the background image */
     background-size: cover; /* Ensure the image covers the entire container */
     background-position: center center; /* Ensure the image is centered */
     background-repeat: no-repeat; /* Prevent repeating the image */
+}
+
+.about-us-wide-image-overlay {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Darkened overlay */
+    z-index: 1; /* Ensure overlay is above background but below text */
 }
 
 .about-us-wide-image h1 {
@@ -79,6 +157,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
 }
 
 .about-us-text-container p {
