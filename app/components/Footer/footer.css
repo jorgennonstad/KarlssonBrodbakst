@@ -83,6 +83,11 @@ min-width: 150px;
   color: #aaa;
 }
 
+.footer-bottom p span{
+  text-decoration: underline;
+  color: white;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .footer-content {
