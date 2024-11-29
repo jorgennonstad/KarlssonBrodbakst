@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; 2024 Karlson Brødbakst. | <i>Designet og utviklet av <span><a href="https://deviro.no/">Deviro.no</a></span></i></p>
+        <p>&copy; 2024 Karlson Brødbakst. | <i>Designet og utviklet av <span><a href="https://deviro.no/" target="_blank">Deviro.no</a></span></i></p>
       </div>
     </footer>
   );
