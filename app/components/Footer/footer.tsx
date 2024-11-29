@@ -1,22 +1,70 @@
-// components/Footer.tsx
+"use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { client } from "@/app/lib/sanity"; // Assuming you have this file setup to initialize your Sanity client
 import './footer.css';
 
 const Footer: React.FC = () => {
+  const [footerData, setFooterData] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchFooterData = async () => {
+      const data = await client.fetch(`
+        *[_type == "footer"][0] {
+          logo {
+            asset -> {
+              url
+            }
+          },
+          contact,
+          map,
+          socialMedia {
+            instagram,
+            facebook,
+            instagramIcon {
+              asset -> {
+                url
+              }
+            },
+            facebookIcon {
+              asset -> {
+                url
+              }
+            }
+          },
+          openingHours
+        }
+      `);
+      setFooterData(data);
+    };
+
+    fetchFooterData();
+  }, []);
+
+  if (!footerData) return <div>Loading...</div>;
+
   return (
     <footer className="footer">
+      <div className="footer-logo-container">
+        <img src={footerData.logo.asset.url} alt="Company Logo" className="footer-logo" />
+      </div>
+
       <div className="footer-content">
-        <div className="footer-section logo-section">
-          <img src="/path/to/logo.png" alt="Company Logo" className="footer-logo" />
+        <div className="footer-section contact-section">
+          <h3>Kontakt</h3>
+          <ul>
+            <li><strong>Telefon:</strong> {footerData.contact.phone}</li>
+            <li><strong>E-post:</strong> {footerData.contact.email}</li>
+            <li><strong>Adresse:</strong> {footerData.contact.address}</li>
+            <li><strong>Org. Nr.:</strong> {footerData.contact.orgnr}</li>
+          </ul>
         </div>
 
         <div className="footer-section map-section">
           <h3>Vårt Sted</h3>
-          <div className="map-placeholder">
-            {/* Placeholder for a map - replace with an embedded map */}
+          <div className="map-container">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509429!2d144.9630577157582!3d-37.81627974283485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577f7f6b4e38ad3!2sFederation+Square!5e0!3m2!1sen!2sau!4v1511363798296"
+              src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Hunnsvegen%204B,%202821%20Gj%C3%B8vik+(Karlson%20Br%C3%B8dbakst)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
               width="100%"
               height="200"
               style={{ border: 0 }}
@@ -26,20 +74,21 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="footer-section contact-section">
-          <h3>Kontaktinformasjon</h3>
-          <p><strong>Telefon:</strong> +47 907 09 117</p>
-          <p><strong>E-post:</strong> karlsson-brodbakst@hotmail.com</p>
-          <p><strong>Adresse:</strong> Smakfullt hunnsvegen 4B 2821 Gjøvik</p>
-          <p><strong>Org. Nr.:</strong> 931 346 113</p>
+        <div className="footer-section social-section">
+          <h3>Følg Oss</h3>
+          <div className="social-icons">
+            <a href={footerData.socialMedia.instagram} target="_blank" rel="noopener noreferrer">
+              <img src={footerData.socialMedia.instagramIcon.asset.url} alt="Instagram" className="social-icon instagram" />
+            </a>
+            <a href={footerData.socialMedia.facebook} target="_blank" rel="noopener noreferrer">
+              <img src={footerData.socialMedia.facebookIcon.asset.url} alt="Facebook" className="social-icon facebook" />
+            </a>
+          </div>
         </div>
+      </div>
 
-        <div className="footer-section hours-section">
-          <h3>Åpningstider</h3>
-          <p><strong>Mandag - Fredag:</strong> 09:00 - 17:00</p>
-          <p><strong>Lørdag:</strong> 10:00 - 14:00</p>
-          <p><strong>Søndag:</strong> Stengt</p>
-        </div>
+      <div className="footer-bottom">
+        <p>&copy; 2024 Karlson Brødbakst. All Rights Reserved.</p>
       </div>
     </footer>
   );

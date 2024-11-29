@@ -1,54 +1,109 @@
-/* footer.css */
-
+/* Footer Styling */
 .footer {
-    background-color: #222;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-  }
-  
+  background-color: #222;
+  color: #fff;
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+.footer-logo-container {
+  margin-bottom: 40px;
+}
+
+.footer-logo {
+margin: 0 auto;
+width: 15%;
+min-width: 150px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.footer-section {
+  flex: 1 1 300px;
+  max-width: 350px;
+}
+
+.contact-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.contact-section li {
+  margin: 10px 0;
+  color: #aaa;
+}
+
+.contact-section h3 {
+  color: #f5a623;
+  margin-bottom: 10px;
+}
+
+.map-container iframe {
+  border-radius: 5px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.instagram {
+  background-image: url('/path/to/instagram-icon.png'); /* Instagram icon */
+}
+
+.facebook {
+  background-image: url('/path/to/facebook-icon.png'); /* Facebook icon */
+}
+
+.footer-bottom {
+  padding-top: 20px;
+  border-top: 1px solid #444;
+  font-size: 14px;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #aaa;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
   .footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-  
+
   .footer-section {
-    flex: 1 1 200px;
-    max-width: 300px;
-  }
-  
-  .footer-logo {
     max-width: 100%;
-    height: auto;
+    margin-bottom: 30px;
+      flex: 1 1 30px;
   }
-  
-  .map-placeholder iframe {
-    border-radius: 5px;
+
+  .social-icons {
+    justify-content: center;
   }
-  
-  .contact-section, .hours-section {
-    line-height: 1.6;
+}
+
+@media (max-width: 979px) {
+  .footer-content {
+    justify-content: center;
   }
-  
-  .footer h3 {
-    color: #f5a623;
-    margin-bottom: 10px;
-  }
-  
-  .footer p {
-    margin: 5px 0;
-  }
-  
-  @media (max-width: 768px) {
-    .footer-content {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .footer-section {
-      max-width: 100%;
-    }
-  }
-  
+}
