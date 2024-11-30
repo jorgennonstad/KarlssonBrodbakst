@@ -36,9 +36,23 @@ min-width: 150px;
   padding: 0;
 }
 
+.contact-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.contact-section strong{
+  color: white;
+}
+
 .contact-section li {
-  margin: 10px 0;
+  margin: 20px 0;
   color: #aaa;
+}
+
+.contact-section li a:hover {
+  color: orange;
+  text-decoration: underline;
 }
 
 .contact-section h3 {

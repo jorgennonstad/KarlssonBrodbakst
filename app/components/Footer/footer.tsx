@@ -53,10 +53,22 @@ const Footer: React.FC = () => {
         <div className="footer-section contact-section">
           <h3>Kontakt</h3>
           <ul>
-            <li><strong>Telefon:</strong> {footerData.contact.phone}</li>
-            <li><strong>E-post:</strong> {footerData.contact.email}</li>
-            <li><strong>Adresse:</strong> {footerData.contact.address}</li>
-            <li><strong>Org. Nr.:</strong> {footerData.contact.orgnr}</li>
+          <li>
+        <strong>Telefon: </strong>
+        <a href={`tel:${footerData.contact.phone}`}>{footerData.contact.phone}</a>
+      </li>
+      <li>
+        <strong>E-post: </strong>
+        <a href={`mailto:${footerData.contact.email}`}>{footerData.contact.email}</a>
+      </li>
+      <li>
+        <strong>Adresse: </strong>
+        {footerData.contact.address}
+      </li>
+      <li>
+        <strong>Org. Nr.: </strong>
+        {footerData.contact.orgnr}
+      </li>
           </ul>
         </div>
 
