@@ -1,17 +1,15 @@
-export default{
+export default {
     name: 'heroImage',
     type: 'document',
-    title: 'Two Hero Images',
-    fields:[
+    title: 'Hero Image',
+    fields: [
         {
             name: 'image1',
             type: 'image',
-            title: 'First Image',
-        },
-        {
-            name: 'image2',
-            type: 'image',
-            title: 'Second Image',
+            title: 'Hero Image', // Updated title
+            options: {
+                hotspot: true, // Optional: allows cropping/zooming of the image
+            },
         }
     ]
 }
