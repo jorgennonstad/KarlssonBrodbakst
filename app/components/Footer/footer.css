@@ -33,13 +33,15 @@ min-width: 150px;
 .contact-section ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Stack list items vertically */
+  justify-content: center; /* Center the list within its container */
+  align-items: flex-start; /* Align text in list items to the left */
+  max-width: 500px; /* Optional: limit the width of the list */
+  margin-left: auto; /* Center ul horizontally */
+  margin-right: auto; /* Center ul horizontally */
 }
-
-.contact-section ul {
-  list-style-type: none;
-  padding: 0;
-}
-
 .contact-section strong{
   color: white;
 }
@@ -47,6 +49,7 @@ min-width: 150px;
 .contact-section li {
   margin: 20px 0;
   color: #aaa;
+  text-align: left; /* Ensure text inside each list item is left-aligned */
 }
 
 .contact-section li a:hover {

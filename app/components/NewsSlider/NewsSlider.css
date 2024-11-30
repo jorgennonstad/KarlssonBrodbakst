@@ -79,6 +79,10 @@
     padding: 50px 0;
   }
 
+  .newsTitle {
+    font-size: 2.5rem;
+  }
+
   .slider-images {
     display: flex; /* Place images side by side */
     width: 100%; /* Full width of the container */
