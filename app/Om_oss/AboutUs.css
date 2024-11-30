@@ -8,7 +8,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background-image: url('../src/img/TwoBakers.jpeg'); /* Define the background image */
+    background-image: url('../src/img/Abonnement.png'); /* Define the background image */
     background-size: cover; /* Ensure the image covers the entire container */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent repeating the image */
@@ -41,7 +41,6 @@
     background-repeat: no-repeat; /* Prevent repeating */
     border-radius: 10px; /* Rounded corners */
     overflow: hidden; /* Clip overflowing elements */
-    cursor: pointer; /* Pointer cursor on hover */
     transition: transform 0.3s ease; /* Optional hover scaling */
 }
 
@@ -77,7 +76,6 @@
     z-index: 2;
     transition: opacity 0.3s ease-in-out;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.6); /* Darkened background for better contrast */
     border-radius: 10px;
     width: 80%; /* Restrict the text width for better legibility */
     box-sizing: border-box;
@@ -131,7 +129,7 @@
 .about-us-wide-image {
     width: 100%;
     height: 100%;
-    background-image: url('../src/img/bakery.jpeg'); /* Define the background image */
+    background-image: url('../src/img/Abonnement.png'); /* Define the background image */
     background-size: cover; /* Ensure the image covers the entire container */
     background-position: center center; /* Ensure the image is centered */
     background-repeat: no-repeat; /* Prevent repeating the image */
