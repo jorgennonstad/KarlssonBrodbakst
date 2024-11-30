@@ -6,6 +6,11 @@
   font-family: 'Arial', sans-serif;
   text-align: center;
 }
+.no-break {
+  white-space: nowrap; /* Prevent line breaks inside this element */
+  overflow-wrap: break-word; /* Break the word at an appropriate place if necessary */
+}
+
 
 .footer-logo-container {
   margin-bottom: 40px;

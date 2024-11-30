@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
   if (!footerData) return <div>Loading...</div>;
 
   return (
-    <footer className="footer">
+    <footer className="footer no-break">
       <div className="footer-logo-container">
         <img src={footerData.logo.asset.url} alt="Company Logo" className="footer-logo" />
       </div>

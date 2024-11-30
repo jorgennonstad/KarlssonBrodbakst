@@ -5,7 +5,7 @@ import { ShoppingCart, Box } from "lucide-react"; // Import icons from lucide-re
 import "./Hero.css";
 
 async function getData() {
-    const query = '*[_type == "heroImage"][0]';
+    const query = '*[_type == "heroImage"][0]'; // Only fetch the first document of type "heroImage"
     const data = await client.fetch(query);
     return data;
 }
@@ -19,7 +19,7 @@ export default async function Hero() {
                 <div className="hero-overlay"></div>
                 <div className="hero-image">
                     <Image 
-                        src={urlFor(data.image1).url()} 
+                        src={urlFor(data.image1).url()} // Use image1 from the schema
                         alt="Hero Background"
                         layout="fill" /* Covers the entire container */
                         className="h-full w-full object-cover object-center"

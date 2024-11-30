@@ -56,7 +56,7 @@ export default function ShoppingCartModal() {
                     <SheetTitle>Shopping Cart</SheetTitle>
                 </SheetHeader>
 
-                <div className="h-full flex flex-col justify-between">
+                <div className="h-full flex flex-col justify-between z-100">
                     <div className="mt-8 flex-1 overflow-y-auto">
                         <ul className="-my-6 divide-y divide-gray-200">
                             {cartCount === 0 ? (
