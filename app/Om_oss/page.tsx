@@ -38,9 +38,6 @@ const AboutUs = () => {
     <div className="about-us-wide-image">
         <div className="about-us-wide-image-overlay"></div>
         <h1>Vår Historie</h1>
-    </div> {/* This div will hold the image */}
-</div>
-
 <div className="about-us-text-container">
     <p>
         Vår historie startet med en lidenskap for ekte håndverksbaking og kvalitet. 
@@ -63,6 +60,9 @@ const AboutUs = () => {
         Bli med oss på reisen gjennom vår historie og oppdag hvordan vi har utviklet oss fra vår første dag.
     </p>
 </div>
+    </div> {/* This div will hold the image */}
+</div>
+
 
             <Footer />
         </div>

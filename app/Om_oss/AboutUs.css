@@ -116,51 +116,45 @@
 .about-us-wide-image-container {
     position: relative;
     width: 100%;
-    height: 500px; /* Adjust height as needed for your layout */
-    box-sizing: border-box; /* Include padding and margin inside the element's width */
+    height: auto; /* Allow height to adapt based on content */
+    box-sizing: border-box;
     padding: 0 50px;
 }
 
-.about-us-text-container {
-    background-color: rgb(251, 224, 177);
-    margin: 0 50px 50px;
-}
 
 .about-us-wide-image {
+    position: relative;
     width: 100%;
-    height: 100%;
-    background-image: url('../src/img/Abonnement.png'); /* Define the background image */
-    background-size: cover; /* Ensure the image covers the entire container */
-    background-position: center center; /* Ensure the image is centered */
-    background-repeat: no-repeat; /* Prevent repeating the image */
+    background-image: url('../src/img/cutting_board.png'); /* Cutting board image */
+    background-size: contain; /* Ensure the image fits within the container */
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 50px; /* Add padding to keep text within the image area */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Center-align the text */
+    box-sizing: border-box;
 }
 
-.about-us-wide-image-overlay {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* Darkened overlay */
-    z-index: 1; /* Ensure overlay is above background but below text */
-}
+
 
 .about-us-wide-image h1 {
-    position: absolute;
+    position: relative;
+    text-align: center;
     font-size: 3rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: #ffffff;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
+   
 }
 
 .about-us-text-container p {
     font-size: 1.1rem;
     line-height: 1.5;
     font-weight: lighter;
+    color: white;
     padding: 20px;
 }
 
