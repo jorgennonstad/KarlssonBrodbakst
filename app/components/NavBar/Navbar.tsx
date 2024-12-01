@@ -2,68 +2,56 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ShoppingBag } from "lucide-react";
 import { useShoppingCart } from "use-shopping-cart";
 import React, { useState, useEffect } from "react";
+import { ShoppingBag } from "lucide-react";
+import Image from "next/image"; // Importing the Image component
 import "./NavBar.css";
 
-const links = [
-    { name: 'Hjem', href: '/' },
-    { name: 'Om oss', href: '/Om_oss' },
-];
-
 export default function NavBar() {
-    const pathname = usePathname();
     const { handleCartClick } = useShoppingCart();
     const [menuOpen, setMenuOpen] = useState(false);
 
     // Disable scrolling when the menu is open
     useEffect(() => {
         if (menuOpen) {
-            document.body.style.overflow = 'hidden'; // Disable scrolling
+            document.body.style.overflow = "hidden"; // Disable scrolling
         } else {
-            document.body.style.overflow = 'auto'; // Enable scrolling
+            document.body.style.overflow = "auto"; // Enable scrolling
         }
 
         // Cleanup to reset overflow when component unmounts or menu is closed
         return () => {
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = "auto";
         };
     }, [menuOpen]);
 
     return (
-       <header className="navbar">
+        <header className="navbar">
             <div className="navbar-container">
                 {/* Hamburger icon for mobile view */}
-                <button 
-                    className="navbar-hamburger" 
+                <button
+                    className="navbar-hamburger"
                     onClick={() => setMenuOpen(true)}
                 >
                     ☰
                 </button>
-                
+
                 {/* Desktop navigation links */}
                 <nav className="navbar-links">
-                    {links.map((link, idx) => (
-                        <div key={idx}>
-                            {pathname === link.href ? (
-                                <Link className="navbar-link-active" href={link.href}>
-                                    {link.name}
-                                </Link>
-                            ) : (
-                                <Link className="navbar-link" href={link.href}>
-                                    {link.name}
-                                </Link>
-                            )}
-                        </div>
-                    ))}
+                    <Link className="navbar-link" href="/">
+                        Hjem
+                    </Link>
+
+                    <Link className="navbar-link" href="/Om_oss">
+                        Om oss
+                    </Link>
                 </nav>
 
                 <div className="navbar-cart">
-                    <Button 
-                        variant={"outline"} 
-                        onClick={handleCartClick}    
+                    <Button
+                        variant="outline"
+                        onClick={handleCartClick}
                         className="navbar-cart-button"
                     >
                         <ShoppingBag />
@@ -75,23 +63,30 @@ export default function NavBar() {
             {/* Overlay menu for mobile view */}
             {menuOpen && (
                 <div className="overlay-menu">
-                    <button className="overlay-close" onClick={() => setMenuOpen(false)}>
+                    <button
+                        className="overlay-close"
+                        onClick={() => setMenuOpen(false)}
+                    >
                         ×
                     </button>
                     <nav className="overlay-links">
-                        {links.map((link, idx) => (
-                            <Link 
-                                key={idx} 
-                                href={link.href} 
-                                className="overlay-link" 
-                                onClick={() => setMenuOpen(false)}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
+                        <Link
+                            href="/"
+                            className="overlay-link"
+                            onClick={() => setMenuOpen(false)}
+                        >
+                            Hjem
+                        </Link>
+                        <Link
+                            href="/Om_oss"
+                            className="overlay-link"
+                            onClick={() => setMenuOpen(false)}
+                        >
+                            Om oss
+                        </Link>
                     </nav>
                 </div>
             )}
-       </header>
+        </header>
     );
 }

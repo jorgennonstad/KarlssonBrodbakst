@@ -89,14 +89,6 @@ min-width: 150px;
   background-repeat: no-repeat;
 }
 
-.instagram {
-  background-image: url('/path/to/instagram-icon.png'); /* Instagram icon */
-}
-
-.facebook {
-  background-image: url('/path/to/facebook-icon.png'); /* Facebook icon */
-}
-
 .footer-bottom {
   padding-top: 20px;
   border-top: 1px solid #444;
