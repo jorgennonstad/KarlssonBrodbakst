@@ -58,7 +58,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* Initial semi-transparent overlay */
+    background-color: rgba(0, 0, 0, 0.0); /* Initial semi-transparent overlay */
     transition: background-color 0.3s ease-in-out;
     z-index: 1;
 }
