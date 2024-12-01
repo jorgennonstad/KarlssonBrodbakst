@@ -1,11 +1,8 @@
-import Image from "next/image";
 import Hero from "./components/Hero/Hero";
-import Newest from "./components/Newest/Newest";
 import Footer from "./components/Footer/footer";
 import AllProductsPage from "./components/AllProductsPage/AllProductsPage";
 import Abonnement from "./components/Abonnement/Abonnement";
 import NewsSlider from "./components/NewsSlider/NewsSlider";
-import Head from "next/head";
 
 
 

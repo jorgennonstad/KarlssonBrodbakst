@@ -68,7 +68,7 @@ export default function AllProductsPage() {
                                     height={500}
                                 />
                                 
-                                <Link href={`/product/${product.slug}`} className='product-link'>
+                                <div className='product-link'>
                                     <div className='product-title'>
                                         <h2 className='product-title-text'>{product.name}</h2>
                                     </div>
@@ -78,7 +78,7 @@ export default function AllProductsPage() {
                                             <p className='product-description'>{product.description}</p>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
 
                             <div className='product-action-buttons'>

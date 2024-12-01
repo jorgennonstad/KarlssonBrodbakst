@@ -118,15 +118,15 @@ export default function Abonnement() {
       >
         <div className="abonnement_overlay">
           <div className="abonnement-left">
-            <h1>{abonnement.title}</h1>
-            <h2>{abonnement.subtitle1}</h2>
-            <h3>{abonnement.subtitle2}</h3>
+            <h1>{abonnement?.title}</h1>
+            <h2>{abonnement?.subtitle1}</h2>
+            <h3>{abonnement?.subtitle2}</h3>
             <button className="subscribe-button" onClick={handleSubscribe}>
               Abonner
             </button>
           </div>
           <div className="abonnement-right">
-            <p>{abonnement.description}</p>
+            <p>{abonnement?.description}</p>
           </div>
         </div>
       </div>

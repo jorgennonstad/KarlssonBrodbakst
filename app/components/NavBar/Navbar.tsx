@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useShoppingCart } from "use-shopping-cart";
 import React, { useState, useEffect } from "react";
 import { ShoppingBag } from "lucide-react";
-import Image from "next/image"; // Importing the Image component
 import "./NavBar.css";
 
 export default function NavBar() {

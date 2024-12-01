@@ -21,7 +21,7 @@ export default {
       title: 'Priority',
       type: 'number',
       description: 'Use this field to control the order of the images. Lower numbers appear first.',
-      validation: (Rule) => Rule.min(0).integer(), // Ensure positive integers
+      validation: (Rule: { min: (arg0: number) => { (): any; new(): any; integer: { (): any; new(): any; }; }; }) => Rule.min(0).integer(), // Ensure positive integers
     },
   ],
 };
