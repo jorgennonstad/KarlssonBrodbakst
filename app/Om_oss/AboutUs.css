@@ -35,9 +35,9 @@
 .about-us-image {
     position: relative;
     width: calc(50% - 25px); /* Use 50% width with gap adjustment */
-    max-width: 500px; /* Optional max width */
+    max-width: 600px; /* Optional max width */
     height: auto; /* Allow height to adjust based on content */
-    min-height: 300px; /* Minimum height to ensure the image doesn't get too small */
+    min-height: 400px; /* Minimum height to ensure the image doesn't get too small */
     background-size: cover; /* Ensure the image covers the container */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent repeating */
