@@ -110,6 +110,26 @@
     .product-grid {
         grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
     }
+
+    .product-card {
+        height: 50vh;
+        min-height: 50vh; ;
+    }
+
+    .overlay-content {
+        height: 70%;
+        margin-top: 30%;
+    }
+
+    .product-overlay {
+        height: 50vh;
+        max-height: 50vh;
+    }
+
+    .product-image{
+        height: 50vh;
+        max-height: 50vh;
+    }
 }
 
 /* Responsive Design: 1 column for phone size (less than 768px) */
