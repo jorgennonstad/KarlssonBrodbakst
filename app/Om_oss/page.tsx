@@ -1,68 +1,95 @@
+"use client";
+
 import './AboutUs.css';
 import Footer from "../components/Footer/footer";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import { client } from "@/app/lib/sanity"; // Antatt oppsett for Sanity-klienten
 
 const AboutUs = () => {
+    const [employees, setEmployees] = useState([]);
+    const [history, setHistory] = useState(null);
+    const [header, setHeader] = useState(null);
+
+    useEffect(() => {
+        // Fetch data from Sanity
+        const fetchData = async () => {
+            try {
+                const employeesData = await client.fetch(`*[_type == "employee"]{
+                    name,
+                    bio,
+                    "imageUrl": image.asset->url
+                }`);
+                const historyData = await client.fetch(`*[_type == "ourHistory"][0]{
+                    title,
+                    content
+                }`);
+                const headerData = await client.fetch(`*[_type == "pageHeader"][0]{
+                    title,
+                    subtitle
+                }`);
+
+                setEmployees(employeesData);
+                setHistory(historyData);
+                setHeader(headerData);
+            } catch (error) {
+                console.error("Failed to fetch data from Sanity:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    if (!employees.length || !history || !header) {
+        return <div>Loading...</div>; // Simple loading state
+    }
+
     return (
         <div className="about-us-page">
+            {/* Hero Section */}
             <div className="about-us-hero-container">
                 <div className="about-us-hero-images-container">
                     <div className="about-us-hero-overlay"></div>
                     <div className="about-us-hero-text-content">
-                        <h1 className="about-us-hero-title">Om Oss</h1>
-                        <p className="about-us-hero-subtitle">
-                            Hvem er vi som driver bakeriet
-                        </p>
+                        <h1 className="about-us-hero-title">{header.title}</h1>
+                        <p className="about-us-hero-subtitle">{header.subtitle}</p>
                     </div>
                 </div>
             </div>
 
-            {/* Section for two side-by-side placeholders */}
+            {/* Employees Section */}
             <div className="about-us-images-section">
-    <div className="about-us-image bilde-1">
-        <div className="hover-text">
-            <h2>Johan Karlsson</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-        </div>
-    </div>
-    <div className="about-us-image bilde-2">
-        <div className="hover-text">
-            <h2>Jonas Jensen</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-    </div>
-</div>
+                {employees.map((employee, index) => (
+                    <div
+                        key={index}
+                        className={`about-us-image bilde-${index + 1}`}
+                    >
+                        <Image
+                            src={employee.imageUrl}
+                            alt={employee.name}
+                            fill
+                            className="about-us-employee-image"
+                        />
+                        <div className="hover-text">
+                            <h2>{employee.name}</h2>
+                            <p>{employee.bio}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
-            {/* Section for one wider image */}
-            {/* Section for one wider image */}
-<div className="about-us-wide-image-container">
-    <div className="about-us-wide-image">
-        <div className="about-us-wide-image-overlay"></div>
-        <h1>Vår Historie</h1>
-<div className="about-us-text-container">
-    <p>
-        Vår historie startet med en lidenskap for ekte håndverksbaking og kvalitet. 
-        Fra små begynnelse har vi utviklet oss til å bli et sted hvor tradisjon og innovasjon møtes. 
-        Vi tror på ekte håndverk, og vår kjærlighet til baking gjenspeiles i hver eneste bit. 
-        Gjennom årene har vi lært, vokst, og endret oss, men vårt mål har alltid vært det samme – å tilby deg bakervarer av høyeste kvalitet.
-    </p>
-    <p>
-        Vi er stolte av å være en del av et samfunn som verdsetter tradisjon, håndverk og kvalitet. 
-        Bli med oss på reisen gjennom vår historie og oppdag hvordan vi har utviklet oss fra vår første dag.
-        Vi er stolte av å være en del av et samfunn som verdsetter tradisjon, håndverk og kvalitet. 
-        Bli med oss på reisen gjennom vår historie og oppdag hvordan vi har utviklet oss fra vår første dag.
-        Vi er stolte av å være en del av et samfunn som verdsetter tradisjon, håndverk og kvalitet. 
-        Bli med oss på reisen gjennom vår historie og oppdag hvordan vi har utviklet oss fra vår første dag.
-        Vi er stolte av å være en del av et samfunn som verdsetter tradisjon, håndverk og kvalitet. 
-        Bli med oss på reisen gjennom vår historie og oppdag hvordan vi har utviklet oss fra vår første dag.
-        Vi er stolte av å være en del av et samfunn som verdsetter tradisjon, håndverk og kvalitet. 
-        Bli med oss på reisen gjennom vår historie og oppdag hvordan vi har utviklet oss fra vår første dag.
-        Vi er stolte av å være en del av et samfunn som verdsetter tradisjon, håndverk og kvalitet. 
-        Bli med oss på reisen gjennom vår historie og oppdag hvordan vi har utviklet oss fra vår første dag.
-    </p>
-</div>
-    </div> {/* This div will hold the image */}
-</div>
-
+            {/* Our History Section */}
+            <div className="about-us-wide-image-container">
+                <div className="about-us-wide-image">
+                    <div className="about-us-wide-image-overlay"></div>
+                    <h1>{history.title}</h1>
+                    <div className="about-us-text-container">
+                        {history.content.map((block, index) => (
+                            <p key={index}>{block.children.map(child => child.text).join("")}</p>
+                        ))}
+                    </div>
+                </div>
+            </div>
 
             <Footer />
         </div>
