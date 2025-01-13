@@ -1,0 +1,125 @@
+/* Shopping Cart Modal (Overlay and Content) */
+
+/* Overlay for the shopping cart modal */
+.shopping-cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50; /* Lower than the delivery popup */
+}
+
+/* Shopping Cart Modal content */
+.shopping-cart-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    z-index: 100;
+}
+
+/* Delivery Popup (Overlay and Content) */
+
+/* The overlay should have a higher z-index to be on top of the shopping cart modal */
+.delivery-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it is above the shopping cart modal */
+}
+
+/* Delivery Popup content */
+.delivery-popup-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    z-index: 10000; /* Ensure the content itself is also above everything */
+}
+
+/* Button Styling for both modals */
+.modal-button {
+    background-color: #0070f3;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.modal-button:hover {
+    background-color: #005bb5;
+}
+
+/* Header and Footer for the modals */
+.modal-header, .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+/* Specific styles for the content inside the shopping cart modal */
+.cart-item {
+    display: flex;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+    padding-left: 1rem;
+}
+
+.cart-item-name {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.cart-item-price {
+    color: #0070f3;
+}
+
+.cart-item-quantity {
+    font-size: 0.875rem;
+    color: #555;
+}
+
+.cart-item-remove {
+    color: #e00;
+    cursor: pointer;
+    font-size: 0.875rem;
+}

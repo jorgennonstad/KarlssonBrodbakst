@@ -1,0 +1,50 @@
+/* DeliveryPopup.css */
+
+/* The overlay should have a higher z-index to be on top of the shopping cart modal */
+.delivery-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Higher z-index to ensure it appears above the shopping cart modal */
+}
+
+.delivery-popup-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    z-index: 10000; /* Make sure the content is above the overlay if needed */
+}
+
+/* Other styles */
+.delivery-popup h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.delivery-popup p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.delivery-popup-button {
+    background-color: #0070f3; /* Use your theme color here */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delivery-popup-button:hover {
+    background-color: #005bb5;
+}

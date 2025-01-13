@@ -3,6 +3,7 @@ const { SERVER_PORT = 5001, STRIPE_PRIVATE_KEY, STRIPE_PRICE_ID, CLIENT_URL } = 
 const express = require("express");
 const cors = require("cors");
 const stripe = require("stripe")(STRIPE_PRIVATE_KEY);
+const sanityClient = require("@sanity/client");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(
     origin: CLIENT_URL || "http://localhost:3000", // Allow frontend origin
   })
 );
+
 
 // Subscription Checkout Session
 app.post("/create-subscription-session", async (req, res) => {
@@ -90,20 +92,99 @@ app.post("/create-subscription-session", async (req, res) => {
 });
 
 
+const { createClient } = require("@sanity/client");
+
+const client = createClient({
+  projectId: "koixe24m", // Replace with your Sanity project ID
+  dataset: "production", // Replace with your dataset name
+  useCdn: true,
+  apiVersion: '2024-02-11', // Ensure this matches your schema's API version
+});
+
+// Fetch delivery schedule data from Sanity
+const fetchDeliverySchedule = async () => {
+  const query = `*[_type == "deliverySchedule"][0]{
+    specialDeliveryDays,
+    blackoutDays
+  }`;
+  return await client.fetch(query);
+};
+
+// Fetch delivery alternatives data from Sanity
+const fetchDeliveryAlternatives = async () => {
+  const query = `*[_type == "deliveryAlternatives"][0]{
+    pickupPriceId,
+    deliveryPriceId
+  }`;
+  return await client.fetch(query);
+};
+
+const generateDeliveryAlternatives = async () => {
+  try {
+    // Fetch delivery alternatives data from Sanity
+    const { pickupPriceId, deliveryPriceId } = await fetchDeliveryAlternatives();
+
+    // Log the fetched price IDs to the console
+    const deliveryPrices = []
+    deliveryPrices.push(pickupPriceId);
+    deliveryPrices.push(deliveryPriceId);
+    return deliveryPrices;
+  } catch (error) {
+    console.error("Error fetching delivery alternatives:", error.message);
+  }
+};
+
+
+// Generate allowed delivery dates based on Sanity data
+const generateAllowedDates = async () => {
+  const { specialDeliveryDays = [], blackoutDays = [] } = await fetchDeliverySchedule();
+
+  const today = new Date();
+  const allowedDays = [1, 4]; // Mondays (1) and Thursdays (4)
+  const dates = [];
+
+  for (let i = 1; i <= 56; i++) { // Generate for the next 4 weeks
+    const futureDate = new Date(today);
+    futureDate.setDate(today.getDate() + i);
+
+    const formattedDate = futureDate.toISOString().split("T")[0]; // YYYY-MM-DD
+
+    // Determine if the date is valid
+    const isAllowedDay = allowedDays.includes(futureDate.getDay());
+    const isSpecialDay = specialDeliveryDays.includes(formattedDate);
+    const isBlackoutDay = blackoutDays.includes(formattedDate);
+
+    if ((isAllowedDay || isSpecialDay) && !isBlackoutDay) {
+      const value = formattedDate.replace(/-/g, ""); // Convert to YYYYMMDD
+      dates.push({
+        label: futureDate.toLocaleDateString("en-GB", {
+          weekday: "long",
+          day: "numeric",
+          month: "short",
+        }),
+        value,
+      });
+    }
+  }
+
+  return dates;
+};
+
 app.post("/create-onetime-session", async (req, res) => {
   try {
     const { items } = req.body;
 
+    // Fetch and generate allowed dates
+    const allowedDates = await generateAllowedDates();
+    const deliveryPrices = await generateDeliveryAlternatives();
+
+    // Prepare line items
     const lineItems = items.map((item) => ({
       price: item.priceId,
       quantity: item.quantity,
     }));
 
-    // Lag en oppsummering av kjøpte produkter
-    const productSummary = items
-      .map((item) => `Product: ${item.name}, Quantity: ${item.quantity}`)
-      .join("; ");
-
+    // Create the Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       success_url: `${CLIENT_URL}?success=true`,
       cancel_url: `${CLIENT_URL}?canceled=true`,
@@ -114,19 +195,34 @@ app.post("/create-onetime-session", async (req, res) => {
       },
       billing_address_collection: "required",
       shipping_address_collection: {
-        allowed_countries: ["NO"], // Begrens til Norge
+        allowed_countries: ["NO"], // Norway only
       },
       shipping_options: [
         {
-          shipping_rate: "shr_1QP7xDRtIk8znp089kpVe4aY", // ID for "Henting"
+          shipping_rate: deliveryPrices[0], // ID for "Henting"
         },
         {
-          shipping_rate: "shr_1QNz6gRtIk8znp08A4D4TWNX", // ID for "Levering"
+          shipping_rate: deliveryPrices[1], // ID for "Levering"
         },
       ],
-      
+      custom_fields: [
+        {
+          key: "delivery_date",
+          label: {
+            type: "custom",
+            custom: "Velg en dag for levering/henting av varer",  // Custom title for delivery date
+          },
+          type: "dropdown",
+          optional: false,
+          dropdown: {
+            options: allowedDates,  // Use dynamically generated dates
+          },
+        },
+      ],
       metadata: {
-        order_summary: productSummary, // Legg til oppsummering her
+        order_summary: items
+          .map((item) => `Product: ${item.name}, Quantity: ${item.quantity}`)
+          .join("; "),
       },
     });
 
@@ -136,6 +232,9 @@ app.post("/create-onetime-session", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+
+
 
 
 
