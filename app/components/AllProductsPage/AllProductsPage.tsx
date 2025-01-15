@@ -19,12 +19,10 @@ async function getAllProducts() {
         "categoryName": category->name,
         price_id,
     }
-    `;
+    `; // næringsinnhold, allergener
     const data = await client.fetch(query);
     return data;
 }
-
-export const dynamic = "force-dynamic";
 
 export default function AllProductsPage() {
     const [products, setProducts] = useState([]);
@@ -69,7 +67,6 @@ export default function AllProductsPage() {
                                     width={400}
                                     height={500}
                                 />
-                                {/* Add overlay here */}
                                 <div className="product-overlay">
                                     <div className="overlay-content">
                                         <p>{product.description}</p>
@@ -95,8 +92,8 @@ export default function AllProductsPage() {
                                     className="info-button"
                                     onClick={() =>
                                         togglePopup({
-                                            næringsinnhold: ["Protein: 10g", "Karbohydrater: 20g", "Fett: 5g"],
-                                            allergener: ["Gluten", "Melk"]
+                                            næringsinnhold: product.næringsinnhold || [],
+                                            allergener: product.allergener || [],
                                         })
                                     }
                                 >
@@ -113,7 +110,7 @@ export default function AllProductsPage() {
                         <h3>Produkt informasjon</h3>
                         <div className="popup-columns">
                             <div className="popup-column">
-                                <h4>Næringsinnhold:</h4>
+                                <h4><strong>Næringsinnhold:</strong></h4>
                                 <ul>
                                     {popupContent.næringsinnhold.map((item, index) => (
                                         <li key={index}>{item}</li>
@@ -121,7 +118,7 @@ export default function AllProductsPage() {
                                 </ul>
                             </div>
                             <div className="popup-column">
-                                <h4>Allergener:</h4>
+                                <h4><strong>Allergener:</strong></h4>
                                 <ul>
                                     {popupContent.allergener.map((item, index) => (
                                         <li key={index}>{item}</li>
