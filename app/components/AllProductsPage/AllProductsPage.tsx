@@ -19,7 +19,7 @@ async function getAllProducts() {
         "categoryName": category->name,
         price_id,
     }
-    `; // næringsinnhold, allergener
+    `; // næringsinnhold,allergener
     const data = await client.fetch(query);
     return data;
 }

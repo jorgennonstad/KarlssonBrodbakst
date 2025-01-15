@@ -1,22 +1,18 @@
-/* NavBar.css */
-
-/* Positioning the navbar over the hero image */
 .navbar {
     position: absolute;
-    top: 0; /* Align it to the top of the page */
-    left: 0; /* Align it to the left */
-    width: 100%; /* Full width */
-    z-index: 10; /* Ensure it's above other content */
-    padding: 2rem 2rem; /* Add padding for spacing */
-    background-color: transparent; /* No background */
-    box-shadow: none; /* Remove any box shadow */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    padding: 2rem 2rem;
+    background-color: transparent;
+    box-shadow: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
 }
 
-/* Navbar container setup */
 .navbar-container {
     display: flex;
     align-items: center;
@@ -24,90 +20,100 @@
     width: 100%;
 }
 
-/* Logo styling */
-.navbar-logo {
-    font-size: 2rem;
-    font-weight: bold;
-    color: white; /* White text for contrast over the image */
-    text-align: center;
-}
-
-/* Navigation links container */
 .navbar-links {
     display: flex;
     justify-content: space-between;
     flex: 1;
 }
 
-/* Link styling */
 .navbar-link {
     font-size: 1.4rem;
     font-weight: 300;
-    color: white; /* White text for contrast */
+    color: white;
     transition: color 0.1s ease;
 }
 
 .navbar-link:hover {
-    color: #ff6600; /* Primary color on hover */
+    color: #ff6600;
 }
 
-.navbar-link-active {
-    font-size: 1.4rem;
-    font-weight: 300;
-    color: #ff6600; /* Active link color */
-}
-
-/* Cart button container */
 .navbar-cart {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: fixed; /* Make the cart button sticky */
+    top: 1rem; /* Adjust this value to control the distance from the top */
+    right: 1rem; /* Optional: position it to the right */
+    z-index: 2000;
 }
 
-.navbar-cart button{
-    height: 60px;
-    width: 60px;
-}
 .navbar-cart-button {
-    height: 100px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 3rem;
     width: 3rem;
     padding: 0.5rem;
-    border-radius: 0.25rem; /* Rounded corners */
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e6e6e6;
+    transition: all 0.2s ease;
+}
+
+.navbar-cart-button:hover {
+    background-color: #ff7f50;
+    color: white;
+    transform: scale(1.03);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-cart-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-cart-icon {
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 .navbar-cart-text {
-    display: none;
+    margin-left: 0.5rem;
     font-size: 0.875rem;
     font-weight: 600;
-    color: black;
+    display: none;
 }
 
-/* Responsive Styling */
+.navbar-cart:hover .navbar-cart-text {
+    display: inline;
+}
+
 @media (min-width: 1024px) {
     .navbar-links {
-        justify-content: space-evenly; /* Evenly distribute the links */
+        justify-content: space-evenly;
     }
 
     .navbar-cart-button {
-        height: 4rem;
+        height: 3.5rem;
         width: auto;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
     }
 
-    .navbar-cart-button .lucide-shopping-bag {
-        font-size: 1.75rem;
+    .navbar-cart-text {
+        display: inline;
+    }
+
+    .navbar-cart-icon {
+        height: 1.75rem;
+        width: 1.75rem;
     }
 }
 
-
-
-/* Hamburger menu button for mobile view */
 .navbar-hamburger {
-    display: none; /* Hide by default */
+    display: none;
     font-size: 2rem;
     color: white;
     background: none;
@@ -115,29 +121,46 @@
     cursor: pointer;
 }
 
-/* Show hamburger button on smaller screens */
 @media (max-width: 1024px) {
-    .navbar-container{
+    .navbar-container {
         justify-content: space-between;
     }
 
     .navbar-hamburger {
         display: block;
     }
-    
+
     .navbar-links {
-        display: none; /* Hide links on smaller screens */
+        display: none;
+    }
+
+    .navbar-cart-button {
+        height: 3rem;
+        width: 3rem;
+        padding: 0.5rem;
+        border-radius: 50%;
+    }
+
+    .navbar-cart-text {
+        display: none;
+    }
+
+    .navbar-cart-text {
+        display: none !important; /* Ensure the text never shows on smaller screens */
+    }
+
+    .navbar-cart:hover .navbar-cart-text {
+        display: none !important; /* Prevent hover effect from showing the text */
     }
 }
 
-/* Overlay menu styles */
 .overlay-menu {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.9); /* Dark overlay */
+    background-color: rgba(0, 0, 0, 0.9);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -146,7 +169,6 @@
     transition: opacity 0.3s ease;
 }
 
-/* Close button for overlay */
 .overlay-close {
     position: absolute;
     top: 1rem;
@@ -158,7 +180,6 @@
     cursor: pointer;
 }
 
-/* Links within overlay */
 .overlay-links {
     display: flex;
     flex-direction: column;
@@ -173,5 +194,5 @@
 }
 
 .overlay-link:hover {
-    color: #ff6600; /* Highlight color */
+    color: #ff6600;
 }
