@@ -18,9 +18,12 @@ async function getAllProducts() {
         "slug": slug.current,
         "categoryName": category->name,
         price_id,
+        naeringsinnhold,
+        allergener
     }
     `; // næringsinnhold,allergener
     const data = await client.fetch(query);
+    console.log(data);
     return data;
 }
 
@@ -92,7 +95,7 @@ export default function AllProductsPage() {
                                     className="info-button"
                                     onClick={() =>
                                         togglePopup({
-                                            næringsinnhold: product.næringsinnhold || [],
+                                            næringsinnhold: product.naeringsinnhold || [],
                                             allergener: product.allergener || [],
                                         })
                                     }

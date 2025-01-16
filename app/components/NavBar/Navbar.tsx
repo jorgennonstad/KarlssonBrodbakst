@@ -34,13 +34,13 @@ export default function NavBar() {
                     <Link className="navbar-link" href="/">
                         Hjem
                     </Link>
-                    <Link className="navbar-link" href="/catering">
+                    <Link className="navbar-link" href="/Catering">
                         Catering
                     </Link>
                     <Link className="navbar-link" href="/Om_oss">
                         Om oss
                     </Link>
-                    <Link className="navbar-link" href="/kontakt">
+                    <Link className="navbar-link" href="/Kontakt_oss">
                         Kontakt oss
                     </Link>
                 </nav>

@@ -45,7 +45,7 @@ export default {
             to: [{ type: 'category' }],
         },
         {
-            name: 'næringsinnhold',
+            name: 'naeringsinnhold',
             type: 'array',
             title: 'Næringsinnhold',
             of: [{ type: 'string' }],
