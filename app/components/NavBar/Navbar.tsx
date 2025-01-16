@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useShoppingCart } from "use-shopping-cart";
 import React, { useState, useEffect } from "react";
-import { ShoppingCart } from "lucide-react"; // Import ShoppingCart icon
+import { ShoppingCart } from "lucide-react";
 import "./NavBar.css";
 
 export default function NavBar() {
@@ -34,8 +34,14 @@ export default function NavBar() {
                     <Link className="navbar-link" href="/">
                         Hjem
                     </Link>
+                    <Link className="navbar-link" href="/catering">
+                        Catering
+                    </Link>
                     <Link className="navbar-link" href="/Om_oss">
                         Om oss
+                    </Link>
+                    <Link className="navbar-link" href="/kontakt">
+                        Kontakt oss
                     </Link>
                 </nav>
                 <div className="navbar-cart">
@@ -65,11 +71,25 @@ export default function NavBar() {
                             Hjem
                         </Link>
                         <Link
+                            href="/catering"
+                            className="overlay-link"
+                            onClick={() => setMenuOpen(false)}
+                        >
+                            Catering
+                        </Link>
+                        <Link
                             href="/Om_oss"
                             className="overlay-link"
                             onClick={() => setMenuOpen(false)}
                         >
                             Om oss
+                        </Link>
+                        <Link
+                            href="/kontakt"
+                            className="overlay-link"
+                            onClick={() => setMenuOpen(false)}
+                        >
+                            Kontakt oss
                         </Link>
                     </nav>
                 </div>

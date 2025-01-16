@@ -4,7 +4,7 @@ import './AboutUs.css';
 import Footer from "../components/Footer/footer";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { client } from "@/app/lib/sanity"; // Antatt oppsett for Sanity-klienten
+import { client } from "@/app/lib/sanity";
 
 const AboutUs = () => {
     const [employees, setEmployees] = useState([]);
@@ -12,7 +12,6 @@ const AboutUs = () => {
     const [header, setHeader] = useState(null);
 
     useEffect(() => {
-        // Fetch data from Sanity
         const fetchData = async () => {
             try {
                 const employeesData = await client.fetch(`*[_type == "employee"]{
@@ -41,7 +40,7 @@ const AboutUs = () => {
     }, []);
 
     if (!employees.length || !history || !header) {
-        return <div>Loading...</div>; // Simple loading state
+        return <div>Loading...</div>;
     }
 
     return (
@@ -57,13 +56,23 @@ const AboutUs = () => {
                 </div>
             </div>
 
-            {/* Employees Section */}
+            {/* Vår Historie Section */}
+            <div className="about-us-history-section">
+                <h1 className="about-us-section-title">{history.title}</h1>
+                <div className="about-us-text-container">
+                    {history.content.map((block, index) => (
+                        <p key={index}>
+                            {block.children.map(child => child.text).join("")}
+                        </p>
+                    ))}
+                </div>
+            </div>
+
+            {/* Ansatte Section */}
+            <h2 className="about-us-section-title">Ansatte</h2>
             <div className="about-us-images-section">
                 {employees.map((employee, index) => (
-                    <div
-                        key={index}
-                        className={`about-us-image bilde-${index + 1}`}
-                    >
+                    <div key={index} className="about-us-image">
                         <Image
                             src={employee.imageUrl}
                             alt={employee.name}
@@ -76,19 +85,6 @@ const AboutUs = () => {
                         </div>
                     </div>
                 ))}
-            </div>
-
-            {/* Our History Section */}
-            <div className="about-us-wide-image-container">
-                <div className="about-us-wide-image">
-                    <div className="about-us-wide-image-overlay"></div>
-                    <h1>{history.title}</h1>
-                    <div className="about-us-text-container">
-                        {history.content.map((block, index) => (
-                            <p key={index}>{block.children.map(child => child.text).join("")}</p>
-                        ))}
-                    </div>
-                </div>
             </div>
 
             <Footer />

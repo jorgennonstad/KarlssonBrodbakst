@@ -122,23 +122,6 @@
 }
 
 
-.about-us-wide-image {
-    position: relative;
-    width: 100%;
-    background-image: url('../src/img/cutting_board.png'); /* Cutting board image */
-    background-size: contain; /* Ensure the image fits within the container */
-    background-position: center center;
-    background-repeat: no-repeat;
-    padding: 50px; /* Add padding to keep text within the image area */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center; /* Center-align the text */
-    box-sizing: border-box;
-}
-
-
 
 .about-us-wide-image h1 {
     position: relative;
@@ -156,6 +139,16 @@
     font-weight: lighter;
     color: white;
     padding: 20px;
+}
+
+.about-us-section-title {
+    font-size: 2.5rem; /* Large title size */
+    font-weight: bold; /* Emphasize the title */
+    color: white;
+    text-align: center; /* Center align the title */
+    margin: 30px 0; /* Add spacing above and below */
+    text-transform: uppercase; /* Make the title uppercase */
+    letter-spacing: 1px; /* Add slight spacing between letters */
 }
 
 .about-us-hero-text-content {
