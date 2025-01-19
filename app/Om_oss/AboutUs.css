@@ -1,17 +1,17 @@
 .about-us-hero-container {
     position: relative;
     width: 100%;
-    height: 600px; /* Adjust height as needed */
+    height: 600px;
 }
 
 .about-us-hero-images-container {
     position: relative;
     width: 100%;
     height: 100%;
-    background-image: url('../src/img/Abonnement.png'); /* Define the background image */
-    background-size: cover; /* Ensure the image covers the entire container */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent repeating the image */
+    background-image: url('../src/img/Abonnement.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .about-us-hero-overlay {
@@ -20,37 +20,35 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay */
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 1;
 }
 
 .about-us-images-section {
-    display: flex; /* Align images side-by-side */
-    justify-content: center; /* Center the images horizontally */
-    gap: 50px; /* Space between images */
+    display: flex;
+    justify-content: center;
+    gap: 50px;
     padding: 50px;
-    flex-wrap: wrap; /* Allow wrapping to multiple lines if space is constrained */
+    flex-wrap: wrap;
 }
 
 .about-us-image {
     position: relative;
-    width: calc(50% - 25px); /* Use 50% width with gap adjustment */
-    max-width: 600px; /* Optional max width */
-    height: auto; /* Allow height to adjust based on content */
-    min-height: 400px; /* Minimum height to ensure the image doesn't get too small */
-    background-size: cover; /* Ensure the image covers the container */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent repeating */
-    border-radius: 10px; /* Rounded corners */
-    overflow: hidden; /* Clip overflowing elements */
-    transition: transform 0.3s ease; /* Optional hover scaling */
+    width: calc(50% - 25px);
+    max-width: 600px;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .about-us-image:hover {
-    transform: scale(1.02); /* Slight zoom effect on hover */
+    transform: scale(1.02);
 }
 
-/* Overlay for darkening effect */
 .about-us-image::before {
     content: "";
     position: absolute;
@@ -58,13 +56,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.0); /* Initial semi-transparent overlay */
+    background-color: rgba(0, 0, 0, 0.0);
     transition: background-color 0.3s ease-in-out;
     z-index: 1;
 }
 
 .about-us-image:hover::before {
-    background-color: rgba(0, 0, 0, 0.3); /* Darkened overlay on hover */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .hover-text {
@@ -74,21 +72,19 @@
     transform: translate(-50%, -50%);
     color: white;
     text-align: center;
-    opacity: 0; /* Initially hidden */
+    opacity: 0;
     z-index: 2;
     transition: opacity 0.3s ease-in-out;
     padding: 20px;
     border-radius: 10px;
-    width: 90%; /* Restrict the text width for better legibility */
+    width: 90%;
     box-sizing: border-box;
 }
 
-/* Show text on hover */
 .about-us-image:hover .hover-text {
     opacity: 1;
 }
 
-/* Specific styles for headings */
 .hover-text h2 {
     font-size: 2rem;
     font-weight: bold;
@@ -97,58 +93,39 @@
     letter-spacing: 1px;
 }
 
-/* Specific styles for paragraphs */
 .hover-text p {
     font-size: 1.2rem;
     line-height: 1.6;
     font-weight: lighter;
 }
 
-/* Specific styles for each image */
-.bilde-1 {
-    background-image: url('../src/img/baker1.jpeg'); /* Replace with your image path */
-}
-
-.bilde-2 {
-    background-image: url('../src/img/baker2.jpeg'); /* Replace with your image path */
-}
-
-.about-us-wide-image-container {
-    position: relative;
-    width: 100%;
-    height: auto; /* Allow height to adapt based on content */
-    box-sizing: border-box;
-    padding: 0 50px;
-}
-
-
-
-.about-us-wide-image h1 {
-    position: relative;
+.about-us-text-container {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 50px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 30px auto;
+    max-width: 800px;
     text-align: center;
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: #ffffff;
-   
 }
 
 .about-us-text-container p {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    font-weight: lighter;
-    color: white;
-    padding: 20px;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 20px;
 }
 
 .about-us-section-title {
-    font-size: 2.5rem; /* Large title size */
-    font-weight: bold; /* Emphasize the title */
-    color: white;
-    text-align: center; /* Center align the title */
-    margin: 30px 0; /* Add spacing above and below */
-    text-transform: uppercase; /* Make the title uppercase */
-    letter-spacing: 1px; /* Add slight spacing between letters */
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fbe0b1;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 40px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .about-us-hero-text-content {
@@ -171,16 +148,22 @@
     margin-top: 0.5rem;
 }
 
-/* Responsive layout: Stack images vertically on smaller screens */
 @media (max-width: 768px) {
     .about-us-images-section {
-        flex-direction: column; /* Change layout to column */
-        align-items: center; /* Center images vertically */
+        flex-direction: column;
+        align-items: center;
     }
 
     .about-us-image {
-        width: 100%; /* Take full width on smaller screens */
-        max-width: none; /* Remove max width restriction */
-        height: auto; /* Adjust height to fit content */
+        width: 100%;
+        max-width: none;
+    }
+
+    .about-us-section-title {
+        font-size: 2rem;
+    }
+
+    .about-us-text-container p {
+        font-size: 1rem;
     }
 }
