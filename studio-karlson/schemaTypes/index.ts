@@ -10,6 +10,7 @@ import pageHeader from "./pageHeader";
 import deliverySchedule from "./deliverySchedule";
 import deliveryAlternatives from "./deliveryAlternatives";
 import omOssHero from "./omOssHero";
+import cateringItems from "./cateringItems";
 
-export const schemaTypes = [product, category, heroImages, abonnement, sliderImage, footer, employee, omOssHero, ourHistory, pageHeader, deliverySchedule, deliveryAlternatives];
+export const schemaTypes = [product, category, heroImages, abonnement, sliderImage, footer, employee, omOssHero, ourHistory, pageHeader, deliverySchedule, deliveryAlternatives, cateringItems];
 

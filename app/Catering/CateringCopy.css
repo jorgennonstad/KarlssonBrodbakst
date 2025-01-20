@@ -1,0 +1,189 @@
+/* General Styling */
+.catering-page {
+  padding-top: 100px; /* Ensure content starts below the navbar */
+  color: #333; /* Dark gray text for readability */
+}
+
+/* Title Section */
+.catering-title {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  color: white; /* Dark text for contrast */
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Menu Items Section */
+.menu-items {
+  display: flex;
+  flex-wrap: wrap; /* Wrap menu items to the next line */
+  gap: 40px;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px; /* Add padding for responsiveness */
+}
+
+.menu-item {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 50px;
+  background-color: white;
+  width: 80vw;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+  width: 70vw;
+  border-radius: 10px;
+  text-align: center; /* Center-align text for harmony */
+}
+
+/* Menu Image Placeholder */
+.menu-item-image {
+  width: 500px;
+  height: 500px;
+  background-color: #d3d3d3; /* Light gray background */
+  border-radius: 10px; /* Rounded corners */
+  flex-shrink: 0; /* Prevent shrinking in flex layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666; /* Placeholder text color */
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  object-fit: cover
+}
+
+.menu-item {
+  background-color: #fff; /* Clean white for item background */
+  width: 70vw;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center-align text for harmony */
+}
+
+.menu-text {
+  margin: 0 auto;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: space-between; /* Ensure space between items */
+}
+
+.menu-item-price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #a23c24; /* Highlighted price color */
+  margin-top: auto; /* Push the price to the bottom */
+  align-self: center; /* Center the price horizontally */
+}
+
+
+.menu-item-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #5a2b1a; /* Same warm brown as the title */
+}
+
+
+.menu-item-note {
+  font-size: 1.2rem;
+  color: #5a2b1a; /* Match main text color */
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.menu-item-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgb(127, 127, 127); /* Keep the same soft brown for consistency */
+  text-align: left;
+}
+
+.menu-item-description li {
+  margin-bottom: 8px;
+}
+
+.contact-button-container {
+  text-align: center;
+  margin: 40px 0; /* Gir luft over og under knappen */
+}
+
+.contact-button {
+  font-size: 1.2rem;
+  color: white;
+  background-color: #a23c24; /* Passer til prisfargen */
+  border: none;
+  padding: 15px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: #842e1d; /* Litt mørkere på hover */
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-item {
+    width: 90vw;
+  }
+
+  .menu-item-title {
+    font-size: 2rem;
+  }
+
+  .menu-item-price {
+    font-size: 1.8rem;
+  }
+
+  .menu-item-note {
+    font-size: 1rem;
+  }
+
+  .menu-item-description {
+    font-size: 0.9rem;
+  }
+
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-item {
+    flex-direction: column;
+    align-items: center;
+    width: 90vw; /* Make items narrower on small screens */
+  }
+
+  .menu-image-placeholder {
+    width: 400px;
+    height: 400px;
+    margin-top: 10px; /* Add spacing above the placeholder */
+  }
+
+  .menu-text {
+    text-align: center; /* Center text for narrow screens */
+  }
+
+  .menu-item-title {
+    font-size: 1.8rem;
+  }
+
+  .menu-item-description li {
+    font-size: 1rem;
+  }
+
+  .menu-item-price {
+    font-size: 1.1rem;
+  }
+}

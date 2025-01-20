@@ -71,6 +71,10 @@ html{
   background-color: black;
 }
 
-*{
-  font-family: 'Inknut Antiqua', serif;
+h1, h2, h3 {
+  font-family: 'Georgia', serif;
+}
+
+p, li {
+  font-family: 'Arial', sans-serif;
 }
