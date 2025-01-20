@@ -72,8 +72,8 @@
 
 /* Placeholder for menu images */
 .menu-image-placeholder {
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;
   background-color: #d3d3d3; /* Light gray background */
   border-radius: 10px; /* Rounded corners for consistency */
   flex-shrink: 0; /* Prevent shrinking in flex layout */
