@@ -2,7 +2,7 @@
 export default {
     name: 'pageHeader',
     type: 'document',
-    title: 'Sideoverskrift',
+    title: 'Om Oss Sideoverskrift',
     fields: [
       {
         name: 'title',

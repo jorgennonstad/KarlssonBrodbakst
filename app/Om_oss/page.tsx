@@ -4,16 +4,18 @@ import './AboutUs.css';
 import Footer from "../components/Footer/footer";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { client } from "@/app/lib/sanity";
+import { client, urlFor } from "@/app/lib/sanity";
 
 const AboutUs = () => {
     const [employees, setEmployees] = useState([]);
     const [history, setHistory] = useState(null);
     const [header, setHeader] = useState(null);
+    const [heroImage, setHeroImage] = useState(null); // State for the hero image
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // Fetch employees, history, and header
                 const employeesData = await client.fetch(`*[_type == "employee"]{
                     name,
                     bio,
@@ -28,9 +30,15 @@ const AboutUs = () => {
                     subtitle
                 }`);
 
+                // Fetch hero image
+                const heroImageData = await client.fetch(`*[_type == "omOssHeroImage"][0]{
+                    "imageUrl": image1.asset->url
+                }`);
+
                 setEmployees(employeesData);
                 setHistory(historyData);
                 setHeader(headerData);
+                setHeroImage(heroImageData); // Set the hero image state
             } catch (error) {
                 console.error("Failed to fetch data from Sanity:", error);
             }
@@ -39,7 +47,7 @@ const AboutUs = () => {
         fetchData();
     }, []);
 
-    if (!employees.length || !history || !header) {
+    if (!employees.length || !history || !header || !heroImage) {
         return <div>Loading...</div>;
     }
 
@@ -49,6 +57,14 @@ const AboutUs = () => {
             <div className="about-us-hero-container">
                 <div className="about-us-hero-images-container">
                     <div className="about-us-hero-overlay"></div>
+                    <div className="about-us-hero-image">
+                        <Image
+                            src={heroImage.imageUrl} // Use the fetched hero image URL
+                            alt="Hero Background"
+                            fill
+                            className="h-full w-full object-cover object-center"
+                        />
+                    </div>
                     <div className="about-us-hero-text-content">
                         <h1 className="about-us-hero-title">{header.title}</h1>
                         <p className="about-us-hero-subtitle">{header.subtitle}</p>

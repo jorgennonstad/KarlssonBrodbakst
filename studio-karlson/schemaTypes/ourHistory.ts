@@ -2,7 +2,7 @@
 export default {
     name: 'ourHistory',
     type: 'document',
-    title: 'Vår Historie',
+    title: 'Om Oss Vår Historie',
     fields: [
       {
         name: 'title',

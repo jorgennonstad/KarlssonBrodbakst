@@ -8,7 +8,6 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background-image: url('../src/img/Abonnement.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -40,7 +39,6 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease;
 }
@@ -76,7 +74,6 @@
     z-index: 2;
     transition: opacity 0.3s ease-in-out;
     padding: 20px;
-    border-radius: 10px;
     width: 90%;
     box-sizing: border-box;
 }
@@ -102,7 +99,6 @@
 .about-us-text-container {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 50px 20px;
-    border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     margin: 30px auto;
     max-width: 800px;
