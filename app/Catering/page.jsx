@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import "./catering.css";
+import "./Catering.css";
 import Footer from "../components/Footer/footer";
 
 const Catering = () => {
@@ -50,9 +50,7 @@ const Catering = () => {
 
   return (
     <div className="catering-page">
-      <div className="catering-title-container">
-        <h1 className="catering-title">Catering</h1>
-      </div>
+      <h1 className="catering-title">Catering</h1>
       <div className="catering-container">
         <div className="menu-items">
           {menuItems.map((item, index) => (
@@ -67,6 +65,7 @@ const Catering = () => {
                 <p className="menu-item-note">{item.note}</p>
                 <p className="menu-item-price">{item.price}</p>
               </div>
+              <div className="menu-image-placeholder">Image Here</div>
             </div>
           ))}
         </div>

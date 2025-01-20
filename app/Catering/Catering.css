@@ -1,16 +1,17 @@
 /* General Styling */
 .catering-page {
   font-family: "Inknut Antiqua", serif;
+  padding-top: 100px; /* Ensure content starts below the navbar */
 }
 
 /* Title Section */
-.catering-title-container {
+.catering-title {
+  font-size: 3rem;
+  font-weight: bold;
   text-align: center;
-  margin-top: 200px;
+  color: white;
   margin-bottom: 50px;
 }
-
-
 
 /* Menu Section */
 .catering-container {
@@ -18,13 +19,6 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-}
-
-.catering-section-title {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 30px;
 }
 
 .menu-items {
@@ -35,9 +29,10 @@
 
 .menu-item {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between; /* Space between text and placeholder */
+  align-items: center;
   gap: 20px;
-  background-color: #f9f9f9;
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -50,7 +45,7 @@
 .menu-item-title {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #2a7ae2;
+  color: #fbe0b1;
   margin-bottom: 10px;
 }
 
@@ -59,20 +54,36 @@
   padding-left: 20px;
   margin-bottom: 10px;
   font-size: 1rem;
-  color: #555;
+  color: white;
 }
 
 .menu-item-note {
   font-size: 0.9rem;
   font-style: italic;
-  color: #777;
+  color: white;
   margin-bottom: 5px;
 }
 
 .menu-item-price {
   font-size: 1rem;
   font-weight: bold;
-  color: #333;
+  color: white;
+}
+
+/* Placeholder for menu images */
+.menu-image-placeholder {
+  width: 150px;
+  height: 150px;
+  background-color: #d3d3d3; /* Light gray background */
+  border-radius: 10px; /* Rounded corners for consistency */
+  flex-shrink: 0; /* Prevent shrinking in flex layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666; /* Placeholder text color */
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 /* Responsive Design */
@@ -82,15 +93,9 @@
     align-items: center;
   }
 
-  .menu-item-title {
-    font-size: 1.5rem;
-  }
-
-  .menu-item-description {
-    font-size: 0.9rem;
-  }
-
-  .menu-item-price {
-    font-size: 1rem;
+  .menu-image-placeholder {
+    width: 100px;
+    height: 100px;
+    margin-top: 10px; /* Add spacing above the placeholder */
   }
 }
