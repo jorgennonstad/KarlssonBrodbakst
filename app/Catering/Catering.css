@@ -1,99 +1,96 @@
+/* General Styling */
+.catering-page {
+  font-family: "Inknut Antiqua", serif;
+}
+
+/* Title Section */
+.catering-title-container {
+  text-align: center;
+  margin-top: 200px;
+  margin-bottom: 50px;
+}
+
+
+
+/* Menu Section */
 .catering-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 80px auto;
-    padding: 20px;
-    background-color: var(--background);
-  }
-  
-  .catering-title {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--foreground);
-    margin-bottom: 50px;
-    margin-top: 200px;
-  }
-  
-  .menu-items {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-  
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.catering-section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.menu-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.menu-text {
+  flex: 1;
+}
+
+.menu-item-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2a7ae2;
+  margin-bottom: 10px;
+}
+
+.menu-item-description {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.menu-item-note {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.menu-item-price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .menu-item {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    background-color: var(--card);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .menu-image {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px 0 0 10px;
-  }
-  
-  .menu-text {
-    padding: 20px;
-    flex: 1;
-  }
-  
+
   .menu-item-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--primary);
-    margin-bottom: 10px;
+    font-size: 1.5rem;
   }
-  
+
   .menu-item-description {
-    list-style-type: disc;
-    margin: 10px 0 20px;
-    padding-left: 20px;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--muted-foreground);
-  }
-  
-  .menu-item-note {
     font-size: 0.9rem;
-    font-style: italic;
-    color: var(--secondary);
-    margin-bottom: 5px;
   }
-  
+
   .menu-item-price {
     font-size: 1rem;
-    font-weight: bold;
-    color: var(--foreground);
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .menu-item {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .menu-image {
-      width: 100%;
-      height: auto;
-    }
-  
-    .menu-item-title {
-      font-size: 1.5rem;
-    }
-  
-    .menu-item-description {
-      font-size: 0.9rem;
-    }
-  
-    .menu-item-price {
-      font-size: 1rem;
-    }
-  }
-  
+}

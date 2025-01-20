@@ -66,7 +66,7 @@ html{
   scroll-behavior: smooth;
 }
 
-.all-products-container, .abonnement-container, .outer-container, .about-us-page, .catering-container{
+.all-products-container, .abonnement-container, .outer-container, .about-us-page, .catering-page{
   background: url('./src//img/wood_wallpaper2.png') fixed;
   background-color: black;
 }

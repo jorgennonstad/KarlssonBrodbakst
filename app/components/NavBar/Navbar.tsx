@@ -7,7 +7,7 @@ import { ShoppingCart } from "lucide-react";
 import "./NavBar.css";
 
 export default function NavBar() {
-    const { handleCartClick } = useShoppingCart();
+    const { handleCartClick, cartCount } = useShoppingCart(); // Add cartCount to access the current item count
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
@@ -50,6 +50,9 @@ export default function NavBar() {
                         className="navbar-cart-button"
                     >
                         <ShoppingCart className="navbar-cart-icon" />
+                        {cartCount > 0 && ( // Show cart count only if it's greater than 0
+                            <span className="navbar-cart-count">{cartCount}</span>
+                        )}
                         <span className="navbar-cart-text">Handlekurv</span>
                     </button>
                 </div>
