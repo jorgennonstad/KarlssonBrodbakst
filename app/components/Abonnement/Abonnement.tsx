@@ -4,108 +4,106 @@ import React, { useState, useEffect } from "react";
 import { client } from "@/app/lib/sanity";
 import "./Abonnement.css";
 
-// TypeScript interface for the Abonnement data
 interface AbonnementData {
   title: string;
-  subtitle1: string;
-  subtitle2: string;
   description: string;
-  backgroundImage: string; // Background image URL
+  backgroundImage: string;
+  discountPercentage: number;
+  deliveryFee: number;
+}
+
+interface ProductData {
+  name: string;
   price: number;
-  stripeProductId: string;
-  stripePriceId: string; // This is what we need for the Stripe session
+  price_id: string;
 }
 
 // Fetch subscription data from Sanity
-async function getAbonnement(): Promise<AbonnementData> {
+async function fetchData(): Promise<{ abonnement: AbonnementData; products: ProductData[] }> {
   const query = `
-    *[_type == "abonnement"][0]{
+  {
+    "abonnement": *[_type == "abonnement"][0]{
       title,
-      subtitle1,
-      subtitle2,
       description,
       "backgroundImage": backgroundImage.asset->url,
+      discountPercentage,
+      deliveryFee
+    },
+    "products": *[_type == "product" && availableInAbonnement == true]{
+      name,
       price,
-      stripeProductId,
-      stripePriceId
+      price_id
     }
+  }
   `;
-  const data = await client.fetch(query);
-  return data;
+  return await client.fetch(query);
 }
 
 export default function Abonnement() {
   const [abonnement, setAbonnement] = useState<AbonnementData | null>(null);
+  const [products, setProducts] = useState<ProductData[]>([]);
+  const [selectedBread1, setSelectedBread1] = useState<string>("");
+  const [selectedBread2, setSelectedBread2] = useState<string>("");
+  const [totalPrice, setTotalPrice] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchAbonnement() {
+    async function fetchAbonnementData() {
       try {
-        const data = await getAbonnement();
-        setAbonnement(data);
+        const data = await fetchData();
+        setAbonnement(data.abonnement);
+        setProducts(data.products);
       } catch (err) {
-        setError("Failed to load subscription. Please try again later.");
+        setError("Failed to load data. Please try again later.");
       } finally {
         setLoading(false);
       }
     }
-    fetchAbonnement();
-
-    // Function to handle moving the button dynamically
-    const handleResize = () => {
-      const button = document.querySelector(".subscribe-button");
-      const rightSection = document.querySelector(".abonnement-right");
-      const leftSection = document.querySelector(".abonnement-left");
-
-      if (button && rightSection && leftSection) {
-        if (window.innerWidth <= 768) {
-          rightSection.appendChild(button); // Move button to .abonnement-right
-        } else {
-          leftSection.appendChild(button); // Move button back to .abonnement-left
-        }
-      }
-    };
-
-    // Initial check and listener setup
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup listener on unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    fetchAbonnementData();
   }, []);
 
-  const handleSubscribe = async () => {
-    if (!abonnement) return;
+  useEffect(() => {
+    const selectedPrice1 = products.find((product) => product.name === selectedBread1)?.price || 0;
+    const selectedPrice2 = products.find((product) => product.name === selectedBread2)?.price || 0;
 
-    try {
-      // Send stripePriceId from Sanity to the backend
-      const response = await fetch("http://localhost:5001/create-subscription-session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ quantity: 1, priceId: abonnement.stripePriceId }), // Send priceId from Sanity
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        console.error("Server error:", error.error || "Unknown error");
-        return;
-      }
-
-      const data = await response.json();
-      if (data.url) {
-        window.location.href = data.url; // Redirect to Stripe
-      } else {
-        console.error("No URL returned from server");
-      }
-    } catch (e) {
-      console.error("Failed to initiate checkout:", e);
+    if (abonnement) {
+      const subtotal = selectedPrice1 + selectedPrice2;
+      const discount = (subtotal * abonnement.discountPercentage) / 100;
+      const finalPrice = subtotal - discount + abonnement.deliveryFee;
+      setTotalPrice(finalPrice);
     }
+  }, [selectedBread1, selectedBread2, abonnement, products]);
+
+  const generateEmail = () => {
+    const breadNames = [selectedBread1, selectedBread2].filter(Boolean).join(", ");
+    const emailSubject = "Bestilling av abonnement på brød";
+    const emailBody = `
+      Hei,
+
+      Jeg er interesert i å bestille abonnementet med følgende brød:
+      - Brød 1: ${selectedBread1}
+      - Brød 2: ${selectedBread2}
+
+      Totalpris: ${totalPrice.toFixed(2)} Kr
+
+      Extra kommentarer:
+      xxxx
+      
+      Kundens informasjon:
+      Navn: ___________
+      Adresse: ___________
+      Telefonnummer: ___________
+
+      Takk!
+    `;
+
+    const mailToLink = `mailto:example@domain.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = mailToLink;
   };
+
+  // Disable the button if either bread is not selected
+  const isButtonDisabled = !selectedBread1 || !selectedBread2;
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -116,19 +114,60 @@ export default function Abonnement() {
         className="abonnement"
         style={{ backgroundImage: `url(${abonnement?.backgroundImage})` }}
       >
-        <div className="abonnement_overlay">
-          <div className="abonnement-left">
-            <h1>{abonnement?.title}</h1>
-            <h2>{abonnement?.subtitle1}</h2>
-            <h3>{abonnement?.subtitle2}</h3>
-            <button className="subscribe-button" onClick={handleSubscribe}>
-              Abonner
-            </button>
-          </div>
-          <div className="abonnement-right">
-            <p>{abonnement?.description}</p>
+        <div className="abonnement-left">
+          <div className="abonnement-left-text">
+            <h2>{abonnement?.title}</h2>
+            <p>Beskrivelse: {abonnement?.description}</p>
           </div>
         </div>
+
+        <div className="abonnement-right">
+          <div className="abonnement-right-text">
+            <h2>Velg to brød og regn ut abonnement prisen</h2>
+
+            <label htmlFor="bread1">Velg første brød:</label>
+            <select
+              id="bread1"
+              value={selectedBread1}
+              onChange={(e) => setSelectedBread1(e.target.value)}
+            >
+              <option value="">Velg et brød</option>
+              {products.map((product) => (
+                <option key={product.price_id} value={product.name}>
+                  {product.name} - {product.price} Kr
+                </option>
+              ))}
+            </select>
+
+            <label htmlFor="bread2">Velg andre brød:</label>
+            <select
+              id="bread2"
+              value={selectedBread2}
+              onChange={(e) => setSelectedBread2(e.target.value)}
+            >
+              <option value="">Velg et brød</option>
+              {products.map((product) => (
+                <option key={product.price_id} value={product.name}>
+                  {product.name} - {product.price} Kr
+                </option>
+              ))}
+            </select>
+
+            <h3>Total pris: {totalPrice.toFixed(2)} Kr</h3>
+            <button 
+              onClick={generateEmail} 
+              disabled={isButtonDisabled}
+              style={{ 
+                backgroundColor: isButtonDisabled ? '#ccc' : '#007bff', 
+                cursor: isButtonDisabled ? 'not-allowed' : 'pointer' 
+              }}
+            >
+              Send Bestilling via E-post
+            </button>
+          </div>
+        </div>
+
+        <div className="abonnement_overlay"></div>
       </div>
     </div>
   );

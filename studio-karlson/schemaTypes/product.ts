@@ -58,5 +58,11 @@ export default {
             of: [{ type: 'string' }],
             description: 'List of allergens (e.g., Gluten, Milk)',
         },
+        {
+            name: 'availableInAbonnement',
+            type: 'boolean',
+            title: 'Tilgjengelig i abonnement?',
+            description: 'Kryss av hvis denne varen kan velges i abonnementet',
+        },
     ],
 };
