@@ -131,32 +131,6 @@
 }
 
 
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .menu-item {
-    width: 90vw;
-  }
-
-  .menu-item-title {
-    font-size: 2rem;
-  }
-
-  .menu-item-price {
-    font-size: 1.8rem;
-  }
-
-  .menu-item-note {
-    font-size: 1rem;
-  }
-
-  .menu-item-description {
-    font-size: 0.9rem;
-  }
-
-}
-
-
 /* Responsive Design */
 @media (max-width: 768px) {
   .menu-item {
@@ -185,5 +159,15 @@
 
   .menu-item-price {
     font-size: 1.1rem;
+  }
+
+  .menu-item-note {
+    font-size: 1.1rem;
+  }
+
+  .contact-button {
+    padding: 10px 10px;
+    font-size: 1.1rem;
+    margin-top: 10px;
   }
 }

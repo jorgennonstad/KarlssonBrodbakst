@@ -126,6 +126,7 @@
   .abonnement-left-text {
     text-align: center; /* Center-align for better readability on small screens */
     padding: 15px;
+    margin: 0;
   }
 
   .abonnement-left-text h2 {
@@ -148,6 +149,16 @@
   }
 
   .abonnement-right-text button {
-    font-size: 0.9rem; /* Adjust button size for smaller screens */
+    font-size: 0.85rem; /* Adjust button size for smaller screens */
+  }
+
+  .abonnement-right-text h3 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .abonnement-right-text h2 {
+    font-size: 1.1rem;
+    font-weight: bold;
   }
 }

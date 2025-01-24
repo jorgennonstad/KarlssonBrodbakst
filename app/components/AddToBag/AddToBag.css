@@ -1,4 +1,4 @@
-.add-to-bag{
+.add-to-bag {
     height: 70px;
     background-color: #FBE0B1;
     color: #633E1D;
@@ -8,9 +8,20 @@
     min-width: 190px;
     margin: 0 auto;
     border-radius: 5px;
-}
-
-.add-to-bag:hover{
+    transition: all 0.3s ease; /* Add smooth transition for size changes */
+  }
+  
+  .add-to-bag:hover {
     background-color: #633E1D;
     color: #FBE0B1;
-}
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .add-to-bag {
+      height: 50px; /* Reduce height */
+      font-size: 0.8rem; /* Smaller font size */
+      min-width: 150px; /* Adjust minimum width */
+    }
+  }
+  
