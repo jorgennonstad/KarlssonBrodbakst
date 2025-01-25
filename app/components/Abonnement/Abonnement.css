@@ -150,6 +150,8 @@
 
   .abonnement-right-text button {
     font-size: 0.85rem; /* Adjust button size for smaller screens */
+    display: block;
+    margin: 0 auto;
   }
 
   .abonnement-right-text h3 {

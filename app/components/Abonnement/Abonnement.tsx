@@ -66,14 +66,19 @@ export default function Abonnement() {
   useEffect(() => {
     const selectedPrice1 = products.find((product) => product.name === selectedBread1)?.price || 0;
     const selectedPrice2 = products.find((product) => product.name === selectedBread2)?.price || 0;
-
+  
     if (abonnement) {
       const subtotal = selectedPrice1 + selectedPrice2;
-      const discount = (subtotal * abonnement.discountPercentage) / 100;
-      const finalPrice = subtotal - discount + abonnement.deliveryFee;
-      setTotalPrice(finalPrice);
+      if (subtotal === 0) {
+        setTotalPrice(0); // Set total price to 0 if no bread is selected
+      } else {
+        const discount = (subtotal * abonnement.discountPercentage) / 100;
+        const finalPrice = subtotal - discount + abonnement.deliveryFee;
+        setTotalPrice(finalPrice);
+      }
     }
   }, [selectedBread1, selectedBread2, abonnement, products]);
+  
 
   const generateEmail = () => {
     const breadNames = [selectedBread1, selectedBread2].filter(Boolean).join(", ");
