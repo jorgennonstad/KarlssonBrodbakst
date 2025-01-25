@@ -90,24 +90,41 @@
 }
 
 .abonnement-right-text h3 {
-  margin: 20px 0;
+  margin: 20px 0 0 0 ;
   font-size: 1.5rem;
   color: #ffdd57;
 }
 
+.delivery-fee-note{
+  margin-bottom: 20px;
+  font-style: italic;
+  opacity: 0%;
+}
+
+.delivery-fee-note.visible {
+  opacity: 70%;
+}
+
 .abonnement-right-text button {
-  padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  padding: 15px 30px;
   color: white;
-  background-color: #ff5722;
+  background-color: #a23c24;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .abonnement-right-text button:hover {
-  background-color: #e64a19;
+  background-color: #842e1d; /* Litt mørkere på hover */
+}
+
+.price-container{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Responsive Design */

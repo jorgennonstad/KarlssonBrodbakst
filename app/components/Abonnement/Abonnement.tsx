@@ -44,7 +44,7 @@ export default function Abonnement() {
   const [products, setProducts] = useState<ProductData[]>([]);
   const [selectedBread1, setSelectedBread1] = useState<string>("");
   const [selectedBread2, setSelectedBread2] = useState<string>("");
-  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -66,11 +66,12 @@ export default function Abonnement() {
   useEffect(() => {
     const selectedPrice1 = products.find((product) => product.name === selectedBread1)?.price || 0;
     const selectedPrice2 = products.find((product) => product.name === selectedBread2)?.price || 0;
-  
+
     if (abonnement) {
       const subtotal = selectedPrice1 + selectedPrice2;
-      if (subtotal === 0) {
-        setTotalPrice(0); // Set total price to 0 if no bread is selected
+
+      if (!selectedBread1 || !selectedBread2) {
+        setTotalPrice(null); // Show placeholder if breads are not selected
       } else {
         const discount = (subtotal * abonnement.discountPercentage) / 100;
         const finalPrice = subtotal - discount + abonnement.deliveryFee;
@@ -78,7 +79,6 @@ export default function Abonnement() {
       }
     }
   }, [selectedBread1, selectedBread2, abonnement, products]);
-  
 
   const generateEmail = () => {
     const breadNames = [selectedBread1, selectedBread2].filter(Boolean).join(", ");
@@ -90,7 +90,7 @@ export default function Abonnement() {
       - Brød 1: ${selectedBread1}
       - Brød 2: ${selectedBread2}
 
-      Totalpris: ${totalPrice.toFixed(2)} Kr
+      Totalpris: ${totalPrice?.toFixed(2)} Kr
 
       Extra kommentarer:
       xxxx
@@ -157,18 +157,27 @@ export default function Abonnement() {
                 </option>
               ))}
             </select>
+            <div className="price-container">
+            <h3>Total pris: {totalPrice !== null ? `${totalPrice.toFixed(2)} Kr` : "Velg to varer"}</h3>
+            <p 
+              className={`delivery-fee-note ${abonnement && totalPrice !== null ? "visible" : ""}`}
+            >
+              DeliveryFee på {abonnement?.deliveryFee} Kr lagt til i total
+            </p>
 
-            <h3>Total pris: {totalPrice.toFixed(2)} Kr</h3>
+
             <button 
               onClick={generateEmail} 
               disabled={isButtonDisabled}
-              style={{ 
-                backgroundColor: isButtonDisabled ? '#ccc' : '#007bff', 
-                cursor: isButtonDisabled ? 'not-allowed' : 'pointer' 
+              style={{
+                ...(isButtonDisabled && { backgroundColor: '#ccc' }),
+                cursor: isButtonDisabled ? 'not-allowed' : 'pointer',
               }}
+              
             >
               Send Bestilling via E-post
             </button>
+            </div>
           </div>
         </div>
 

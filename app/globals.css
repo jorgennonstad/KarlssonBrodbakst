@@ -78,3 +78,7 @@ h1, h2, h3 {
 p, li {
   font-family: 'Arial', sans-serif;
 }
+
+strong{
+  font-weight: bold;
+}

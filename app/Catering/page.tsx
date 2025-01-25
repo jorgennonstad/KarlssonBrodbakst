@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -36,6 +35,27 @@ const Catering = () => {
     fetchMenuItems();
   }, []);
 
+  // Function to handle the contact button click
+  const handleContactButtonClick = () => {
+    const subject = encodeURIComponent("Catering Forespørsel");
+    const body = encodeURIComponent(`
+Hei,
+
+Jeg er interessert i å bestille catering. Her er mine detaljer:
+
+- Ønsket dato: [Fyll ut dato]
+- Ønskede varer: [Fyll ut ønskede varer]
+- Kontakt info: [Fyll ut telefonnummer og e-post]
+- Adresse: [Fyll ut leveringsadresse]
+- Mer informasjon: [Fyll ut annen info]
+
+Vennlig hilsen,
+[Fyll ut navn]
+    `);
+
+    window.location.href = `mailto:example@domain.com?subject=${subject}&body=${body}`;
+  };
+
   return (
     <div className="catering-page">
       <h1 className="catering-title">Catering</h1>
@@ -62,9 +82,7 @@ const Catering = () => {
                 <p className="menu-item-price">{item.price},-</p>
                 <button
                   className="contact-button"
-                  onClick={() =>
-                    window.location.href = "mailto:example@domain.com?subject=Catering Forespørsel"
-                  }
+                  onClick={handleContactButtonClick}
                 >
                   Kontakt oss for catering i dag
                 </button>

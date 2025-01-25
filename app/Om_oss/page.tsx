@@ -4,18 +4,18 @@ import './AboutUs.css';
 import Footer from "../components/Footer/footer";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { client, urlFor } from "@/app/lib/sanity";
+import { client } from "@/app/lib/sanity";
+import { PortableText } from "@portabletext/react";
 
 const AboutUs = () => {
     const [employees, setEmployees] = useState([]);
     const [history, setHistory] = useState(null);
     const [header, setHeader] = useState(null);
-    const [heroImage, setHeroImage] = useState(null); // State for the hero image
+    const [heroImage, setHeroImage] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Fetch employees, history, and header
                 const employeesData = await client.fetch(`*[_type == "employee"]{
                     name,
                     bio,
@@ -29,8 +29,6 @@ const AboutUs = () => {
                     title,
                     subtitle
                 }`);
-
-                // Fetch hero image
                 const heroImageData = await client.fetch(`*[_type == "omOssHeroImage"][0]{
                     "imageUrl": image1.asset->url
                 }`);
@@ -38,7 +36,7 @@ const AboutUs = () => {
                 setEmployees(employeesData);
                 setHistory(historyData);
                 setHeader(headerData);
-                setHeroImage(heroImageData); // Set the hero image state
+                setHeroImage(heroImageData);
             } catch (error) {
                 console.error("Failed to fetch data from Sanity:", error);
             }
@@ -59,10 +57,10 @@ const AboutUs = () => {
                     <div className="about-us-hero-overlay"></div>
                     <div className="about-us-hero-image">
                         <Image
-                            src={heroImage.imageUrl} // Use the fetched hero image URL
+                            src={heroImage.imageUrl}
                             alt="Hero Background"
                             fill
-                            className="h-full w-full object-cover object-center"
+                            className="object-cover object-center"
                         />
                     </div>
                     <div className="about-us-hero-text-content">
@@ -76,11 +74,26 @@ const AboutUs = () => {
             <div className="about-us-history-section">
                 <h1 className="about-us-section-title">{history.title}</h1>
                 <div className="about-us-text-container">
-                    {history.content.map((block, index) => (
-                        <p key={index}>
-                            {block.children.map(child => child.text).join("")}
-                        </p>
-                    ))}
+                    <PortableText 
+                        value={history.content}
+                        components={{
+                            block: {
+                                normal: ({ children }) => <p>{children}</p>,
+                                h2: ({ children }) => <h2>{children}</h2>,
+                            },
+                            marks: {
+                                strong: ({ children }) => <strong>{children}</strong>,
+                                em: ({ children }) => <em>{children}</em>,
+                            },
+                            list: {
+                                bullet: ({ children }) => <ul>{children}</ul>,
+                                number: ({ children }) => <ol>{children}</ol>,
+                            },
+                            listItem: {
+                                bullet: ({ children }) => <li>{children}</li>,
+                            },
+                        }}
+                    />
                 </div>
             </div>
 
@@ -97,7 +110,22 @@ const AboutUs = () => {
                         />
                         <div className="hover-text">
                             <h2>{employee.name}</h2>
-                            <p>{employee.bio}</p>
+                            {/* Rendre biografien med PortableText */}
+                            <div className="employee-bio">
+                                <PortableText
+                                    value={employee.bio}
+                                    components={{
+                                        block: {
+                                            normal: ({ children }) => <p>{children}</p>,
+                                            h2: ({ children }) => <h2>{children}</h2>,
+                                        },
+                                        marks: {
+                                            strong: ({ children }) => <strong>{children}</strong>,
+                                            em: ({ children }) => <em>{children}</em>,
+                                        },
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 ))}

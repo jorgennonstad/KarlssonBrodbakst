@@ -17,10 +17,11 @@ export default {
             of: [{ type: 'image' }],
         },
         {
-            name: 'description',
-            type: 'text',
-            title: 'Produktbeskrivelse',
-            description: 'Detaljert beskrivelse av produktet',
+            name: "description",
+            title: "Beskrivelse",
+            type: "array",
+            of: [{ type: "block" }], // Dette gjør at 'description' kan inneholde rik tekst
+            description: "Beskrivelse av produktet, kan inkludere formatering som fet, kursiv, lister, etc.",
         },
         {
             name: 'slug',
