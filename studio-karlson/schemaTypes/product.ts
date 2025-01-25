@@ -1,28 +1,32 @@
 export default {
     name: 'product',
     type: 'document',
-    title: 'Product',
+    title: 'Produkt',
     fields: [
         {
             name: 'name',
             type: 'string',
-            title: 'Name of product',
+            title: 'Produktnavn',
+            description: 'Navnet på produktet',
         },
         {
             name: 'images',
             type: 'array',
-            title: 'Product images',
+            title: 'Produktbilder',
+            description: 'Bilder av produktet',
             of: [{ type: 'image' }],
         },
         {
             name: 'description',
             type: 'text',
-            title: 'Description of product',
+            title: 'Produktbeskrivelse',
+            description: 'Detaljert beskrivelse av produktet',
         },
         {
             name: 'slug',
             type: 'slug',
-            title: 'Product slug',
+            title: 'Produkt-slug',
+            description: 'Unik slug for produktet (brukes i URL)',
             options: {
                 source: 'name',
                 maxLength: 96,
@@ -31,38 +35,34 @@ export default {
         {
             name: 'price',
             type: 'number',
-            title: 'Price',
+            title: 'Pris',
+            description: 'Prisen på produktet i NOK',
         },
         {
             name: 'price_id',
-            title: 'Stripe Price ID',
+            title: 'Stripe Pris-ID',
             type: 'string',
-        },
-        {
-            name: 'category',
-            type: 'reference',
-            title: 'Category',
-            to: [{ type: 'category' }],
+            description: 'Stripe-ID for produktet (brukes for betaling)',
         },
         {
             name: 'naeringsinnhold',
             type: 'array',
             title: 'Næringsinnhold',
+            description: 'Liste over næringsinnhold (f.eks. Protein: 10g, Fett: 5g)',
             of: [{ type: 'string' }],
-            description: 'List of nutritional information (e.g., Protein: 10g, Fat: 5g)',
         },
         {
             name: 'allergener',
             type: 'array',
             title: 'Allergener',
+            description: 'Liste over allergener (f.eks. Gluten, Melk)',
             of: [{ type: 'string' }],
-            description: 'List of allergens (e.g., Gluten, Milk)',
         },
         {
             name: 'availableInAbonnement',
             type: 'boolean',
             title: 'Tilgjengelig i abonnement?',
-            description: 'Kryss av hvis denne varen kan velges i abonnementet',
+            description: 'Kryss av hvis dette produktet kan velges i abonnementet',
         },
     ],
 };

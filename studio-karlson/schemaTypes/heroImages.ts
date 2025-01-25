@@ -1,15 +1,15 @@
 export default {
     name: 'heroImage',
     type: 'document',
-    title: 'Hero Image',
+    title: 'Hovedbilde', // Translated to Norwegian
     fields: [
         {
             name: 'image1',
             type: 'image',
-            title: 'Hero Image', // Updated title
+            title: 'Hovedbilde', // Translated to Norwegian
             options: {
-                hotspot: true, // Optional: allows cropping/zooming of the image
+                hotspot: true, // Valgfritt: Lar deg beskjære/zoome inn på bildet
             },
-        }
-    ]
-}
+        },
+    ],
+};

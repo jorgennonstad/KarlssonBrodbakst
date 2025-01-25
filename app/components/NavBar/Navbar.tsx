@@ -88,7 +88,7 @@ export default function NavBar() {
                             Om oss
                         </Link>
                         <Link
-                            href="/kontakt"
+                            href="/Kontakt_oss"
                             className="overlay-link"
                             onClick={() => setMenuOpen(false)}
                         >

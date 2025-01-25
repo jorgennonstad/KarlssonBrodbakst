@@ -1,7 +1,7 @@
 
 export default {
     name: "cateringItems",
-    title: "Catering Items",
+    title: "Catering",
     type: "document",
     fields: [
       {

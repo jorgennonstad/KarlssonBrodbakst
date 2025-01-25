@@ -1,27 +1,27 @@
 export default {
   name: 'sliderImage',
-  title: 'Slider Image',
+  title: 'Nyheter',
   type: 'document',
   fields: [
     {
       name: 'image',
-      title: 'Image (16:9 ratio)',
+      title: 'Bilde (16:9-forhold)',
       type: 'image',
       options: {
-        hotspot: true, // Allows for cropping/zooming of the image
+        hotspot: true,
       },
     },
     {
       name: 'altText',
-      title: 'Alt Text',
+      title: 'Alt-tekst',
       type: 'string',
     },
     {
       name: 'priority',
-      title: 'Priority',
+      title: 'Prioritet',
       type: 'number',
-      description: 'Use this field to control the order of the images. Lower numbers appear first.',
-      validation: (Rule: { min: (arg0: number) => { (): any; new(): any; integer: { (): any; new(): any; }; }; }) => Rule.min(0).integer(), // Ensure positive integers
+      description: 'Bruk dette feltet for å kontrollere rekkefølgen på bildene. Lavere tall vises først.',
+      validation: (Rule: { min: (arg0: number) => { (): any; new(): any; integer: { (): any; new(): any; }; }; }) => Rule.min(0).integer(),
     },
   ],
 };

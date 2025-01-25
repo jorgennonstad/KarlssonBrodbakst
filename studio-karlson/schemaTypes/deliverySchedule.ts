@@ -1,6 +1,6 @@
 export default {
     name: "deliverySchedule",
-    title: "Delivery Schedule",
+    title: "Leveringsplan",
     type: "document",
     fields: [
       {

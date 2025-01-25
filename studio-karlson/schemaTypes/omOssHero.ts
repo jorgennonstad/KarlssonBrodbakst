@@ -1,12 +1,12 @@
 export default {
     name: 'omOssHeroImage',
     type: 'document',
-    title: 'Om Oss Hero Image',
+    title: 'Om Oss Hovedbilde',
     fields: [
         {
             name: 'image1',
             type: 'image',
-            title: 'Hero Image',
+            title: 'Hovedbilde',
             options: {
                 hotspot: true,
             },

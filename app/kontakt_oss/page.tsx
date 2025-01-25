@@ -1,7 +1,7 @@
 // pages/Kontakt_oss.tsx
 
 import React from 'react';
-import './kontakt_oss.css';
+import './Kontakt_oss.css';
 
 const KontaktOss: React.FC = () => {
   return (

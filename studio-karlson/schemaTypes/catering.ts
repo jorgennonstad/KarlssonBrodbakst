@@ -1,53 +1,52 @@
 export default {
-    name: "catering",
-    type: "document",
-    title: "Catering",
-    fields: [
+  name: "catering",
+  type: "document",
+  title: "Catering",
+  fields: [
       {
-        name: "title",
-        type: "string",
-        title: "Title",
+          name: "title",
+          type: "string",
+          title: "Tittel",
       },
       {
-        name: "description",
-        type: "text",
-        title: "Description",
+          name: "description",
+          type: "text",
+          title: "Beskrivelse",
       },
       {
-        name: "image",
-        type: "image",
-        title: "Hero Image",
-        options: {
-          hotspot: true,
-        },
-      },
-      {
-        name: "menuItems",
-        type: "array",
-        title: "Menu Items",
-        of: [
-          {
-            type: "object",
-            fields: [
-              {
-                name: "name",
-                type: "string",
-                title: "Dish Name",
-              },
-              {
-                name: "description",
-                type: "text",
-                title: "Description",
-              },
-              {
-                name: "price",
-                type: "number",
-                title: "Price (in NOK)",
-              },
-            ],
+          name: "image",
+          type: "image",
+          title: "Forsidebilde",
+          options: {
+              hotspot: true,
           },
-        ],
       },
-    ],
-  };
-  
+      {
+          name: "menuItems",
+          type: "array",
+          title: "Menyartikler",
+          of: [
+              {
+                  type: "object",
+                  fields: [
+                      {
+                          name: "name",
+                          type: "string",
+                          title: "Navn på rett",
+                      },
+                      {
+                          name: "description",
+                          type: "text",
+                          title: "Beskrivelse",
+                      },
+                      {
+                          name: "price",
+                          type: "number",
+                          title: "Pris (i NOK)",
+                      },
+                  ],
+              },
+          ],
+      },
+  ],
+};
