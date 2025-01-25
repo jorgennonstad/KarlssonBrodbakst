@@ -58,18 +58,9 @@
   object-fit: cover
 }
 
-.menu-item {
-  background-color: #fff; /* Clean white for item background */
-  width: 70vw;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Center-align text for harmony */
-}
-
 .menu-text {
   margin: 0 auto;
-  max-width: 500px;
+  width: 400px;
   display: flex;
   flex-direction: column; /* Stack items vertically */
   justify-content: space-between; /* Ensure space between items */
@@ -97,6 +88,7 @@
   color: #5a2b1a; /* Match main text color */
   margin-bottom: 30px;
   font-weight: bold;
+  width: 100%;
 }
 
 .menu-item-description {
@@ -171,5 +163,17 @@
     padding: 10px 10px;
     font-size: 1.1rem;
     margin-top: 10px;
+  }
+
+}
+
+@media (max-width: 500px) {
+  
+  .menu-item-image {
+    height: 200px;
+  }
+
+  .menu-text {
+    width: 100%;
   }
 }

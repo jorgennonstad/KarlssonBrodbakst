@@ -163,4 +163,8 @@
     font-size: 1.1rem;
     font-weight: bold;
   }
+
+  .abonnement-container {
+    padding: 20px;
+  }
 }

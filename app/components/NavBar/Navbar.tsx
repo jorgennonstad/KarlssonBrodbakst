@@ -40,7 +40,7 @@ export default function NavBar() {
                     <Link className="navbar-link" href="/Om_oss">
                         Om oss
                     </Link>
-                    <Link className="navbar-link" href="/Kontakt_oss">
+                    <Link className="navbar-link" href="/kontakt_oss">
                         Kontakt oss
                     </Link>
                 </nav>
@@ -74,7 +74,7 @@ export default function NavBar() {
                             Hjem
                         </Link>
                         <Link
-                            href="/catering"
+                            href="/Catering"
                             className="overlay-link"
                             onClick={() => setMenuOpen(false)}
                         >
@@ -88,7 +88,7 @@ export default function NavBar() {
                             Om oss
                         </Link>
                         <Link
-                            href="/Kontakt_oss"
+                            href="/kontakt_oss"
                             className="overlay-link"
                             onClick={() => setMenuOpen(false)}
                         >

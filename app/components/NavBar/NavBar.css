@@ -201,6 +201,8 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .overlay-link {
