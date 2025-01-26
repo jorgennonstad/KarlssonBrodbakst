@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="footer-section map-section">
-          <h3>Vårt Sted</h3>
+          <h3>Finn oss her</h3>
           <div className="map-container">
             <iframe
               src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Hunnsvegen%204B,%202821%20Gj%C3%B8vik+(Karlson%20Br%C3%B8dbakst)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
@@ -87,7 +87,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="footer-section social-section">
-          <h3>Følg Oss</h3>
+          <h3>Følg oss</h3>
           <div className="social-icons">
             <a href={footerData.socialMedia.instagram} target="_blank" rel="noopener noreferrer">
               <img src={footerData.socialMedia.instagramIcon.asset.url} alt="Instagram" className="social-icon instagram" />
