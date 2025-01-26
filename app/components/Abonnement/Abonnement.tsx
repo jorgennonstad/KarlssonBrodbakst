@@ -162,7 +162,7 @@ export default function Abonnement() {
             <p 
               className={`delivery-fee-note ${abonnement && totalPrice !== null ? "visible" : ""}`}
             >
-              DeliveryFee på {abonnement?.deliveryFee} Kr lagt til i total
+              Leveringsgebyr på {abonnement?.deliveryFee}kr lagt til i total
             </p>
 
 

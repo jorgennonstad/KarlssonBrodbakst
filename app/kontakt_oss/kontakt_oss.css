@@ -1,80 +1,123 @@
-/* kontakt_oss.css */
-
-html{
-  scroll-behavior: smooth;
-}
-
-.all-products-container, .abonnement-container, .outer-container, .about-us-page{
-  background: url('../src/img/wood_wallpaper.png') fixed;
-  background-color: black;
+.kontakt-oss-page {
+  padding-top: 100px;
 }
 
 .kontakt-oss-container {
-    max-width: 600px;
-    margin: 100px auto;
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 30px;
+  background: rgba(255, 248, 235, 0.95); /* Soft beige background for warmth */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.kontakt-oss-container h1 {
+  font-size: 2.5rem;
+  color: #633e1d; /* Warm brown for headings */
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px; /* Subtle spacing for a modern look */
+}
+
+.kontakt-description {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+  color: #4b3c28; /* A slightly lighter brown for descriptions */
+}
+
+.kontakt-info {
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  color: #4b3c28;
+  text-align: center;
+}
+
+.kontakt-info p {
+  margin: 10px 0;
+}
+
+.kontakt-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #633e1d;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 15px;
+  border: 1px solid #d1b898; /* Light warm border */
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff9f3; /* Very light warm background */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #633e1d;
+  box-shadow: 0 0 5px rgba(99, 62, 29, 0.3);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-button {
+  padding: 15px 30px;
+  background-color: #633e1d; /* Warm brown button */
+  color: #ffffff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: #4b3c28; /* Slightly darker brown on hover */
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .kontakt-oss-container {
     padding: 20px;
-    color: #333;
   }
-  
+
   .kontakt-oss-container h1 {
     font-size: 2rem;
-    color: #0056b3;
-    text-align: center;
   }
-  
+
   .kontakt-description {
-    text-align: center;
-    margin-bottom: 20px;
+    font-size: 1rem;
   }
-  
+
   .kontakt-info {
-    margin-bottom: 30px;
-    line-height: 1.6;
+    font-size: 1rem;
   }
-  
-  .kontakt-info p {
-    margin: 5px 0;
-  }
-  
-  .kontakt-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  
+
   .submit-button {
-    padding: 10px 15px;
-    background-color: #0056b3;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    padding: 12px 25px;
+    font-size: 0.9rem;
   }
-  
-  .submit-button:hover {
-    background-color: #003f7f;
-  }
-  
+}
