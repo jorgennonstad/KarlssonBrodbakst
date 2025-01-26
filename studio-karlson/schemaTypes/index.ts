@@ -1,5 +1,5 @@
 import product from "./product";
-import heroImages from "./heroImages";
+import heroPage from "./heroPage";
 import abonnement from "./abonnement";
 import sliderImage from "./sliderImage";
 import footer from "./footer";
@@ -11,5 +11,5 @@ import deliveryAlternatives from "./deliveryAlternatives";
 import omOssHero from "./omOssHero";
 import cateringItems from "./cateringItems";
 
-export const schemaTypes = [product, heroImages, abonnement, sliderImage, footer, employee, omOssHero, ourHistory, pageHeader, deliverySchedule, deliveryAlternatives, cateringItems];
+export const schemaTypes = [product, heroPage, abonnement, sliderImage, footer, employee, omOssHero, ourHistory, pageHeader, deliverySchedule, deliveryAlternatives, cateringItems];
 

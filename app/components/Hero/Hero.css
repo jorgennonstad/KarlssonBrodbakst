@@ -13,6 +13,13 @@
     height: 100%;
 }
 
+.hero-logo{
+    position: relative;
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+}
+
 .hero-image {
     position: absolute;
     top: 0;
@@ -93,3 +100,50 @@
 .hero-link:hover .hero-icon {
     color: #ff7f50; /* Change icon color on hover */
 }
+
+/* mediaquery */
+@media (max-width: 1024px) {
+    .hero-logo{
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-links {
+        margin-top: 50px;
+    }
+
+    .hero-link svg{
+        height: 50px;
+        width: 50px;
+    }
+
+    .hero-link-text {
+        font-size: 14px;
+    }
+
+    .hero-logo{
+        width: 100%;
+    }
+
+    .hero-text-content{
+        top: 50%;
+        width: 75vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text-content{
+        top: 50%;
+        width: 75vw;
+    }
+}
+
