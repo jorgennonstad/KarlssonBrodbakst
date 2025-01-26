@@ -40,7 +40,7 @@ export default function NavBar() {
                     <Link className="navbar-link" href="/Om_oss">
                         Om oss
                     </Link>
-                    <Link className="navbar-link" href="/kontakt_oss">
+                    <Link className="navbar-link" href="/Kontakt_oss">
                         Kontakt oss
                     </Link>
                     <div className="navbar-link">
@@ -91,7 +91,7 @@ export default function NavBar() {
                             Om oss
                         </Link>
                         <Link
-                            href="/kontakt_oss"
+                            href="/Kontakt_oss"
                             className="overlay-link"
                             onClick={() => setMenuOpen(false)}
                         >
