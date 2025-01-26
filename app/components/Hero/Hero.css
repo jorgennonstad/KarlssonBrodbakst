@@ -128,4 +128,9 @@
         top: 50%;
         width: 75vw;
     }
+
+    .hero-link-rectangle {
+        padding: 12px 17px;
+        font-size: 12px;
+    }
 }
