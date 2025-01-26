@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { client, urlFor } from '../../lib/sanity';
 import Link from "next/link";
-import { ShoppingCart, Box } from "lucide-react"; // Import icons from lucide-react
 import "./Hero.css";
 
 async function getData() {
@@ -41,15 +40,13 @@ export default async function Hero() {
                         </p>
                     )}
 
-                    {/* Add the icons with text links */}
+                    {/* Updated buttons */}
                     <div className="hero-links">
-                        <Link href="#products-scroll" className="hero-link">
-                            <ShoppingCart className="hero-icon" />
-                            <span className="hero-link-text">Våre produkter</span>
+                        <Link href="#products-scroll" className="hero-link-rectangle">
+                            Våre produkter
                         </Link>
-                        <Link href="#Abonnement-scroll" className="hero-link">
-                            <Box className="hero-icon" />
-                            <span className="hero-link-text">Abonnement</span>
+                        <Link href="#Abonnement-scroll" className="hero-link-rectangle">
+                            Abonnement
                         </Link>
                     </div>
                 </div>
