@@ -34,11 +34,6 @@ export default async function Hero() {
                             className="hero-logo"
                         />
                     )}
-                    {data.slogan && (
-                        <p className="hero-subtitle">
-                            {data.slogan}
-                        </p>
-                    )}
 
                     {/* Updated buttons */}
                     <div className="hero-links">

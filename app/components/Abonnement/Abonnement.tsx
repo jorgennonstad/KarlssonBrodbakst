@@ -92,18 +92,18 @@ export default function Abonnement() {
 
       Totalpris: ${totalPrice?.toFixed(2)} Kr
 
-      Extra kommentarer:
-      xxxx
+      Extra kommentarer?:
+      
       
       Kundens informasjon:
-      Navn: ___________
-      Adresse: ___________
-      Telefonnummer: ___________
+      Navn: 
+      Adresse:
+      Telefonnummer:
 
       Takk!
     `;
 
-    const mailToLink = `mailto:example@domain.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    const mailToLink = `mailto:karlsson-brodbakst@hotmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
     window.location.href = mailToLink;
   };
 
@@ -170,7 +170,7 @@ export default function Abonnement() {
               onClick={generateEmail} 
               disabled={isButtonDisabled}
               style={{
-                ...(isButtonDisabled && { backgroundColor: '#ccc' }),
+                ...(isButtonDisabled && {border: '3px solid #ccc', opacity: 0.5, backgroundColor: 'transparent'}),
                 cursor: isButtonDisabled ? 'not-allowed' : 'pointer',
               }}
               

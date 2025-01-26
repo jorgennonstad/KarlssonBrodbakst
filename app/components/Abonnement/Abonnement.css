@@ -106,18 +106,16 @@
 }
 
 .abonnement-right-text button {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   padding: 15px 30px;
   color: white;
-  background-color: #a23c24;
-  border: none;
-  border-radius: 5px;
+  border: solid 3px white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .abonnement-right-text button:hover {
-  background-color: #842e1d; /* Litt mørkere på hover */
+  background-color: #ff7f50; /* Litt mørkere på hover */
 }
 
 .price-container{
@@ -166,7 +164,7 @@
   }
 
   .abonnement-right-text button {
-    font-size: 0.85rem; /* Adjust button size for smaller screens */
+    font-size: 1rem; /* Adjust button size for smaller screens */
     display: block;
     margin: 0 auto;
   }

@@ -55,8 +55,10 @@
   font-size: 1rem;
   font-weight: bold;
   text-align: center;
-  object-fit: cover
+  object-fit: cover;
+  margin: auto 0;
 }
+
 
 .menu-text {
   margin: 0 auto;

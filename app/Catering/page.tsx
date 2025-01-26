@@ -53,7 +53,7 @@ Vennlig hilsen,
 [Fyll ut navn]
     `);
 
-    window.location.href = `mailto:example@domain.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:karlsson-brodbakst@hotmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -63,6 +63,7 @@ Vennlig hilsen,
         <div className="menu-items">
           {menuItems.map((item, index) => (
             <div key={index} className="menu-item">
+              
               {/* Displaying image if available */}
               {item.image && item.image.asset && (
                 <img

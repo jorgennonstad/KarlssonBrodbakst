@@ -42,8 +42,7 @@
     align-items: center;
     justify-content: center;
     position: fixed; /* Make the cart button sticky */
-    top: 1rem; /* Adjust this value to control the distance from the top */
-    right: 1rem; /* Optional: position it to the right */
+    right: 6vw; /* Optional: position it to the right */
     z-index: 2000;
 }
 
@@ -58,14 +57,13 @@
     background-color: white;
     color: black;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e6e6e6;
+    border: 3px solid white;
     transition: all 0.2s ease;
 }
 
 .navbar-cart-button:hover {
     background-color: #ff7f50;
     color: white;
-    transform: scale(1.03);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -116,7 +114,7 @@
         height: 3rem;
         width: auto;
         padding: 0.75rem 0.5rem;
-        border-radius: 0.5rem;
+        border-radius: 0;
     }
 
     .navbar-cart-text {

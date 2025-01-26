@@ -78,12 +78,11 @@
     font-weight: 600;
     text-decoration: none;
     text-align: center;
-    transition: color 0.3s, border-color 0.3s;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .hero-link-rectangle:hover {
-    color: #ff7f50; /* Change color on hover */
-    border-color: #ff7f50; /* Change border color on hover */
+    background-color: #ff7f50;
 }
 
 /* mediaquery */
