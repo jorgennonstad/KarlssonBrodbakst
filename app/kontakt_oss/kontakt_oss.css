@@ -7,7 +7,6 @@
   margin: 50px auto;
   padding: 30px;
   background: rgba(255, 248, 235, 0.95); /* Soft beige background for warmth */
-  border-radius: 15px; /* Rounded corners */
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
@@ -60,7 +59,6 @@
 .form-group textarea {
   padding: 15px;
   border: 1px solid #d1b898; /* Light warm border */
-  border-radius: 8px;
   font-size: 1rem;
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -84,7 +82,6 @@
   color: #ffffff;
   font-size: 1rem;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
