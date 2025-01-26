@@ -101,7 +101,7 @@ export default function ShoppingCartModal() {
                                                     </div>
 
                                                     <div className="flex flex-1 items-end justify-between text-sm">
-                                                        <p className="text-gray-500">Antall: {entry.quantity}</p>
+                                                        <p className="text-black">Antall: {entry.quantity}</p>
 
                                                         <div className="flex">
                                                             <button
@@ -130,7 +130,7 @@ export default function ShoppingCartModal() {
                         <p className="mt-0.5 text-sm text-gray-500">
                             Frakt velges og legges til ved checkout
                         </p>
-                        <div className="m t-6">
+                        <div className="mt-6">
                             <Button onClick={handleCheckoutClick} className="w-full">
                                 Gå til kassen
                             </Button>
