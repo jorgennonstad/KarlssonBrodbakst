@@ -5,7 +5,6 @@ import Image from "next/image";
 import AddToBag from "@/app/components/AddToBag/AddToBag";
 import { client } from "@/app/lib/sanity";
 import { urlFor } from "@/app/lib/sanity";
-import { PortableText } from "@portabletext/react"; // Import PortableText
 import "./AllProductsPage.css";
 
 async function getAllProducts() {
@@ -73,30 +72,7 @@ export default function AllProductsPage() {
                                 />
                                 <div className="product-overlay">
                                     <div className="overlay-content">
-                                        {/* Using PortableText to render description */}
-                                        <div className="product-description">
-                                            <PortableText 
-                                                value={product.description}
-                                                components={{
-                                                    block: {
-                                                        normal: ({ children }) => <p>{children}</p>,
-                                                        h2: ({ children }) => <h2>{children}</h2>,
-                                                        h3: ({ children }) => <h3>{children}</h3>,
-                                                    },
-                                                    marks: {
-                                                        strong: ({ children }) => <strong>{children}</strong>,
-                                                        em: ({ children }) => <em>{children}</em>,
-                                                    },
-                                                    list: {
-                                                        bullet: ({ children }) => <ul>{children}</ul>,
-                                                        number: ({ children }) => <ol>{children}</ol>,
-                                                    },
-                                                    listItem: {
-                                                        bullet: ({ children }) => <li>{children}</li>,
-                                                    },
-                                                }}
-                                            />
-                                        </div>
+                                        <p>{product.description}</p>
                                     </div>
                                 </div>
                                 <div className="product-link">
