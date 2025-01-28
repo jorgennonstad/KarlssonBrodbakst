@@ -138,11 +138,11 @@ export default function ShoppingCartModal() {
                 {isPopupOpen && (
                     <div className="delivery-popup">
                         <div className="delivery-popup-content">
-                            <h3 className="delivery-popup-header">Velg leveringsmetode</h3>
+                            <h3 className="delivery-popup-header">Vi leverer kun til postnummer xxxx - xxxx</h3>
                             <div className="delivery-options">
                                 <label>
                                     <input
-                                        type="radio"
+                                        type="checkbox"
                                         name="deliveryOption"
                                         value="pickup"
                                         checked={deliveryOption === "pickup"}
@@ -152,7 +152,7 @@ export default function ShoppingCartModal() {
                                 </label>
                                 <label>
                                     <input
-                                        type="radio"
+                                        type="checkbox"
                                         name="deliveryOption"
                                         value="delivery"
                                         checked={deliveryOption === "delivery"}
