@@ -1,125 +1,163 @@
-/* Shopping Cart Modal (Overlay and Content) */
-
-/* Overlay for the shopping cart modal */
-.shopping-cart-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 50; /* Lower than the delivery popup */
+/* General Styles */
+.shopping-cart-modal {
+    max-width: 90vw;
 }
 
-/* Shopping Cart Modal content */
 .shopping-cart-content {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     z-index: 100;
 }
 
-/* Delivery Popup (Overlay and Content) */
+.cart-items-container {
+    margin-top: 2rem;
+    flex-grow: 1;
+    overflow-y: auto;
+}
 
-/* The overlay should have a higher z-index to be on top of the shopping cart modal */
-.delivery-popup-overlay {
-    position: fixed;
+.cart-item-list {
+    margin-top: -1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0;
+}
+
+.cart-item {
+    display: flex;
+    padding: 1.5rem 0;
+}
+
+.cart-item-image-container {
+    width: 6rem;
+    height: 6rem;
+    position: relative;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+.cart-item-details {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.cart-item-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #1f2937;
+}
+
+.cart-item-description {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    width: 90%;
+    line-clamp: 2;
+}
+
+.cart-item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 0.875rem;
+}
+
+.cart-item-quantity {
+    color: #000;
+}
+
+.remove-item-button {
+    font-weight: 500;
+    color: #3b82f6;
+    cursor: pointer;
+}
+
+.checkout-container {
+    border-top: 1px solid #e5e7eb;
+    padding: 1.5rem;
+}
+
+.checkout-summary {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #1f2937;
+}
+
+.shipping-note {
+    margin-top: 0.125rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.checkout-button-container {
+    margin-top: 1.5rem;
+}
+
+.checkout-button {
+    width: 100%;
+}
+
+.continue-shopping-container {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.continue-shopping-button {
+    color: #3b82f6;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Delivery Popup Styles */
+.delivery-popup {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Ensure it is above the shopping cart modal */
+    z-index: 50;
 }
 
-/* Delivery Popup content */
 .delivery-popup-content {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    z-index: 10000; /* Ensure the content itself is also above everything */
-}
-
-/* Button Styling for both modals */
-.modal-button {
-    background-color: #0070f3;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    font-size: 1.125rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
     width: 100%;
+    max-width: 20rem;
+    text-align: center;
 }
 
-.modal-button:hover {
-    background-color: #005bb5;
-}
-
-/* Header and Footer for the modals */
-.modal-header, .modal-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 0;
-}
-
-.modal-header h2 {
-    font-size: 1.5rem;
+.delivery-popup-header {
+    font-size: 1.125rem;
+    font-weight: 600;
     margin-bottom: 1rem;
 }
 
-.modal-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
-}
-
-/* Specific styles for the content inside the shopping cart modal */
-.cart-item {
-    display: flex;
-    padding: 1rem 0;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.cart-item img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-}
-
-.cart-item-details {
-    flex-grow: 1;
-    padding-left: 1rem;
-}
-
-.cart-item-name {
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-.cart-item-price {
-    color: #0070f3;
-}
-
-.cart-item-quantity {
-    font-size: 0.875rem;
-    color: #555;
-}
-
-.cart-item-remove {
-    color: #e00;
+.delivery-popup-button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    width: 100%;
+    margin-bottom: 1rem;
     cursor: pointer;
+}
+
+.delivery-popup-cancel {
     font-size: 0.875rem;
+    color: #6b7280;
+    cursor: pointer;
 }
