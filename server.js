@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { SERVER_PORT = 5001, STRIPE_PRIVATE_KEY, STRIPE_PRICE_ID, CLIENT_URL } = process.env;
+const { SERVER_PORT = 5001, STRIPE_PRIVATE_KEY, CLIENT_URL } = process.env;
 const express = require("express");
 const cors = require("cors");
 const stripe = require("stripe")(STRIPE_PRIVATE_KEY);
@@ -14,103 +14,17 @@ app.use(
   })
 );
 
-
-// Subscription Checkout Session
-app.post("/create-subscription-session", async (req, res) => {
-  try {
-    const { quantity = 1, priceId } = req.body; // Use priceId from the request body
-
-    // Create the Stripe checkout session using the dynamic priceId
-    const session = await stripe.checkout.sessions.create({
-      success_url: `${CLIENT_URL}?success=true`,
-      cancel_url: `${CLIENT_URL}?canceled=true`,
-      line_items: [
-        {
-          price: priceId,  // Use the priceId dynamically from the request
-          quantity,
-        },
-      ],
-      mode: "subscription", // Using subscription mode
-      phone_number_collection: {
-        enabled: true, // Enable phone number collection
-      },
-      billing_address_collection: "required", // Collect full billing address
-      shipping_address_collection: {
-        allowed_countries: ["NO"], // Add allowed countries here
-      },
-      custom_fields: [
-        {
-          key: "BreadChoice", // Unique identifier for the first dropdown field
-          label: {
-            type: "custom",
-            custom: "Brød 1",
-          },
-          type: "dropdown", // Specify dropdown type
-          optional: false, // Make this field required
-          dropdown: {
-            options: [
-              { label: "Baguette", value: "baguette" },
-              { label: "Ciabatta", value: "ciabatta" },
-              { label: "Focaccia", value: "focaccia" },
-            ],
-          },
-        },
-        {
-          key: "BreadChoiceTwo", // Unique identifier for the second dropdown field
-          label: {
-            type: "custom",
-            custom: "Brød 2",
-          },
-          type: "dropdown", // Specify dropdown type
-          optional: false, // Make this field required
-          dropdown: {
-            options: [
-              { label: "Baguette", value: "baguette" },
-              { label: "Ciabatta", value: "ciabatta" },
-              { label: "Focaccia", value: "focaccia" },
-            ],
-          },
-        },
-        {
-          key: "customer_message", // Additional custom field
-          label: {
-            type: "custom",
-            custom: "Melding til oss (valgfritt)",
-          },
-          type: "text", // Text input field
-          optional: true, // Make this field optional
-        },
-      ],
-    });
-
-
-    res.json({ url: session.url });
-  } catch (error) {
-    console.error("Stripe session creation failed:", error.message);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-
 const { createClient } = require("@sanity/client");
 
 const client = createClient({
   projectId: "koixe24m", // Replace with your Sanity project ID
   dataset: "production", // Replace with your dataset name
   useCdn: true,
-  apiVersion: '2024-02-11', // Ensure this matches your schema's API version
+  apiVersion: "2024-02-11", // Ensure this matches your schema's API version
 });
 
-// Fetch delivery schedule data from Sanity
-const fetchDeliverySchedule = async () => {
-  const query = `*[_type == "deliverySchedule"][0]{
-    specialDeliveryDays,
-    blackoutDays
-  }`;
-  return await client.fetch(query);
-};
 
-// Fetch delivery alternatives data from Sanity
+// Fetch delivery alternatives from Sanity
 const fetchDeliveryAlternatives = async () => {
   const query = `*[_type == "deliveryAlternatives"][0]{
     pickupPriceId,
@@ -119,31 +33,29 @@ const fetchDeliveryAlternatives = async () => {
   return await client.fetch(query);
 };
 
-const generateDeliveryAlternatives = async () => {
-  try {
-    // Fetch delivery alternatives data from Sanity
-    const { pickupPriceId, deliveryPriceId } = await fetchDeliveryAlternatives();
-
-    // Log the fetched price IDs to the console
-    const deliveryPrices = []
-    deliveryPrices.push(pickupPriceId);
-    deliveryPrices.push(deliveryPriceId);
-    return deliveryPrices;
-  } catch (error) {
-    console.error("Error fetching delivery alternatives:", error.message);
-  }
+// Validate postal code for home delivery
+const isPostalCodeValid = async (postalCode) => {
+  const query = `*[_type == "deliveryPostalCodes"][0]{
+    validPostalCodes
+  }`;
+  const data = await client.fetch(query);
+  return data?.validPostalCodes.includes(postalCode);
 };
 
-
-// Generate allowed delivery dates based on Sanity data
+// Fetch allowed delivery dates
 const generateAllowedDates = async () => {
-  const { specialDeliveryDays = [], blackoutDays = [] } = await fetchDeliverySchedule();
+  const query = `*[_type == "deliverySchedule"][0]{
+    specialDeliveryDays,
+    blackoutDays
+  }`;
+  const { specialDeliveryDays = [], blackoutDays = [] } = await client.fetch(query);
 
   const today = new Date();
   const allowedDays = [1, 4]; // Mondays (1) and Thursdays (4)
   const dates = [];
 
-  for (let i = 1; i <= 56; i++) { // Generate for the next 4 weeks
+  for (let i = 1; i <= 56; i++) {
+    // Generate for the next 4 weeks
     const futureDate = new Date(today);
     futureDate.setDate(today.getDate() + i);
 
@@ -170,15 +82,31 @@ const generateAllowedDates = async () => {
   return dates;
 };
 
+// Create one-time session
 app.post("/create-onetime-session", async (req, res) => {
   try {
-    const { items } = req.body;
+    const { items, deliveryOption, postalCode } = req.body;
 
-    // Fetch and generate allowed dates
+    // Validate postal code for "hjemme levering"
+    if (deliveryOption === "hjemme-levering") {
+      const isValidPostalCode = await isPostalCodeValid(postalCode);
+      if (!isValidPostalCode) {
+        return res.status(400).json({ error: "Ugyldig postnummer for hjemme levering." });
+      }
+    }
+
+    const deliveryPrices = await fetchDeliveryAlternatives();
     const allowedDates = await generateAllowedDates();
-    const deliveryPrices = await generateDeliveryAlternatives();
 
-    // Prepare line items
+    // Determine shipping options based on delivery option
+    const shippingOptions =
+      deliveryOption === "hente-i-butikk"
+        ? [{ shipping_rate: deliveryPrices.pickupPriceId }] // Only "Hente i butikk"
+        : [
+            { shipping_rate: deliveryPrices.pickupPriceId },
+            { shipping_rate: deliveryPrices.deliveryPriceId }, // Include "Levering" if applicable
+          ];
+
     const lineItems = items.map((item) => ({
       price: item.priceId,
       quantity: item.quantity,
@@ -197,29 +125,24 @@ app.post("/create-onetime-session", async (req, res) => {
       shipping_address_collection: {
         allowed_countries: ["NO"], // Norway only
       },
-      shipping_options: [
-        {
-          shipping_rate: deliveryPrices[0], // ID for "Henting"
-        },
-        {
-          shipping_rate: deliveryPrices[1], // ID for "Levering"
-        },
-      ],
+      shipping_options: shippingOptions,
       custom_fields: [
         {
           key: "delivery_date",
           label: {
             type: "custom",
-            custom: "Velg en dag for levering/henting av varer",  // Custom title for delivery date
+            custom: "Velg en dag for levering/henting av varer", // Custom title for delivery date
           },
           type: "dropdown",
           optional: false,
           dropdown: {
-            options: allowedDates,  // Use dynamically generated dates
+            options: allowedDates, // Use dynamically generated dates
           },
         },
       ],
       metadata: {
+        deliveryOption,
+        postalCode,
         order_summary: items
           .map((item) => `Product: ${item.name}, Quantity: ${item.quantity}`)
           .join("; "),
@@ -232,12 +155,6 @@ app.post("/create-onetime-session", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-
-
-
-
-
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server running on port ${SERVER_PORT}`);
