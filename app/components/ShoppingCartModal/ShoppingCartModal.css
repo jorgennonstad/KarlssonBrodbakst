@@ -213,7 +213,7 @@
 }
 
 .delivery-popup-button {
-    background-color: #3b82f6;
+    background-color: #F97316;
     color: white;
     padding: 0.5rem 1rem;
     width: 100%;
@@ -222,9 +222,9 @@
     font-size: 1rem;
 }
 
-.delivery-popup-button:hover {
+/* .delivery-popup-button:hover {
     background-color: #2563eb;
-}
+} */
 
 .delivery-popup-cancel {
     font-size: 0.875rem;

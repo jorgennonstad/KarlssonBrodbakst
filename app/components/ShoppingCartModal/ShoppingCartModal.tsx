@@ -1,36 +1,41 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import {
     Sheet,
     SheetContent,
     SheetHeader,
     SheetTitle,
-} from "@/components/ui/sheet"
-import { useShoppingCart } from "use-shopping-cart"
-import Image from 'next/image'
-import { Button } from '@/components/ui/button';
-import './ShoppingCartModal.css'; // Import the CSS file
+} from "@/components/ui/sheet";
+import { useShoppingCart } from "use-shopping-cart";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import "./ShoppingCartModal.css"; // Import the CSS file
 
 export default function ShoppingCartModal() {
     const { cartCount, shouldDisplayCart, handleCartClick, cartDetails, removeItem, totalPrice } = useShoppingCart();
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [deliveryOption, setDeliveryOption] = useState<string>(''); // Track selected delivery option
-    const [postalCode, setPostalCode] = useState<string>(''); // Track postal code for "hjemme levering"
-    const [errorMessage, setErrorMessage] = useState<string>(''); // Track error messages
+    const [deliveryOption, setDeliveryOption] = useState<string>(""); // Track selected delivery option
+    const [postalCode, setPostalCode] = useState<string>(""); // Track postal code for "hjemme levering"
+    const [errorMessage, setErrorMessage] = useState<string>(""); // Track error messages
 
     const handleDeliveryOptionChange = (option: string) => {
         setDeliveryOption(option);
-        setErrorMessage('');
-        if (option === 'hente-i-butikk') {
-            setPostalCode(''); // Clear postal code for "hente i butikk"
+        setErrorMessage(""); // Clear any existing error messages
+        if (option === "hente-i-butikk") {
+            setPostalCode(""); // Clear postal code for "hente i butikk"
         }
     };
 
     const handleProceedToCheckout = async () => {
-        if (deliveryOption === 'hjemme-levering' && !postalCode) {
-            setErrorMessage('Vennligst skriv inn postnummer for hjemmelevering.');
+        if (!deliveryOption) {
+            setErrorMessage("Vennligst velg en leveringsmetode før du fortsetter.");
+            return;
+        }
+
+        if (deliveryOption === "hjemme-levering" && !postalCode) {
+            setErrorMessage("Vennligst skriv inn postnummer for hjemme levering.");
             return;
         }
 
@@ -40,10 +45,10 @@ export default function ShoppingCartModal() {
                 quantity: entry.quantity,
             }));
 
-            const response = await fetch('http://localhost:5001/create-onetime-session', {
-                method: 'POST',
+            const response = await fetch("http://localhost:5001/create-onetime-session", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     items,
@@ -80,11 +85,11 @@ export default function ShoppingCartModal() {
                                     {Object.values(cartDetails ?? {}).map((entry) => (
                                         <li key={entry.id} className="cart-item">
                                             <div className="cart-item-image-container">
-                                                <Image 
-                                                    src={entry.image as string} 
-                                                    alt="product image" 
-                                                    layout="fill"  
-                                                    objectFit="cover" 
+                                                <Image
+                                                    src={entry.image as string}
+                                                    alt="product image"
+                                                    layout="fill"
+                                                    objectFit="cover"
                                                 />
                                             </div>
 
@@ -123,9 +128,7 @@ export default function ShoppingCartModal() {
                             <p>Tottal:</p>
                             <p>{totalPrice} Kr</p>
                         </div>
-                        <p className="shipping-note">
-                            Frakt velges og legges til ved checkout
-                        </p>
+                        <p className="shipping-note">Frakt velges og legges til ved checkout</p>
                         <div className="checkout-button-container">
                             <Button onClick={() => setIsPopupOpen(true)} className="checkout-button">
                                 Gå til kassen
@@ -143,24 +146,26 @@ export default function ShoppingCartModal() {
                                 <label>
                                     <input
                                         type="checkbox"
+                                        name="deliveryOption"
                                         value="hjemme-levering"
-                                        checked={deliveryOption === 'hjemme-levering'}
-                                        onChange={() => handleDeliveryOptionChange('hjemme-levering')}
+                                        checked={deliveryOption === "hjemme-levering"}
+                                        onChange={() => handleDeliveryOptionChange("hjemme-levering")}
                                     />
                                     Hjemme levering
                                 </label>
                                 <label>
                                     <input
                                         type="checkbox"
+                                        name="deliveryOption"
                                         value="hente-i-butikk"
-                                        checked={deliveryOption === 'hente-i-butikk'}
-                                        onChange={() => handleDeliveryOptionChange('hente-i-butikk')}
+                                        checked={deliveryOption === "hente-i-butikk"}
+                                        onChange={() => handleDeliveryOptionChange("hente-i-butikk")}
                                     />
                                     Hente i butikk
                                 </label>
                             </div>
 
-                            {deliveryOption === 'hjemme-levering' && (
+                            {deliveryOption === "hjemme-levering" && (
                                 <div className="postal-code-input">
                                     <label>
                                         Postnummer:
@@ -170,21 +175,16 @@ export default function ShoppingCartModal() {
                                             onChange={(e) => setPostalCode(e.target.value)}
                                         />
                                     </label>
-                                    {errorMessage && <p className="error-message">{errorMessage}</p>}
                                 </div>
                             )}
 
-                            <button
-                                onClick={handleProceedToCheckout}
-                                className="delivery-popup-button"
-                            >
+                            {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+                            <button onClick={handleProceedToCheckout} className="delivery-popup-button">
                                 Fortsett til kassen
                             </button>
 
-                            <button
-                                onClick={() => setIsPopupOpen(false)}
-                                className="delivery-popup-cancel"
-                            >
+                            <button onClick={() => setIsPopupOpen(false)} className="delivery-popup-cancel">
                                 Avbryt
                             </button>
                         </div>
