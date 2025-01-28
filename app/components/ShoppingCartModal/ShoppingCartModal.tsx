@@ -68,6 +68,10 @@ export default function ShoppingCartModal() {
         }
     };
 
+    const handleOverlayClick = () => {
+        setIsPopupOpen(false);
+    };
+
     return (
         <Sheet open={shouldDisplayCart} onOpenChange={handleCartClick}>
             <SheetContent className="shopping-cart-modal">
@@ -138,8 +142,11 @@ export default function ShoppingCartModal() {
                 </div>
 
                 {isPopupOpen && (
-                    <div className="delivery-popup">
-                        <div className="delivery-popup-content">
+                    <div className="delivery-popup-overlay" onClick={handleOverlayClick}>
+                        <div
+                            className="delivery-popup-content"
+                            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the popup
+                        >
                             <h3 className="delivery-popup-header">Vi leverer kun til postnummer xxxx - xxxx</h3>
 
                             <div className="delivery-options">
