@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from 'react';
 import {
@@ -6,9 +6,9 @@ import {
     SheetContent,
     SheetHeader,
     SheetTitle,
-} from "@/components/ui/sheet"
-import { useShoppingCart } from "use-shopping-cart"
-import Image from 'next/image'
+} from "@/components/ui/sheet";
+import { useShoppingCart } from "use-shopping-cart";
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import './ShoppingCartModal.css'; // Import the CSS file
 
@@ -16,52 +16,49 @@ export default function ShoppingCartModal() {
     const { cartCount, shouldDisplayCart, handleCartClick, cartDetails, removeItem, totalPrice } = useShoppingCart();
 
     const [isPopupOpen, setIsPopupOpen] = useState(false); // Track the popup state
+    const [deliveryOption, setDeliveryOption] = useState("pickup"); // Default option: Hente i butikk
+    const [postalCode, setPostalCode] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     async function handleCheckoutClick(event: any) {
         event.preventDefault();
-        
-        // Show the delivery popup first
-        setIsPopupOpen(true);
+        setIsPopupOpen(true); // Show the delivery popup
     }
 
-    // Handle when the user acknowledges the postal codes and proceeds to checkout
     const handleProceedToCheckout = async () => {
+        if (deliveryOption === "delivery" && !postalCode.trim()) {
+            setErrorMessage("Postnummer er påkrevd for hjemmelevering.");
+            return;
+        }
+
         setIsPopupOpen(false);
 
-        // Prepare the cart items for checkout
         const items = Object.values(cartDetails ?? {}).map((entry) => ({
-            priceId: entry.price_id,  // Correctly using price_id here
-            quantity: entry.quantity,  // Quantity of the item
+            priceId: entry.price_id,
+            quantity: entry.quantity,
         }));
-        console.log(items);
-        
-        // Send the cart items to the backend to create a Stripe checkout session
+
         try {
             const response = await fetch('http://localhost:5001/create-onetime-session', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ items }), // Send the priceId and quantity to the backend
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ items, deliveryOption, postalCode }),
             });
-        
+
             const { url } = await response.json();
-        
-            // Redirect to Stripe Checkout
             if (url) {
-                window.location.href = url;
+                window.location.href = url; // Redirect to Stripe Checkout
             } else {
                 console.error("Failed to create Stripe session");
             }
         } catch (error) {
-            console.log("Error creating checkout session", error);
+            console.error("Error creating checkout session:", error);
         }
-    }
+    };
 
-    // Modify the handleCartClick function to close the popup when the cart is toggled
     const handleCloseCart = () => {
-        handleCartClick();  // Toggle the cart visibility
-        setIsPopupOpen(false);  // Close the popup when cart is closed
+        handleCartClick(); // Toggle the cart visibility
+        setIsPopupOpen(false); // Close the popup
     };
 
     return (
@@ -78,44 +75,39 @@ export default function ShoppingCartModal() {
                                 <h1 className="empty-cart-message">Du har ingen varer i handlekurven</h1>
                             ) : (
                                 <>
-                                    {Object.values(cartDetails ?? {}).map((entry) => {
-                                        return (
-                                            <li key={entry.id} className="cart-item">
-                                                <div className="cart-item-image-container">
-                                                    <Image 
-                                                        src={entry.image as string} 
-                                                        alt="product image" 
-                                                        layout="fill"  
-                                                        objectFit="cover" 
-                                                    />
-                                                </div>
-
-                                                <div className="cart-item-details">
-                                                    <div>
-                                                        <div className="cart-item-header">
-                                                            <h3>{entry.name}</h3>
-                                                            <p className="cart-item-price">Kr {entry.price}</p>
-                                                        </div>
-                                                        <p className="cart-item-description">{entry.description}</p>
+                                    {Object.values(cartDetails ?? {}).map((entry) => (
+                                        <li key={entry.id} className="cart-item">
+                                            <div className="cart-item-image-container">
+                                                <Image
+                                                    src={entry.image as string}
+                                                    alt="product image"
+                                                    layout="fill"
+                                                    objectFit="cover"
+                                                />
+                                            </div>
+                                            <div className="cart-item-details">
+                                                <div>
+                                                    <div className="cart-item-header">
+                                                        <h3>{entry.name}</h3>
+                                                        <p className="cart-item-price">Kr {entry.price}</p>
                                                     </div>
-
-                                                    <div className="cart-item-footer">
-                                                        <p className="cart-item-quantity">Antall: {entry.quantity}</p>
-
-                                                        <div className="remove-item-container">
-                                                            <button
-                                                                type="button"
-                                                                onClick={() => removeItem(entry.id)}
-                                                                className="remove-item-button"
-                                                            >
-                                                                Fjern
-                                                            </button>
-                                                        </div>
+                                                    <p className="cart-item-description">{entry.description}</p>
+                                                </div>
+                                                <div className="cart-item-footer">
+                                                    <p className="cart-item-quantity">Antall: {entry.quantity}</p>
+                                                    <div className="remove-item-container">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => removeItem(entry.id)}
+                                                            className="remove-item-button"
+                                                        >
+                                                            Fjern
+                                                        </button>
                                                     </div>
                                                 </div>
-                                            </li>
-                                        );
-                                    })}
+                                            </div>
+                                        </li>
+                                    ))}
                                 </>
                             )}
                         </ul>
@@ -136,36 +128,60 @@ export default function ShoppingCartModal() {
                         </div>
                         <div className="continue-shopping-container">
                             <p>
-                                ELLER {""} 
+                                ELLER{" "}
                                 <button onClick={handleCloseCart} className="continue-shopping-button">Fortsett å handle</button>
                             </p>
                         </div>
                     </div>
                 </div>
 
-                {/* Render the DeliveryPopup content when isPopupOpen is true */}
                 {isPopupOpen && (
                     <div className="delivery-popup">
                         <div className="delivery-popup-content">
-                            <h3 className="delivery-popup-header">Vi leverer kunn til postnummer <br/> xxx-xxx</h3>
-
-                            <button 
-                                onClick={handleProceedToCheckout} 
-                                className="delivery-popup-button"
-                            >
+                            <h3 className="delivery-popup-header">Velg leveringsmetode</h3>
+                            <div className="delivery-options">
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="deliveryOption"
+                                        value="pickup"
+                                        checked={deliveryOption === "pickup"}
+                                        onChange={() => setDeliveryOption("pickup")}
+                                    />
+                                    Hente i butikk
+                                </label>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="deliveryOption"
+                                        value="delivery"
+                                        checked={deliveryOption === "delivery"}
+                                        onChange={() => setDeliveryOption("delivery")}
+                                    />
+                                    Hjemme levering
+                                </label>
+                            </div>
+                            {deliveryOption === "delivery" && (
+                                <div className="postal-code-input">
+                                    <input
+                                        type="text"
+                                        placeholder="Skriv inn postnummer"
+                                        value={postalCode}
+                                        onChange={(e) => setPostalCode(e.target.value)}
+                                    />
+                                    {errorMessage && <p className="error-message">{errorMessage}</p>}
+                                </div>
+                            )}
+                            <button onClick={handleProceedToCheckout} className="delivery-popup-button">
                                 Fortsett til kassen
                             </button>
-
-                            <button 
-                                onClick={() => setIsPopupOpen(false)} 
-                                className="delivery-popup-cancel"
-                            >
+                            <button onClick={() => setIsPopupOpen(false)} className="delivery-popup-cancel">
                                 Avbryt
                             </button>
                         </div>
                     </div>
                 )}
-            </SheetContent> 
+            </SheetContent>
         </Sheet>
     );
 }
