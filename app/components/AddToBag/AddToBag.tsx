@@ -15,31 +15,34 @@ export interface ProductCart {
 }
 
 export default function AddToBag({
-    currency,
-    description,
-    image,
+  currency,
+  description,
+  image,
+  name,
+  price,
+  price_id,
+}: ProductCart) {
+  const { addItem, handleCartClick } = useShoppingCart();
+
+  // Ensure the image is a serializable string (URL)
+  const product = {
     name,
+    description,
     price,
+    currency,
+    image: urlFor(image).url() ?? "", // Convert image to a plain string (URL)
     price_id,
-  }: ProductCart) {
-    const { addItem, handleCartClick } = useShoppingCart();
-  
-    const product = {
-      name: name,
-      description: description,
-      price: price,
-      currency: currency,
-      image: urlFor(image).url(),
-      price_id: price_id,
-    };
-    return(
-            <Button 
-            className="add-to-bag"
-            onClick={() => {
-                addItem(product), handleCartClick();
-                
-            }}>
-                Legg til handlekurv
-            </Button>
-    )
+  };
+
+  return (
+    <Button
+      className="add-to-bag"
+      onClick={() => {
+        addItem({ ...product }); // Ensure it's only serializable data
+        handleCartClick();
+      }}
+    >
+      Legg til handlekurv
+    </Button>
+  );
 }
