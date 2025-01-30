@@ -43,19 +43,46 @@ const isPostalCodeValid = async (postalCode) => {
 };
  
 // Fetch allowed delivery dates
-const generateAllowedDates = async () => {
+// Fetch the products that have 'maxOrdersPerDay' set to true
+const fetchMaxOrdersPerDayProducts = async () => {
+  const query = `*[_type == "product" && maxOrdersPerDay == true]{
+    price_id
+  }`;
+  return await client.fetch(query);
+};
+
+// Updated generateAllowedDates to handle 'fullyBookedDays' and max orders per day
+const generateAllowedDates = async (items) => {
   const query = `*[_type == "deliverySchedule"][0]{
     specialDeliveryDays,
-    blackoutDays
+    blackoutDays,
+    fullyBookedDays
   }`;
-  const { specialDeliveryDays = [], blackoutDays = [] } = await client.fetch(query);
+  const { specialDeliveryDays = [], blackoutDays = [], fullyBookedDays = [] } = await client.fetch(query);
+  console.log("Special delivery days:", specialDeliveryDays);
+  console.log("Blackout days:", blackoutDays);
+  console.log("Fully booked days:", fullyBookedDays);
 
   const today = new Date();
   const allowedDays = [1, 4]; // Mondays (1) and Thursdays (4)
   const dates = [];
 
+  // Fetch products marked with 'maxOrdersPerDay'
+  const maxOrdersProducts = await fetchMaxOrdersPerDayProducts();
+  console.log("Products marked as maxOrdersPerDay:", maxOrdersProducts);
+  const maxOrdersProductPriceIds = maxOrdersProducts.map(product => product.price_id);
+  
+  // Check if any items in the cart have 'maxOrdersPerDay' flag
+  const maxOrdersInCart = items.filter(item => maxOrdersProductPriceIds.includes(item.priceId));
+  
+  if (maxOrdersInCart.length > 0) {
+    console.log("Items in cart marked as maxOrdersPerDay:", maxOrdersInCart.map(item => item.priceId));
+  }
+
+  const hasMaxOrdersProduct = maxOrdersInCart.length > 0;
+
+  // Filter out fully booked days if cart contains max orders products
   for (let i = 1; i <= 56; i++) {
-    // Generate for the next 4 weeks
     const futureDate = new Date(today);
     futureDate.setDate(today.getDate() + i);
 
@@ -65,39 +92,44 @@ const generateAllowedDates = async () => {
     const isAllowedDay = allowedDays.includes(futureDate.getDay());
     const isSpecialDay = specialDeliveryDays.includes(formattedDate);
     const isBlackoutDay = blackoutDays.includes(formattedDate);
+    const isFullyBookedDay = fullyBookedDays.includes(formattedDate);
 
-    if ((isAllowedDay || isSpecialDay) && !isBlackoutDay) {
+    // If the cart contains max orders products, remove fully booked days from allowed dates
+    if ((isAllowedDay || isSpecialDay) && !isBlackoutDay && (!hasMaxOrdersProduct || !isFullyBookedDay)) {
       const value = formattedDate.replace(/-/g, ""); // Convert to YYYYMMDD
       dates.push({
-        label: futureDate.toLocaleDateString("nb-NO", { // ✅ Set Norwegian locale
+        label: futureDate.toLocaleDateString("nb-NO", {
           weekday: "long",
           day: "numeric",
           month: "short",
         }),
         value,
       });
+    } else if (hasMaxOrdersProduct && isFullyBookedDay) {
+      // Log the fully booked days being removed from the allowed dates
+      console.log(`Removing fully booked day: ${formattedDate} (${futureDate.toLocaleDateString("nb-NO", { weekday: "long", day: "numeric", month: "short" })})`);
     }
   }
 
   return dates;
 };
 
- 
-// Create one-time session
+
+// Create one-time session (updated to use the modified generateAllowedDates function)
 app.post("/create-onetime-session", async (req, res) => {
   try {
     const { items, deliveryOption, postalCode } = req.body;
- 
+
     if (deliveryOption === "hjemme-levering") {
       const isValidPostalCode = await isPostalCodeValid(postalCode);
       if (!isValidPostalCode) {
         return res.status(400).json({ error: "Ugyldig postnummer for hjemme levering." });
       }
     }
- 
+
     const deliveryPrices = await fetchDeliveryAlternatives();
-    const allowedDates = await generateAllowedDates();
- 
+    const allowedDates = await generateAllowedDates(items);
+
     const shippingOptions =
       deliveryOption === "hente-i-butikk"
         ? [{ shipping_rate: deliveryPrices.pickupPriceId }]
@@ -105,14 +137,14 @@ app.post("/create-onetime-session", async (req, res) => {
             { shipping_rate: deliveryPrices.pickupPriceId },
             { shipping_rate: deliveryPrices.deliveryPriceId },
           ];
- 
+
     const lineItems = items.map((item) => ({
       price: item.priceId,
       quantity: item.quantity,
     }));
- 
+
     const session = await stripe.checkout.sessions.create({
-      success_url: `${CLIENT_URL}?success=true`,
+      success_url: `${CLIENT_URL}/stripe/success`,
       cancel_url: `${CLIENT_URL}?canceled=true`,
       line_items: lineItems,
       mode: "payment",
@@ -135,15 +167,14 @@ app.post("/create-onetime-session", async (req, res) => {
         order_summary: items.map((item) => `Product: ${item.name}, Quantity: ${item.quantity}`).join("; "),
       },
     });
- 
+
     res.json({ url: session.url });
   } catch (error) {
     console.error("Stripe session creation failed:", error.message);
     res.status(500).json({ error: error.message });
   }
 });
- 
+
 app.listen(SERVER_PORT, () => {
   console.log(`Server running on port ${SERVER_PORT}`);
 });
- 
