@@ -59,9 +59,6 @@ const generateAllowedDates = async (items) => {
     fullyBookedDays
   }`;
   const { specialDeliveryDays = [], blackoutDays = [], fullyBookedDays = [] } = await client.fetch(query);
-  console.log("Special delivery days:", specialDeliveryDays);
-  console.log("Blackout days:", blackoutDays);
-  console.log("Fully booked days:", fullyBookedDays);
 
   const today = new Date();
   const allowedDays = [1, 4]; // Mondays (1) and Thursdays (4)
@@ -69,16 +66,11 @@ const generateAllowedDates = async (items) => {
 
   // Fetch products marked with 'maxOrdersPerDay'
   const maxOrdersProducts = await fetchMaxOrdersPerDayProducts();
-  console.log("Products marked as maxOrdersPerDay:", maxOrdersProducts);
   const maxOrdersProductPriceIds = maxOrdersProducts.map(product => product.price_id);
   
   // Check if any items in the cart have 'maxOrdersPerDay' flag
   const maxOrdersInCart = items.filter(item => maxOrdersProductPriceIds.includes(item.priceId));
   
-  if (maxOrdersInCart.length > 0) {
-    console.log("Items in cart marked as maxOrdersPerDay:", maxOrdersInCart.map(item => item.priceId));
-  }
-
   const hasMaxOrdersProduct = maxOrdersInCart.length > 0;
 
   // Filter out fully booked days if cart contains max orders products
@@ -108,6 +100,8 @@ const generateAllowedDates = async (items) => {
     } else if (hasMaxOrdersProduct && isFullyBookedDay) {
       // Log the fully booked days being removed from the allowed dates
       console.log(`Removing fully booked day: ${formattedDate} (${futureDate.toLocaleDateString("nb-NO", { weekday: "long", day: "numeric", month: "short" })})`);
+      console.log(`Special days: ${specialDeliveryDays}`);
+      console.log(`Blackout days: ${blackoutDays}`);
     }
   }
 
