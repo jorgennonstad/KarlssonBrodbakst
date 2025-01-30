@@ -39,7 +39,6 @@ export default function AddToBag({
       className="add-to-bag"
       onClick={() => {
         addItem({ ...product }); // Ensure it's only serializable data
-        handleCartClick();
       }}
     >
       Legg til handlekurv
