@@ -49,27 +49,27 @@ const generateAllowedDates = async () => {
     blackoutDays
   }`;
   const { specialDeliveryDays = [], blackoutDays = [] } = await client.fetch(query);
- 
+
   const today = new Date();
   const allowedDays = [1, 4]; // Mondays (1) and Thursdays (4)
   const dates = [];
- 
+
   for (let i = 1; i <= 56; i++) {
     // Generate for the next 4 weeks
     const futureDate = new Date(today);
     futureDate.setDate(today.getDate() + i);
- 
+
     const formattedDate = futureDate.toISOString().split("T")[0]; // YYYY-MM-DD
- 
+
     // Determine if the date is valid
     const isAllowedDay = allowedDays.includes(futureDate.getDay());
     const isSpecialDay = specialDeliveryDays.includes(formattedDate);
     const isBlackoutDay = blackoutDays.includes(formattedDate);
- 
+
     if ((isAllowedDay || isSpecialDay) && !isBlackoutDay) {
       const value = formattedDate.replace(/-/g, ""); // Convert to YYYYMMDD
       dates.push({
-        label: futureDate.toLocaleDateString("en-GB", {
+        label: futureDate.toLocaleDateString("nb-NO", { // ✅ Set Norwegian locale
           weekday: "long",
           day: "numeric",
           month: "short",
@@ -78,9 +78,10 @@ const generateAllowedDates = async () => {
       });
     }
   }
- 
+
   return dates;
 };
+
  
 // Create one-time session
 app.post("/create-onetime-session", async (req, res) => {
