@@ -34,12 +34,18 @@ export default function AddToBag({
     price_id,
   };
 
+  const handleAddToCart = () => {
+    // Add the item to the cart without passing the event
+    addItem({ ...product });
+    
+    // Optionally call handleCartClick if needed, but ensure it's handled properly
+    // handleCartClick(); // Ensure this doesn't receive a synthetic event
+  };
+
   return (
     <Button
       className="add-to-bag"
-      onClick={() => {
-        addItem({ ...product }); // Ensure it's only serializable data
-      }}
+      onClick={handleAddToCart} // Custom handler
     >
       Legg til handlekurv
     </Button>

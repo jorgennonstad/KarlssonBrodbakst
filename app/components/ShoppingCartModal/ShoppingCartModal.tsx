@@ -138,9 +138,14 @@ export default function ShoppingCartModal() {
                         </div>
                         <p className="shipping-note">Frakt velges og legges til ved checkout</p>
                         <div className="checkout-button-container">
-                            <Button onClick={() => setIsPopupOpen(true)} className="checkout-button">
-                                Gå til kassen
-                            </Button>
+                        <Button 
+                            onClick={() => cartCount > 0 && setIsPopupOpen(true)} 
+                            className={`checkout-button ${cartCount === 0 ? "disabled" : ""}`}
+                            disabled={cartCount === 0}
+                        >
+                            Gå til kassen
+                        </Button>
+
                         </div>
                     </div>
                 </div>

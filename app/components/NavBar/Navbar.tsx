@@ -49,7 +49,7 @@ export default function NavBar() {
                 </nav>
                 <div className="navbar-cart">
                     <button
-                        onClick={handleCartClick}
+                        onClick={() => handleCartClick()} // Remove event from here
                         className="navbar-cart-button"
                     >
                         <ShoppingCart className="navbar-cart-icon" />
