@@ -9,15 +9,15 @@ export default function stripeSuccess() {
         <CheckCheck className="text-green-600 w-16 h-16 mx-auto my-6" />
         <div className="text-center">
           <h3 className="md:text-2xl text-base text-gray-900 font-semibold text-center">
-            Payment Done!
+            Betaling fullført!
           </h3>
           <p className="text-gray-600 my-2">
-            Thank you for you pruchase We hope you enjoy it
+            Takk for at du handlet hos Karlsson Brødbakst!
           </p>
-          <p>Have a great day!</p>
+          <p>Ha en fin dag!</p>
 
           <Button asChild className="mt-5">
-            <Link href="/">GO back</Link>
+            <Link href="/">Gå tilbake til forsiden</Link>
           </Button>
         </div>
       </div>
