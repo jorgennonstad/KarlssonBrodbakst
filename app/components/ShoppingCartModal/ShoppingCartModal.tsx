@@ -13,7 +13,8 @@ import { Button } from "@/components/ui/button";
 import "./ShoppingCartModal.css"; // Import the CSS file
 
 export default function ShoppingCartModal() {
-    const { cartCount, shouldDisplayCart, handleCartClick, cartDetails, removeItem, totalPrice } = useShoppingCart();
+    const { cartCount, shouldDisplayCart, handleCartClick, cartDetails, removeItem, totalPrice, incrementItem, decrementItem } = useShoppingCart();
+
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [deliveryOption, setDeliveryOption] = useState<string>("hjemme-levering"); // ✅ Default to "hjemme-levering"
@@ -112,16 +113,22 @@ export default function ShoppingCartModal() {
                                                 <div className="cart-item-footer">
                                                     <p className="cart-item-quantity">Antall: {entry.quantity}</p>
 
-                                                    <div className="remove-item-container">
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => removeItem(entry.id)}
-                                                            className="remove-item-button"
-                                                        >
-                                                            Fjern
+                                                    <div className="cart-item-actions">
+                                                        <button type="button" onClick={() => decrementItem(entry.id)} className="cart-action-button remove-item">
+                                                            -
                                                         </button>
+
+                                                        <button type="button" onClick={() => removeItem(entry.id)} className="cart-action-button remove-all">
+                                                            Fjern alle
+                                                        </button>
+                                                        
+                                                        <button type="button" onClick={() => incrementItem(entry.id)} className="cart-action-button add-item">
+                                                            +
+                                                        </button>
+
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </li>
                                     ))}

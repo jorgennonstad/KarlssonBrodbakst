@@ -66,6 +66,7 @@
   color: white;
   padding: 20px; /* Adjust padding as needed */
   text-align: left; /* Align text to the left */
+  width: 400px;
 }
 
 .abonnement-right-text h2 {
@@ -82,7 +83,6 @@
 .abonnement-right-text select {
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -105,7 +105,7 @@
   opacity: 70%;
 }
 
-.abonnement-right-text button {
+.abonnement-right-text .price-container button {
   font-size: 1.1rem;
   padding: 15px 30px;
   color: white;
@@ -114,8 +114,42 @@
   transition: background-color 0.3s ease;
 }
 
-.abonnement-right-text button:hover {
+.abonnement-right-text .price-container button:hover {
   background-color: #ff7f50; /* Litt mørkere på hover */
+}
+
+.removeDopdownButton{
+  height: 70%;
+  border: none;
+  margin: auto 0;
+  padding: 0 10px;
+}
+
+.legg-til-brod-btn {
+  font-size: 1rem;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin: 8px 0;
+}
+
+.legg-til-brod-btn:hover {
+  background-color: #ff7f50;
+  border: solid 1px #ff7f50;
+  color: white;
+}
+
+
+
+.bread-dropdown{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
 }
 
 .price-container{
@@ -123,12 +157,17 @@
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .abonnement {
     flex-direction: column; /* Stack left and right sections vertically */
+  }
+
+  .abonnement-right-text .price-container button {
+    font-size: 0.8rem;
   }
 
   .abonnement-left,
@@ -155,18 +194,18 @@
   .abonnement-right-text select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: auto;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: white;
     color: black;
+
   }
 
   .abonnement-right-text button {
     font-size: 1rem; /* Adjust button size for smaller screens */
     display: block;
-    margin: 0 auto;
   }
 
   .abonnement-right-text h3 {

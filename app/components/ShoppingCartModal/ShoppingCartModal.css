@@ -68,19 +68,51 @@
 .cart-item-footer {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center; /* Ensures that both the quantity and action buttons are aligned on the baseline */
     font-size: 0.875rem;
 }
 
 .cart-item-quantity {
     color: #000;
+    margin-right: 10px; /* Optional, add space between the quantity and buttons */
+    display: flex;
+    align-items: center; /* Ensure that the text and buttons align properly */
 }
 
-.remove-item-button {
-    font-weight: 500;
-    color: #3b82f6;
-    cursor: pointer;
+.cart-item-actions {
+    display: flex;
+    align-items: center; /* Aligns the buttons vertically with the quantity counter */
 }
+
+.cart-action-button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: color 0.3s ease;
+}
+
+/* Adjust font size for action buttons */
+.cart-action-button.remove-item,
+.cart-action-button.add-item {
+    font-size: 1.5rem; /* Slightly smaller font size for consistency */
+}
+
+.cart-action-button.remove-all {
+    font-size: 14px;
+    text-decoration: underline;
+    color: #d9534f;
+}
+
+.cart-item-actions .remove-item,
+.cart-item-actions .add-item {
+    font-size: 1.5rem;
+    text-align: bottom;
+}
+
+
 
 .checkout-container {
     border-top: 1px solid #e5e7eb;
