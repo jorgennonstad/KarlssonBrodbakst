@@ -74,7 +74,7 @@ export default {
       name: 'maxOrdersPerCustomer',
       type: 'number',
       title: 'Maks antall per kunde',
-      description: 'Hvor mange av dette produktet en kunde kan bestille per ordre',
+      description: 'Hvor mange av dette produktet en kunde kan bestille i dag',
       validation: Rule => Rule.required().min(1), // Ensures it's always set
     },
   ],
