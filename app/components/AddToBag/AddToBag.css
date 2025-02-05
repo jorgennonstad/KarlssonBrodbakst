@@ -7,7 +7,6 @@
   width: 60%;
   min-width: 190px;
   margin: 0 auto;
-  border-radius: 8px; /* Slightly larger border radius for a modern feel */
   transition: all 0.3s ease; /* Smooth transition */
   border: 2px solid transparent; /* Add border for better hover effect */
   cursor: pointer; /* Ensure pointer cursor */
@@ -18,15 +17,14 @@
 }
 
 /* Hover Effect */
-.add-to-bag:hover {
+.add-to-bag:hover, .info-button:hover {
   background-color: #633E1D;
   color: #FBE0B1;
   border: 2px solid #FBE0B1; /* Subtle border effect */
-  transform: scale(1.05); /* Slight scale-up effect */
 }
 
 /* Active Click Effect */
-.add-to-bag:active {
+.add-to-bag:active, .info-button:active {
   transform: scale(0.98);
   opacity: 0.9;
 }
@@ -38,6 +36,18 @@
   cursor: not-allowed;
   border: none;
   transform: none;
+}
+
+/* Info Button */
+.info-button {
+  background-color: #FBE0B1;
+  color: #633E1D;
+  border: 2px solid transparent; /* Add border for better hover effect */
+  padding: 8px 18px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 /* Responsive Design */
