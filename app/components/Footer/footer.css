@@ -71,7 +71,18 @@ min-width: 150px;
 }
 
 .map-section h3 {
+  color: #f5a623;
   margin-bottom: 10px;
+}
+
+.social-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-section h3{
+  color: #f5a623;
 }
 
 .social-icons {
@@ -87,6 +98,85 @@ min-width: 150px;
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+/* Opening Hours Section Styling */
+.opening-hours-section {
+  margin-top: 20px;
+  text-align: center; /* Center align text */
+}
+
+.opening-hours-section h3 {
+  color: #f5a623;
+  margin-bottom: 10px;
+}
+
+.opening-hours-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.opening-hours-section li {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #aaa;
+}
+
+/* Social Media Section */
+.social-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.social-icon-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Ensuring the anchor tag takes up the whole container */
+.social-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* Removes underline from the link */
+  color: inherit; /* Ensures text color inherits from parent (white in this case) */
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.social-username {
+  color: #fff;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+/* Hover effects */
+.social-link:hover .social-username {
+  color: #f5a623; /* Orange color for the text */
+}
+
+.social-link:hover .social-icon {
+  filter: brightness(0) saturate(100%) invert(82%) sepia(27%) saturate(4716%) hue-rotate(342deg) brightness(100%) contrast(93%);
+  /* This is a combination that will give an orange tint */
+}
+
 
 .footer-bottom {
   padding-top: 20px;
@@ -115,20 +205,22 @@ min-width: 150px;
   .footer-section {
     max-width: 100%;
     margin-bottom: 30px;
-      flex: 1 1 30px;
+    flex: 1 1 30px;
+  }
+  
+  .social-section {
+    width: 100%;
   }
 
+  .opening-hours-section {
+    width: 100%;
+  }
+  
   .social-icons {
     justify-content: center;
   }
 
   .footer-bottom {
     font-size: 12px;
-  }
-}
-
-@media (max-width: 979px) {
-  .footer-content {
-    justify-content: center;
   }
 }

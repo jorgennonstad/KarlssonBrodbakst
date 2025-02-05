@@ -1,6 +1,6 @@
 export default {
   name: 'footer',
-  title: 'Bunntekst', // Translated to Norwegian
+  title: 'Bunntekst',
   type: 'document',
   fields: [
     {
@@ -8,7 +8,7 @@ export default {
       title: 'Logo',
       type: 'image',
       options: {
-        hotspot: true, // Lar deg beskjære/zoome inn på bildet
+        hotspot: true,
       },
     },
     {
@@ -42,7 +42,7 @@ export default {
       name: 'map',
       title: 'Kart Embed URL',
       type: 'string',
-      description: 'Embed-URL for Google Maps (Bruk URL-en fra delingsalternativet i Google Maps)', // Translated
+      description: 'Embed-URL for Google Maps',
     },
     {
       name: 'socialMedia',
@@ -64,7 +64,7 @@ export default {
           title: 'Instagram-ikon',
           type: 'image',
           options: {
-            hotspot: true, // Lar deg beskjære/zoome inn på bildet
+            hotspot: true,
           },
         },
         {
@@ -72,33 +72,40 @@ export default {
           title: 'Facebook-ikon',
           type: 'image',
           options: {
-            hotspot: true, // Lar deg beskjære/zoome inn på bildet
+            hotspot: true,
           },
+        },
+        {
+          name: 'instagramName',
+          title: 'Instagram Navn',
+          type: 'string',  // New field for Instagram name
+        },
+        {
+          name: 'facebookName',
+          title: 'Facebook Navn',
+          type: 'string',  // New field for Facebook name
         },
       ],
     },
     {
       name: 'openingHours',
       title: 'Åpningstider',
-      type: 'object',
-      fields: [
+      type: 'array',
+      of: [
         {
-          name: 'mondayToFriday',
-          title: 'Mandag - Fredag',
-          type: 'string',
-          description: 'Eksempel: 09:00 - 17:00', // Translated
-        },
-        {
-          name: 'saturday',
-          title: 'Lørdag',
-          type: 'string',
-          description: 'Eksempel: 10:00 - 14:00', // Translated
-        },
-        {
-          name: 'sunday',
-          title: 'Søndag',
-          type: 'string',
-          description: 'Eksempel: Stengt', // Translated
+          type: 'object',
+          fields: [
+            {
+              name: 'day',
+              title: 'Dag',
+              type: 'string',
+            },
+            {
+              name: 'hours',
+              title: 'Åpningstider',
+              type: 'string',
+            },
+          ],
         },
       ],
     },
