@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useShoppingCart } from "use-shopping-cart";
-import { client } from "@/app/lib/sanity";
 import { urlFor } from "../../lib/sanity";
 import "./AddToBag.css";
 
@@ -24,24 +23,18 @@ export default function AddToBag({
   name,
   price,
   price_id,
-  maxOrdersPerCustomer,
+  maxOrdersPerCustomer, // ✅ Use this directly instead of fetching it
 }: ProductCart) {
   const { addItem, cartDetails } = useShoppingCart();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
 
-  const fetchMaxLimit = async (priceId: string) => {
-    const query = `*[_type == "product" && price_id == $priceId][0]{maxOrdersPerCustomer}`;
-    const data = await client.fetch(query, { priceId });
-    return data?.maxOrdersPerCustomer || 10;
-  };
-
-  const handleAddToCart = async () => {
+  const handleAddToCart = () => {
     const productInCart = cartDetails?.[price_id];
-    const maxLimit = await fetchMaxLimit(price_id);
 
-    if (productInCart?.quantity >= maxLimit) {
-      setPopupMessage(`Du kan kun bestille maks ${maxLimit} av dette produktet i dag.`);
+    // ✅ Use maxOrdersPerCustomer from props instead of querying
+    if (productInCart?.quantity >= maxOrdersPerCustomer) {
+      setPopupMessage(`Du kan kun bestille maks ${maxOrdersPerCustomer} av dette produktet i dag.`);
       setIsPopupOpen(true);
       return;
     }
@@ -53,7 +46,7 @@ export default function AddToBag({
       currency,
       image: urlFor(image).url() ?? "",
       price_id,
-      maxOrdersPerCustomer: maxLimit,
+      maxOrdersPerCustomer,
     });
   };
 
