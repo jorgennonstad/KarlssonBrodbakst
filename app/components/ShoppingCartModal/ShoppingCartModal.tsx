@@ -10,16 +10,41 @@ import {
 import { useShoppingCart } from "use-shopping-cart";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { client } from "@/app/lib/sanity";
 import "./ShoppingCartModal.css"; // Import the CSS file
 
 export default function ShoppingCartModal() {
     const { cartCount, shouldDisplayCart, handleCartClick, cartDetails, removeItem, totalPrice, incrementItem, decrementItem } = useShoppingCart();
 
-
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [deliveryOption, setDeliveryOption] = useState<string>("hjemme-levering"); // ✅ Default to "hjemme-levering"
+    const [popupMessage, setPopupMessage] = useState(""); // Message for popup
+    const [deliveryOption, setDeliveryOption] = useState<string>("hjemme-levering"); // Default to "hjemme-levering"
     const [postalCode, setPostalCode] = useState<string>(""); // Track postal code for "hjemme levering"
     const [errorMessage, setErrorMessage] = useState<string>(""); // Track error messages
+
+    const fetchMaxLimit = async (priceId: string) => {
+        const query = `*[_type == "product" && price_id == $priceId][0]{maxOrdersPerCustomer}`;
+        const data = await client.fetch(query, { priceId });
+        return data?.maxOrdersPerCustomer || 10; // Default to 10 if missing
+    };
+
+    const handleIncrementItem = async (id: string, priceId: string) => {
+        const product = cartDetails?.[id];
+        if (!product) return;
+
+        const maxLimit = await fetchMaxLimit(priceId); // Fetch dynamically
+        if (product.quantity >= maxLimit) {
+            setPopupMessage(`Du kan kun bestille maks ${maxLimit} av dette produktet i dag.`);
+            setIsPopupOpen(true);
+            return;
+        }
+
+        incrementItem(id);
+    };
+
+    const handleOverlayClick = () => {
+        setIsPopupOpen(false);
+    };
 
     const handleDeliveryOptionChange = (option: string) => {
         setDeliveryOption(option);
@@ -71,10 +96,7 @@ export default function ShoppingCartModal() {
             setErrorMessage("En feil oppstod. Prøv igjen senere.");
         }
     };
-
-    const handleOverlayClick = () => {
-        setIsPopupOpen(false);
-    };
+    
 
     return (
         <Sheet open={shouldDisplayCart} onOpenChange={handleCartClick}>
@@ -89,127 +111,58 @@ export default function ShoppingCartModal() {
                             {cartCount === 0 ? (
                                 <h1 className="empty-cart-message">Du har ingen varer i handlekurven</h1>
                             ) : (
-                                <>
-                                    {Object.values(cartDetails ?? {}).map((entry) => (
-                                        <li key={entry.id} className="cart-item">
-                                            <div className="cart-item-image-container">
-                                                <Image
-                                                    src={entry.image as string}
-                                                    alt="product image"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                />
+                                Object.values(cartDetails ?? {}).map((entry) => (
+                                    <li key={entry.id} className="cart-item">
+                                        <div className="cart-item-image-container">
+                                            <Image
+                                                src={entry.image as string}
+                                                alt="product image"
+                                                layout="fill"
+                                                objectFit="cover"
+                                            />
+                                        </div>
+
+                                        <div className="cart-item-details">
+                                            <div>
+                                                <div className="cart-item-header">
+                                                    <h3>{entry.name}</h3>
+                                                    <p className="cart-item-price">Kr {entry.price}</p>
+                                                </div>
+                                                <p className="cart-item-description">{entry.description}</p>
                                             </div>
 
-                                            <div className="cart-item-details">
-                                                <div>
-                                                    <div className="cart-item-header">
-                                                        <h3>{entry.name}</h3>
-                                                        <p className="cart-item-price">Kr {entry.price}</p>
-                                                    </div>
-                                                    <p className="cart-item-description">{entry.description}</p>
+                                            <div className="cart-item-footer">
+                                                <p className="cart-item-quantity">Antall: {entry.quantity}</p>
+
+                                                <div className="cart-item-actions">
+                                                    <button type="button" onClick={() => decrementItem(entry.id)} className="cart-action-button remove-item">
+                                                        -
+                                                    </button>
+
+                                                    <button type="button" onClick={() => removeItem(entry.id)} className="cart-action-button remove-all">
+                                                        Fjern alle
+                                                    </button>
+
+                                                    <button type="button" onClick={() => handleIncrementItem(entry.id, entry.price_id)} className="cart-action-button add-item">
+                                                        +
+                                                    </button>
                                                 </div>
-
-                                                <div className="cart-item-footer">
-                                                    <p className="cart-item-quantity">Antall: {entry.quantity}</p>
-
-                                                    <div className="cart-item-actions">
-                                                        <button type="button" onClick={() => decrementItem(entry.id)} className="cart-action-button remove-item">
-                                                            -
-                                                        </button>
-
-                                                        <button type="button" onClick={() => removeItem(entry.id)} className="cart-action-button remove-all">
-                                                            Fjern alle
-                                                        </button>
-                                                        
-                                                        <button type="button" onClick={() => incrementItem(entry.id)} className="cart-action-button add-item">
-                                                            +
-                                                        </button>
-
-                                                    </div>
-                                                </div>
-
                                             </div>
-                                        </li>
-                                    ))}
-                                </>
+
+                                        </div>
+                                    </li>
+                                ))
                             )}
                         </ul>
-                    </div>
-
-                    <div className="checkout-container">
-                        <div className="checkout-summary">
-                            <p>Tottal:</p>
-                            <p>{totalPrice} Kr</p>
-                        </div>
-                        <p className="shipping-note">Frakt velges og legges til ved checkout</p>
-                        <div className="checkout-button-container">
-                        <Button 
-                            onClick={() => cartCount > 0 && setIsPopupOpen(true)} 
-                            className={`checkout-button ${cartCount === 0 ? "disabled" : ""}`}
-                            disabled={cartCount === 0}
-                        >
-                            Gå til kassen
-                        </Button>
-                        </div>
                     </div>
                 </div>
 
                 {isPopupOpen && (
-                    <div className="delivery-popup-overlay" onClick={handleOverlayClick}>
-                        <div
-                            className="delivery-popup-content"
-                            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the popup
-                        >
-                            <h3 className="delivery-popup-header">Vi leverer kun til postnummer xxxx - xxxx</h3>
-
-                            <div className="delivery-options">
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="deliveryOption"
-                                        value="hjemme-levering"
-                                        checked={deliveryOption === "hjemme-levering"}
-                                        onChange={() => handleDeliveryOptionChange("hjemme-levering")}
-                                    />
-                                    Hjemme levering
-                                </label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="deliveryOption"
-                                        value="hente-i-butikk"
-                                        checked={deliveryOption === "hente-i-butikk"}
-                                        onChange={() => handleDeliveryOptionChange("hente-i-butikk")}
-                                    />
-                                    Hente i butikk
-                                </label>
-                            </div>
-
-                            {deliveryOption === "hjemme-levering" && (
-                                <div className="postal-code-input">
-                                    <label>
-                                        Postnummer:
-                                        <input
-                                            type="text"
-                                            value={postalCode}
-                                            onChange={(e) => {
-                                                setPostalCode(e.target.value);
-                                                setErrorMessage(""); // Clear previous error when user types
-                                            }}
-                                        />
-                                    </label>
-                                    {errorMessage && <p className="error-message">{errorMessage}</p>}
-                                </div>
-                            )}
-
-                            <button onClick={handleProceedToCheckout} className="delivery-popup-button">
-                                Fortsett til kassen
-                            </button>
-
-                            <button onClick={() => setIsPopupOpen(false)} className="delivery-popup-cancel">
-                                Avbryt
-                            </button>
+                    <div className="popup-overlay" onClick={handleOverlayClick}>
+                        <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+                            <h3 className="popup-header">Begrensning</h3>
+                            <p className="popup-message">{popupMessage}</p>
+                            <button className="close-popup" onClick={handleOverlayClick}>OK</button>
                         </div>
                     </div>
                 )}

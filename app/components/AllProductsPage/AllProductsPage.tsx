@@ -19,13 +19,14 @@ async function getAllProducts() {
         "categoryName": category->name,
         price_id,
         naeringsinnhold,
-        allergener
+        allergener,
+        maxOrdersPerCustomer
     }
-    `; // næringsinnhold,allergener
+    `;
     const data = await client.fetch(query);
-    console.log(data);
     return data;
 }
+
 
 export default function AllProductsPage() {
     const [products, setProducts] = useState([]);
@@ -90,6 +91,7 @@ export default function AllProductsPage() {
                                     price={product.price}
                                     key={`${product._id}-add-to-bag`}
                                     price_id={product.price_id}
+                                    maxOrdersPerCustomer={product.maxOrdersPerCustomer}
                                 />
                                 <button
                                     className="info-button"
