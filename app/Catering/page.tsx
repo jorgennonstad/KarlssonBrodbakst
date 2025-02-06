@@ -1,13 +1,14 @@
-"use client";
+"use client"
 
 import React, { useEffect, useState } from "react";
+import { CateringItem } from "../interface"; // import the interface if it's in a separate file
 import "./CateringCopy.css";
 import Footer from "../components/Footer/footer";
 import { client } from "@/app/lib/sanity";
 
 const Catering = () => {
-  // State to hold the menu items fetched from Sanity
-  const [menuItems, setMenuItems] = useState([]);
+  // State to hold the menu items fetched from Sanity, with correct type
+  const [menuItems, setMenuItems] = useState<CateringItem[]>([]);
 
   // Fetch data from Sanity
   useEffect(() => {
@@ -63,7 +64,6 @@ Vennlig hilsen,
         <div className="menu-items">
           {menuItems.map((item, index) => (
             <div key={index} className="menu-item">
-              
               {/* Displaying image if available */}
               {item.image && item.image.asset && (
                 <img
@@ -92,8 +92,7 @@ Vennlig hilsen,
           ))}
         </div>
       </div>
-      <div className="contact-button-container">
-      </div>
+      <div className="contact-button-container"></div>
       <Footer />
     </div>
   );

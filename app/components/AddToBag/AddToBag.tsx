@@ -4,17 +4,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useShoppingCart } from "use-shopping-cart";
 import { urlFor } from "../../lib/sanity";
+import { ProductCart } from "../../interface"; // Importing the interface
 import "./AddToBag.css";
-
-export interface ProductCart {
-  name: string;
-  description: string;
-  price: number;
-  currency: string;
-  image: any;
-  price_id: string;
-  maxOrdersPerCustomer: number;
-}
 
 export default function AddToBag({
   currency,
@@ -23,7 +14,7 @@ export default function AddToBag({
   name,
   price,
   price_id,
-  maxOrdersPerCustomer, // ✅ Use this directly instead of fetching it
+  maxOrdersPerCustomer,
 }: ProductCart) {
   const { addItem, cartDetails } = useShoppingCart();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -32,9 +23,9 @@ export default function AddToBag({
   const handleAddToCart = () => {
     const productInCart = cartDetails?.[price_id];
 
-    // ✅ Use maxOrdersPerCustomer from props instead of querying
-    if (productInCart?.quantity >= maxOrdersPerCustomer) {
-      setPopupMessage(`Du kan kun bestille maks ${maxOrdersPerCustomer} av dette produktet i dag.`);
+    // Make sure productInCart and quantity exist and quantity is a valid number
+    if (productInCart?.quantity && productInCart.quantity >= maxOrdersPerCustomer) {
+      setPopupMessage(`Du kan kun bestille ${maxOrdersPerCustomer} av denne varen om gangen. Hvis du ønsker å bestille flere, kan du kontakte oss via e-post.`);
       setIsPopupOpen(true);
       return;
     }

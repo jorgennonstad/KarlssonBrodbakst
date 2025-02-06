@@ -53,7 +53,7 @@ export default function NavBar() {
                         className="navbar-cart-button"
                     >
                         <ShoppingCart className="navbar-cart-icon" />
-                        {cartCount > 0 && ( // Show cart count only if it's greater than 0
+                        {cartCount && (cartCount ?? 0) > 0 && ( // Show cart count only if it's greater than 0
                             <span className="navbar-cart-count">{cartCount}</span>
                         )}
                         <span className="navbar-cart-text">Handlekurv</span>

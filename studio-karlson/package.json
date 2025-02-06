@@ -8,8 +8,10 @@
     "dev": "sanity dev",
     "start": "sanity start",
     "build": "sanity build",
+    "build-react": "react-scripts build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "deploy-graphql": "sanity graphql deploy",
+    "start-backend": "node server.js"
   },
   "keywords": [
     "sanity"

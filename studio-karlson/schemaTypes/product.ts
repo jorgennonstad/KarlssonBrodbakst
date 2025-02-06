@@ -75,7 +75,7 @@ export default {
       type: 'number',
       title: 'Maks antall per kunde',
       description: 'Hvor mange av dette produktet en kunde kan bestille i dag',
-      validation: Rule => Rule.required().min(1), // Ensures it's always set
+      validation: (Rule: { required: () => { (): any; new(): any; min: { (arg0: number): any; new(): any; }; }; }) => Rule.required().min(1), // Ensures it's always set
     },
   ],
 };

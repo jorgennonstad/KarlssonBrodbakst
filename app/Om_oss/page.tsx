@@ -6,12 +6,13 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { client } from "@/app/lib/sanity";
 import { PortableText } from "@portabletext/react";
+import { HeroImage, Employee, History, PageHeader } from "../interface"; // Import the interfaces
 
 const AboutUs = () => {
-    const [employees, setEmployees] = useState([]);
-    const [history, setHistory] = useState(null);
-    const [header, setHeader] = useState(null);
-    const [heroImage, setHeroImage] = useState(null);
+    const [employees, setEmployees] = useState<Employee[]>([]); // Using Employee interface
+    const [history, setHistory] = useState<History | null>(null); // Using History interface
+    const [header, setHeader] = useState<PageHeader | null>(null); // Using PageHeader interface
+    const [heroImage, setHeroImage] = useState<HeroImage | null>(null); // Using HeroImage interface
 
     useEffect(() => {
         const fetchData = async () => {
@@ -56,12 +57,14 @@ const AboutUs = () => {
                 <div className="about-us-hero-images-container">
                     <div className="about-us-hero-overlay"></div>
                     <div className="about-us-hero-image">
-                        <Image
-                            src={heroImage.imageUrl}
-                            alt="Hero Background"
-                            fill
-                            className="object-cover object-center"
-                        />
+                        {heroImage && heroImage.imageUrl && ( // Check that heroImage is not null
+                            <Image
+                                src={heroImage.imageUrl}
+                                alt="Hero Background"
+                                fill
+                                className="object-cover object-center"
+                            />
+                        )}
                     </div>
                     <div className="about-us-hero-text-content">
                         <h1 className="about-us-hero-title">{header.title}</h1>
@@ -110,7 +113,7 @@ const AboutUs = () => {
                         />
                         <div className="hover-text">
                             <h2>{employee.name}</h2>
-                            {/* Rendre biografien med PortableText */}
+                            {/* Render bio using PortableText */}
                             <div className="employee-bio">
                                 <PortableText
                                     value={employee.bio}

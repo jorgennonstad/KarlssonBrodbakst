@@ -5,6 +5,7 @@ import Image from "next/image";
 import AddToBag from "@/app/components/AddToBag/AddToBag";
 import { client } from "@/app/lib/sanity";
 import { urlFor } from "@/app/lib/sanity";
+import { Product, PopupContent } from "../../interface"; // Import interfaces from the interfaces file
 import "./AllProductsPage.css";
 
 async function getAllProducts() {
@@ -27,13 +28,15 @@ async function getAllProducts() {
     return data;
 }
 
-
 export default function AllProductsPage() {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState<Product[]>([]); // Use Product[] type for products state
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [isPopupOpen, setIsPopupOpen] = useState(false); // State for popup
-    const [popupContent, setPopupContent] = useState({ næringsinnhold: [], allergener: [] });
+    const [popupContent, setPopupContent] = useState<PopupContent>({
+      næringsinnhold: [],
+      allergener: [],
+    });
 
     useEffect(() => {
         async function fetchProducts() {
