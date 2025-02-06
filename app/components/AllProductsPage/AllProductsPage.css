@@ -170,13 +170,13 @@
     background-color: #ff7f50;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .close-popup:hover {
     background-color: #e16e45;
+    border: white 1px;
 }
 
 
