@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useShoppingCart } from "use-shopping-cart";
-import { urlFor } from "../../lib/sanity";
+import { urlFor } from "@/app/lib/sanity";
 import { ProductCart } from "../../interface"; // Importing the interface
 import "./AddToBag.css";
 

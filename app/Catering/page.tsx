@@ -1,10 +1,11 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { CateringItem } from "../interface"; // import the interface if it's in a separate file
 import "./CateringCopy.css";
 import Footer from "../components/Footer/footer";
 import { client } from "@/app/lib/sanity";
+import Image from "next/image"; // Import Image from next/image
 
 const Catering = () => {
   // State to hold the menu items fetched from Sanity, with correct type
@@ -66,10 +67,13 @@ Vennlig hilsen,
             <div key={index} className="menu-item">
               {/* Displaying image if available */}
               {item.image && item.image.asset && (
-                <img
+                <Image
                   src={item.image.asset.url}
                   alt={item.title}
                   className="menu-item-image"
+                  width={500}   // Specify width (adjust as necessary)
+                  height={300}  // Specify height (adjust as necessary)
+                  layout="intrinsic" // This ensures the image maintains aspect ratio
                 />
               )}
               <div className="menu-text">

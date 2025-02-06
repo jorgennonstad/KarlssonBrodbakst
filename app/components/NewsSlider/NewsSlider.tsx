@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { client } from "@/app/lib/sanity"; // Assuming you have this file setup to initialize your Sanity client
-import { ArrowLeft, ArrowRight } from "lucide-react"; // Import arrow icons
-import "./NewsSlider.css"; // Ensure you have the appropriate CSS styles
+import { client } from "@/app/lib/sanity";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import "./NewsSlider.css";
 
 // Define the image type structure
 interface SliderImage {
@@ -17,7 +17,6 @@ interface SliderImage {
   altText?: string;
 }
 
-// Sanity query to fetch images
 const query = `*[_type == "sliderImage"] | order(priority asc){
   _id,
   image {
@@ -28,38 +27,25 @@ const query = `*[_type == "sliderImage"] | order(priority asc){
   altText
 }`;
 
-
 export default function NewsSlider() {
   const [images, setImages] = useState<SliderImage[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Fetch images from Sanity
+  // Fetch images from Sanity and set them in the state
   useEffect(() => {
     const fetchImages = async () => {
-      const result = await client.fetch(query);
-      setImages(result); // Set the images to state
+      const data = await client.fetch(query); // Fetching the data from Sanity using the query
+      setImages(data); // Setting the fetched images to state
     };
 
     fetchImages();
-  }, []);
+  }, []); // Empty dependency array means this effect runs only once, on mount
 
-  // Function to go to the next image
-  const nextSlide = () => {
+  // Memoize nextSlide with useCallback
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  // Function to go to the previous image
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
-
-   // Go to a specific slide when a dot is clicked
-   const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
+  }, [images.length]); // Only recreate nextSlide if images.length changes
 
   // Add interval to automatically change images
   useEffect(() => {
@@ -67,9 +53,18 @@ export default function NewsSlider() {
       const interval = setInterval(nextSlide, 5000); // Change image every 5 seconds
       return () => clearInterval(interval); // Cleanup on unmount or when hover changes
     }
-  }, [images, isHovered]); // Re-run the effect when hover state changes
+  }, [images, isHovered, nextSlide]); // Added nextSlide to the dependency array
 
-  // If images are still loading, show a loading state
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
   if (images.length === 0) {
     return <div>Loading...</div>;
   }
@@ -83,7 +78,6 @@ export default function NewsSlider() {
         onMouseLeave={() => setIsHovered(false)} // Resume slide when hover ends
       >
         <div className="slider">
-          {/* Previous Button with Arrow */}
           <button onClick={prevSlide} className="prev-button">
             <ArrowLeft size={24} />
           </button>
@@ -91,8 +85,8 @@ export default function NewsSlider() {
             <div
               className="slider-track"
               style={{
-                transform: `translateX(-${currentIndex * 100}%)`, // Move the slider to the appropriate image
-                transition: "transform 0.5s ease-in-out", // Apply sliding animation
+                transform: `translateX(-${currentIndex * 100}%)`,
+                transition: "transform 0.5s ease-in-out",
               }}
             >
               {images.map((image) => (
@@ -108,12 +102,10 @@ export default function NewsSlider() {
               ))}
             </div>
           </div>
-          {/* Next Button with Arrow */}
           <button onClick={nextSlide} className="next-button">
             <ArrowRight size={24} />
           </button>
         </div>
-        {/* Dots Pagination */}
         <div className="dots-container">
           {images.map((_, index) => (
             <div

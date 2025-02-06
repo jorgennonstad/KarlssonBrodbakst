@@ -43,8 +43,9 @@ export default function AllProductsPage() {
             try {
                 const data = await getAllProducts();
                 setProducts(data);
-            } catch (err) {
+            } catch (error) {
                 setError("Failed to load products. Please try again later.");
+                console.error("Error fetching products: ", error); // Logging the error to console
             } finally {
                 setLoading(false);
             }
@@ -67,12 +68,12 @@ export default function AllProductsPage() {
                     {products.map((product) => (
                         <div key={product._id} className="product-card">
                             <div className="product-image-container">
-                                <Image
-                                    src={urlFor(product.images[0]).url()}
-                                    alt={product.name}
-                                    className="product-image"
-                                    width={400}
-                                    height={500}
+                            <Image
+                                src={urlFor(product.images[0]).url()}  // Now this should work without any issues
+                                alt={product.name}
+                                className="product-image"
+                                width={400}
+                                height={500}
                                 />
                                 <div className="product-overlay">
                                     <div className="overlay-content">

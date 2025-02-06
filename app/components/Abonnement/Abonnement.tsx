@@ -52,8 +52,9 @@ export default function Abonnement() {
         const data = await fetchData();
         setAbonnement(data.abonnement);
         setProducts(data.products);
-      } catch (err) {
+      } catch (error) {
         setError("Failed to load data. Please try again later.");
+        console.error("Error fetching data: ", error); // Logging the error to console
       } finally {
         setLoading(false);
       }
