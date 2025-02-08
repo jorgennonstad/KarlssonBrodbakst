@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { SERVER_PORT = 5001, STRIPE_PRIVATE_KEY, CLIENT_URL } = process.env;
+const { SERVER_PORT, STRIPE_PRIVATE_KEY, CLIENT_URL } = process.env;
 const express = require("express");
 const cors = require("cors");
 const stripe = require("stripe")(STRIPE_PRIVATE_KEY);
