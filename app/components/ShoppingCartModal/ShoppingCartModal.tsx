@@ -74,7 +74,7 @@ export default function ShoppingCartModal() {
                 quantity: entry.quantity,
             }));
 
-            const response = await fetch("https://karlsonbrodbakst.onrender.com/create-onetime-session", {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/create-onetime-session`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ items, deliveryOption, postalCode }),
