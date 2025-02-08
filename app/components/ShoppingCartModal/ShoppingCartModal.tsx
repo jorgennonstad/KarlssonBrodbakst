@@ -74,7 +74,7 @@ export default function ShoppingCartModal() {
                 quantity: entry.quantity,
             }));
 
-            const response = await fetch(`https://karlsonbrodbakst.netlify.app//create-onetime-session`, {
+            const response = await fetch(`https://karlsonbrodbakstbetaling.onrender.com/create-onetime-session`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ items, deliveryOption, postalCode }),
