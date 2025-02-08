@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: CLIENT_URL || "http://localhost:3000", // Allow frontend origin
+    origin: CLIENT_URL || "https://karlsonbrodbakst.onrender.com", // Allow frontend origin
   })
 );
  
