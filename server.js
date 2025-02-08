@@ -10,9 +10,10 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: CLIENT_URL || "https://karlsonbrodbakst.onrender.com", // Allow frontend origin
+    origin: process.env.CLIENT_URL || "https://karlsonbrodbakst-2.onrender.com", // Default to production if CLIENT_URL is not defined
   })
 );
+
  
 const { createClient } = require("@sanity/client");
  
