@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import './Kontakt_oss.css';
+import './kontakt_oss.css';
 import Footer from "../components/Footer/footer";
 
 const KontaktOss: React.FC = () => {
