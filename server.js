@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000", // Default to production if CLIENT_URL is not defined
+    origin: process.env.CLIENT_URL || "https://karlsonbrodbakst.netlify.app/", // Default to production if CLIENT_URL is not defined
   })
 );
 
