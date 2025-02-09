@@ -130,7 +130,11 @@
     }
 
     .hero-link-rectangle {
-        padding: 12px 17px;
+        padding: 12px 9px;
         font-size: 12px;
+    }
+
+    .hero-links {
+        gap: 30px;
     }
 }
