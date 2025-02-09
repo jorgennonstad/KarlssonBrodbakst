@@ -25,7 +25,7 @@ export default function AddToBag({
 
     // Make sure productInCart and quantity exist and quantity is a valid number
     if (productInCart?.quantity && productInCart.quantity >= maxOrdersPerCustomer) {
-      setPopupMessage(`Du kan kun bestille ${maxOrdersPerCustomer} av denne varen om gangen. Hvis du ønsker å bestille flere, kan du kontakte oss via e-post.`);
+      setPopupMessage(`Du kan kun putte maks ${maxOrdersPerCustomer} av denne varen i handlekurven. Hvis du ønsker å bestille mer, kan du kontakte oss via e-post.`);
       setIsPopupOpen(true);
       return;
     }

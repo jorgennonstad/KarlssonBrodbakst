@@ -35,7 +35,7 @@ export default function ShoppingCartModal() {
 
         const maxLimit = await fetchMaxLimit(priceId);
         if (product.quantity >= maxLimit) {
-            setPopupMessage(`Du kan kun bestille maks ${maxLimit} av dette produktet i dag.`);
+            setPopupMessage(`Du kan kun putte maks ${maxLimit} av denne varen i handlekurven. Hvis du ønsker å bestille mer, kan du kontakte oss via e-post.`);
             setIsLimitPopupOpen(true);
             return;
         }
