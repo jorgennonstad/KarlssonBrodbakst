@@ -129,8 +129,8 @@ app.post("/create-onetime-session", async (req, res) => {
       deliveryOption === "hente-i-butikk"
         ? [{ shipping_rate: deliveryPrices.pickupPriceId }]
         : [
+          { shipping_rate: deliveryPrices.deliveryPriceId },
             { shipping_rate: deliveryPrices.pickupPriceId },
-            { shipping_rate: deliveryPrices.deliveryPriceId },
           ];
 
     const lineItems = items.map((item) => ({

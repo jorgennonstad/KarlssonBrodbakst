@@ -186,8 +186,8 @@
 
 .overlay-close {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 2rem;
+    left: 2rem;
     font-size: 2rem;
     color: white;
     background: none;
