@@ -65,7 +65,7 @@
 }
 
 .about-us-image:hover::before {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .hover-text {
@@ -181,5 +181,11 @@
         font-size: 1rem;
     }
 
-   
+    .employee-bio p {
+        font-size: 0.8rem;
+    }
+    
+    .hover-text h2 {
+        font-size: 1.2rem;
+    }
 }

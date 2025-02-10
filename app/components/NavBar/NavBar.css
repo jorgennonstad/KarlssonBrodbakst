@@ -42,7 +42,7 @@
     align-items: center;
     justify-content: center;
     position: fixed; /* Make the cart button sticky */
-    right: 6vw; /* Optional: position it to the right */
+    right: 6vw;
     z-index: 2000;
 }
 
@@ -104,7 +104,6 @@
     justify-content: center;
 }
 
-
 @media (min-width: 1024px) {
     .navbar-links {
         justify-content: space-evenly;
@@ -136,39 +135,6 @@
     cursor: pointer;
 }
 
-@media (max-width: 1024px) {
-    .navbar-container {
-        justify-content: space-between;
-    }
-
-    .navbar-hamburger {
-        display: block;
-    }
-
-    .navbar-links {
-        display: none;
-    }
-
-    .navbar-cart-button {
-        height: 3rem;
-        width: 3rem;
-        padding: 0.5rem;
-        border-radius: 50%;
-    }
-
-    .navbar-cart-text {
-        display: none;
-    }
-
-    .navbar-cart-text {
-        display: none !important; /* Ensure the text never shows on smaller screens */
-    }
-
-    .navbar-cart:hover .navbar-cart-text {
-        display: none !important; /* Prevent hover effect from showing the text */
-    }
-}
-
 .overlay-menu {
     position: fixed;
     top: 0;
@@ -186,9 +152,9 @@
 
 .overlay-close {
     position: absolute;
-    top: 2rem;
-    left: 2rem;
-    font-size: 2rem;
+    top: 1.4rem;
+    left: 2.1rem;
+    font-size: 2.6rem;
     color: white;
     background: none;
     border: none;
@@ -212,4 +178,46 @@
 
 .overlay-link:hover {
     color: #ff6600;
+}
+
+/* ✅ Merged @media (max-width: 1024px) section at the bottom */
+@media (max-width: 1024px) {
+    .navbar-container {
+        justify-content: space-between;
+    }
+
+    .navbar-hamburger {
+        display: block;
+    }
+
+    .navbar-links {
+        display: none;
+    }
+
+    .navbar-cart-button {
+        height: 3rem;
+        width: 3rem;
+        padding: 0.5rem;
+        border-radius: 50%;
+    }
+
+    .navbar-cart-text {
+        display: none !important; /* Ensure the text never shows on smaller screens */
+    }
+
+    .navbar-cart:hover .navbar-cart-text {
+        display: none !important; /* Prevent hover effect from showing the text */
+    }
+
+    /* ✅ Make nav links smaller in the mobile menu */
+    .overlay-link {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* ✅ Further reduce size for smaller screens */
+    .overlay-link {
+        font-size: 1.5rem;
+    }
 }
