@@ -6,7 +6,7 @@ import Navbar from "./components/NavBar/Navbar";
 import ShoppingCartModal from "./components/ShoppingCartModal/ShoppingCartModal";
 
 // Add a boolean to toggle coming soon status
-const showComingSoon = true;  // Change this to `false` to show the normal content
+const showComingSoon = false;  // Change this to `false` to show the normal content
 
 const inter = Inter({ subsets: ["latin"] });
 
