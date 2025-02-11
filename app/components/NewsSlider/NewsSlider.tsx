@@ -34,6 +34,7 @@ export default function NewsSlider() {
 
   // Fetch images from Sanity and set them in the state
   useEffect(() => {
+    console.log("7")
     const fetchImages = async () => {
       const data = await client.fetch(query); // Fetching the data from Sanity using the query
       setImages(data); // Setting the fetched images to state
@@ -49,6 +50,7 @@ export default function NewsSlider() {
 
   // Add interval to automatically change images
   useEffect(() => {
+    console.log("8")
     if (images.length > 0 && !isHovered) {
       const interval = setInterval(nextSlide, 5000); // Change image every 5 seconds
       return () => clearInterval(interval); // Cleanup on unmount or when hover changes

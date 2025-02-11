@@ -7,6 +7,7 @@ import Image from "next/image";
 import { client } from "@/app/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import { HeroImage, Employee, History, PageHeader } from "../interface"; // Import the interfaces
+import Navbar from "../components/NavBar/Navbar";
 
 const AboutUs = () => {
     const [employees, setEmployees] = useState<Employee[]>([]); // Using Employee interface
@@ -15,6 +16,7 @@ const AboutUs = () => {
     const [heroImage, setHeroImage] = useState<HeroImage | null>(null); // Using HeroImage interface
 
     useEffect(() => {
+        console.log("10")
         const fetchData = async () => {
             try {
                 const employeesData = await client.fetch(`*[_type == "employee"]{
@@ -52,6 +54,7 @@ const AboutUs = () => {
 
     return (
         <div className="about-us-page">
+            <Navbar />
             {/* Hero Section */}
             <div className="about-us-hero-container">
                 <div className="about-us-hero-images-container">

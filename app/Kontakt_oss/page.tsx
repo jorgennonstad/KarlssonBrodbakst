@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import './kontakt_oss.css';
 import Footer from "../components/Footer/footer";
+import Navbar from "../components/NavBar/Navbar";
 
 const KontaktOss: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -38,6 +39,7 @@ const KontaktOss: React.FC = () => {
 
   return (
     <div className="kontakt-oss-page">
+      <Navbar />
       <div className="kontakt-oss-container">
         <h1>Kontakt Oss</h1>
         <p className="kontakt-description">

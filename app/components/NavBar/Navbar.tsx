@@ -11,6 +11,7 @@ export default function NavBar() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
+        console.log("6")
         if (menuOpen) {
             document.body.style.overflow = "hidden";
         } else {
