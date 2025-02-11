@@ -7,7 +7,7 @@ import { ShoppingCart } from "lucide-react";
 import "./NavBar.css";
 
 export default function NavBar() {
-    const { handleCartClick, cartCount } = useShoppingCart(); // Ensure cartCount is accessed correctly
+    const { handleCartClick, cartCount } = useShoppingCart();
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
@@ -42,11 +42,13 @@ export default function NavBar() {
                     </Link>
                 </nav>
 
-                {/* ✅ Shopping Cart Button (Hides Count When 0) */}
+                {/* ✅ Fix: Ensure cartCount is always a number */}
                 <div className="navbar-cart">
                     <button onClick={handleCartClick} className="navbar-cart-button">
                         <ShoppingCart className="navbar-cart-icon" />
-                        {cartCount > 0 && <span className="navbar-cart-count">{cartCount}</span>}
+                        {(cartCount ?? 0) > 0 && (
+                            <span className="navbar-cart-count">{cartCount}</span>
+                        )}
                         <span className="navbar-cart-text">Handlekurv</span>
                     </button>
                 </div>
