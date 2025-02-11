@@ -7,13 +7,12 @@ import { ShoppingCart } from "lucide-react";
 import "./NavBar.css";
 import { IoMenuSharp } from "react-icons/io5";
 
-
 export default function NavBar() {
-    const { handleCartClick, cartCount } = useShoppingCart();
+    const { handleCartClick, cartCount, shouldDisplayCart } = useShoppingCart(); // ✅ Added shouldDisplayCart
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-        if (menuOpen) {
+        if (menuOpen || shouldDisplayCart) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
@@ -21,13 +20,13 @@ export default function NavBar() {
         return () => {
             document.body.style.overflow = "auto";
         };
-    }, [menuOpen]);
+    }, [menuOpen, shouldDisplayCart]);
 
     return (
         <header className="navbar">
             <div className="navbar-container">
                 <button className="navbar-hamburger" onClick={() => setMenuOpen(true)}>
-                <IoMenuSharp />
+                    <IoMenuSharp />
                 </button>
                 <nav className="navbar-links">
                     <Link className="navbar-link" href="/">
@@ -42,19 +41,20 @@ export default function NavBar() {
                     <Link className="navbar-link" href="/Kontakt_oss">
                         Kontakt oss
                     </Link>
-                    <div></div>
                 </nav>
 
-                {/* ✅ Fix: Ensure cartCount is always a number */}
-                <div className="navbar-cart">
-                    <button onClick={handleCartClick} className="navbar-cart-button">
-                        <ShoppingCart className="navbar-cart-icon" />
-                        {(cartCount ?? 0) > 0 && (
-                            <span className="navbar-cart-count">{cartCount}</span>
-                        )}
-                        <span className="navbar-cart-text">Handlekurv</span>
-                    </button>
-                </div>
+                {/* ✅ Hide the cart button when the cart menu is open */}
+                {!shouldDisplayCart && (
+                    <div className="navbar-cart">
+                        <button onClick={handleCartClick} className="navbar-cart-button">
+                            <ShoppingCart className="navbar-cart-icon" />
+                            {(cartCount ?? 0) > 0 && (
+                                <span className="navbar-cart-count">{cartCount}</span>
+                            )}
+                            <span className="navbar-cart-text">Handlekurv</span>
+                        </button>
+                    </div>
+                )}
             </div>
 
             {/* ✅ Mobile Menu Overlay */}

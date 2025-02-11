@@ -163,7 +163,7 @@
 
 .overlay-close {
     position: absolute;
-    top: 1.4rem;
+    top: 1rem;
     left: 2.6rem;
     font-size: 2.6rem;
     color: white;
@@ -192,7 +192,7 @@
 }
 
 /* ✅ Merged @media (max-width: 1024px) section at the bottom */
-@media (max-width: 1024px) {
+@media (max-width: 1324px) {
     .navbar-container {
         justify-content: space-between;
     }
