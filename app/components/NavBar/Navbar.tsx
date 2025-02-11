@@ -5,6 +5,8 @@ import { useShoppingCart } from "use-shopping-cart";
 import React, { useState, useEffect } from "react";
 import { ShoppingCart } from "lucide-react";
 import "./NavBar.css";
+import { IoMenuSharp } from "react-icons/io5";
+
 
 export default function NavBar() {
     const { handleCartClick, cartCount } = useShoppingCart();
@@ -25,7 +27,7 @@ export default function NavBar() {
         <header className="navbar">
             <div className="navbar-container">
                 <button className="navbar-hamburger" onClick={() => setMenuOpen(true)}>
-                    ☰
+                <IoMenuSharp />
                 </button>
                 <nav className="navbar-links">
                     <Link className="navbar-link" href="/">
