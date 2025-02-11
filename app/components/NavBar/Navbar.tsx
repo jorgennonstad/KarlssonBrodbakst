@@ -42,6 +42,7 @@ export default function NavBar() {
                     <Link className="navbar-link" href="/Kontakt_oss">
                         Kontakt oss
                     </Link>
+                    <div></div>
                 </nav>
 
                 {/* ✅ Fix: Ensure cartCount is always a number */}
