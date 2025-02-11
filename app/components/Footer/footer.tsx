@@ -42,6 +42,7 @@ const Footer: React.FC = () => {
   const [footerData, setFooterData] = useState<FooterData | null>(null); // Use the FooterData type
 
   useEffect(() => {
+    console.log("5")
     const fetchFooterData = async () => {
       const data = await client.fetch(`
         *[_type == "footer"][0] {

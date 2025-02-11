@@ -47,6 +47,7 @@ export default function Abonnement() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log("2")
     async function fetchAbonnementData() {
       try {
         const data = await fetchData();
@@ -63,6 +64,7 @@ export default function Abonnement() {
   }, []);
 
   useEffect(() => {
+    console.log("3")
     const subtotal = selectedBreads.reduce((acc, bread) => {
       return acc + (products.find((product) => product.name === bread)?.price || 0);
     }, 0);

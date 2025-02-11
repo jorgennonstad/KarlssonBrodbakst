@@ -39,6 +39,7 @@ export default function AllProductsPage() {
     });
 
     useEffect(() => {
+        console.log("4")
         async function fetchProducts() {
             try {
                 const data = await getAllProducts();

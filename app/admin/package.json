@@ -5,7 +5,7 @@
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "sanity dev",
+    "dev": "nex dev",
     "start": "sanity start",
     "build": "sanity build",
     "build-react": "react-scripts build",

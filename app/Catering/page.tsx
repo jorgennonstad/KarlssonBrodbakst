@@ -6,6 +6,8 @@ import "./CateringCopy.css";
 import Footer from "../components/Footer/footer";
 import { client } from "@/app/lib/sanity";
 import Image from "next/image"; // Import Image from next/image
+import Navbar from "../components/NavBar/Navbar";
+
 
 const Catering = () => {
   // State to hold the menu items fetched from Sanity, with correct type
@@ -13,6 +15,7 @@ const Catering = () => {
 
   // Fetch data from Sanity
   useEffect(() => {
+    console.log("1")
     const fetchMenuItems = async () => {
       const query = `*[_type == "cateringItems"]{
         title,
@@ -60,6 +63,7 @@ Vennlig hilsen,
 
   return (
     <div className="catering-page">
+      <Navbar />
       <h1 className="catering-title">Catering</h1>
       <div className="catering-container">
         <div className="menu-items">
