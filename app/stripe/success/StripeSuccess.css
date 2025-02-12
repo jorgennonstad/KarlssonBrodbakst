@@ -1,0 +1,44 @@
+.success-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f9fafb;
+    z-index: 1000;
+  }
+  
+  .success-container {
+    max-width: 50vw;
+    padding: 2rem;
+    text-align: center;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .success-icon {
+    color: #16a34a;
+    width: 64px;
+    height: 64px;
+    margin: 1.5rem auto;
+  }
+  
+  .success-title {
+    font-size: 1.5rem;
+    color: #1f2937;
+    font-weight: 600;
+  }
+  
+  .success-message {
+    color: #4b5563;
+    margin: 0.5rem 0;
+  }
+  
+  .success-subtext {
+    color: #6b7280;
+  }
+  
+  .success-button {
+    margin-top: 1.5rem;
+  }
+  

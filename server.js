@@ -140,7 +140,7 @@ app.post("/create-onetime-session", async (req, res) => {
 
     const session = await stripe.checkout.sessions.create({
       success_url: `${CLIENT_URL}/stripe/success`,
-      cancel_url: `${CLIENT_URL}?canceled=true`,
+      cancel_url: `${CLIENT_URL}/stripe/error`,
       line_items: lineItems,
       mode: "payment",
       phone_number_collection: { enabled: true },
