@@ -4,19 +4,31 @@ const express = require("express");
 const cors = require("cors");
 const stripe = require("stripe")(STRIPE_PRIVATE_KEY);
 const sanityClient = require("@sanity/client");
+const rateLimit = require("express-rate-limit");  // Import rate-limiter
+const { createClient } = require("@sanity/client");
  
 const app = express();
+
+// Set up rate limiting: limit to 60 requests per 1 minute per IP
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 2, // Limit each IP to 60 requests per minute
+  message: { error: "Too many requests. Please try again later." },
+  headers: true, // Optionally send rate-limit headers in response
+});
+
+// Apply the rate limit to all routes
+app.use(limiter);
  
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "https://karlssonbrodbakst.netlify.app", // Default to production if CLIENT_URL is not defined
+    origin: process.env.CLIENT_URL || "https://karlssonbrodbakst.no", // Default to production if CLIENT_URL is not defined
   })
 );
 
  
-const { createClient } = require("@sanity/client");
- 
+
 const client = createClient({
   projectId: "koixe24m", // Replace with your Sanity project ID
   dataset: "production", // Replace with your dataset name
