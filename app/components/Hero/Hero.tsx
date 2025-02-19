@@ -17,12 +17,12 @@ export default async function Hero() {
             <div className="hero-images-container">
                 <div className="hero-overlay"></div>
                 <div className="hero-image">
-                    <Image 
-                        src={urlFor(data.image1).url()} // Use image1 from the schema
-                        alt="Hero Background"
-                        layout="fill" // Covers the entire container
-                        className="h-full w-full object-cover object-center"
-                    />
+                <Image 
+                    src={urlFor(data.image1).width(2000).height(1200).quality(100).auto("format").url()} 
+                    alt="Hero Background"
+                    layout="fill" // Covers the entire container
+                    className="h-full w-full object-cover object-center"
+                />
                 </div>
                 <div className="hero-text-content">
                     {data.logo && (

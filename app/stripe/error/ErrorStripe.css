@@ -1,41 +1,40 @@
 .error-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f8f9fa;
-  }
-  
-  .error-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 400px;
-  }
-  
-  .error-icon {
-    color: #f44336;
-    width: 60px;
-    height: 60px;
-    margin: 1rem auto;
-  }
-  
-  .error-text h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .error-text p {
-    color: #555;
-    margin: 0.5rem 0;
-  }
-  
-  .error-button {
-    margin-top: 1rem;
-    background-color: #ff5555;
-    color: white;
-  }
-  
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+}
+
+.error-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+}
+
+.error-icon {
+  color: #f44336;
+  width: 60px;
+  height: 60px;
+  margin: 1rem auto;
+}
+
+.error-text h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.error-text p {
+  color: #555;
+  margin: 0.5rem 0;
+}
+
+.error-button {
+  margin-top: 1rem;
+  background-color: #ff5555;
+  color: white;
+}

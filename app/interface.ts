@@ -96,3 +96,11 @@ export interface PageHeader {
   title: string;
   subtitle: string;
 }
+
+export interface KontaktData {
+  title: string;
+  description: string;
+  phone: string;
+  email: string;
+  address: string;
+}

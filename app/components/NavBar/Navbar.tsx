@@ -41,6 +41,7 @@ export default function NavBar() {
                     <Link className="navbar-link" href="/Kontakt_oss">
                         Kontakt oss
                     </Link>
+                    <div></div>
                 </nav>
 
                 {/* ✅ Hide the cart button when the cart menu is open */}

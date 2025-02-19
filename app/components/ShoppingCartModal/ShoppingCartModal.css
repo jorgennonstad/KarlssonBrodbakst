@@ -20,6 +20,7 @@
     margin-top: 2rem;
     flex-grow: 1;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .cart-item-list {
@@ -47,6 +48,7 @@
     flex-direction: column;
     flex-grow: 1;
     justify-content: space-between;
+    width: 65%;
 }
 
 .cart-item-header {

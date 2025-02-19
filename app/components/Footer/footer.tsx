@@ -13,7 +13,7 @@ interface FooterData {
     };
   };
   contact: {
-    phone: string;
+    phone?: string;
     email: string;
     address: string;
     orgnr: string;
@@ -83,14 +83,14 @@ const Footer: React.FC = () => {
   return (
     <footer className="footer no-break">
       <div className="footer-logo-container">
-        <Image
-          src={footerData.logo.asset.url}
-          alt="Company Logo"
-          className="footer-logo"
-          width={200}
-          height={100}
-          layout="intrinsic"
-        />
+      <Image
+        src={`${footerData.logo.asset.url}?w=1000&h=500&auto=format&dpr=2&q=100`}
+        alt="Company Logo"
+        className="footer-logo"
+        width={200}
+        height={100}
+        layout="intrinsic"
+      />
       </div>
 
       <div className="footer-content">
@@ -98,10 +98,12 @@ const Footer: React.FC = () => {
         <div className="footer-section contact-section">
           <h3>Kontakt</h3>
           <ul>
-            <li>
-              <strong>Telefon: </strong>
-              <a href={`tel:${footerData.contact.phone}`}>{footerData.contact.phone}</a>
-            </li>
+          {footerData.contact.phone && (
+              <li>
+                <strong>Telefon: </strong>
+                <a href={`tel:${footerData.contact.phone}`}>{footerData.contact.phone}</a>
+              </li>
+            )}
             <li>
               <strong>E-post: </strong>
               <a href={`mailto:${footerData.contact.email}`}>{footerData.contact.email}</a>
@@ -156,7 +158,7 @@ const Footer: React.FC = () => {
                 className="social-link"
               >
                 <Image
-                  src={footerData.socialMedia.instagramIcon.asset.url}
+                  src={`${footerData.socialMedia.instagramIcon.asset.url}?w=100&h=100&auto=format&dpr=2&q=100`}
                   alt="Instagram"
                   className="social-icon instagram"
                   width={30}
@@ -176,7 +178,7 @@ const Footer: React.FC = () => {
                 className="social-link"
               >
                 <Image
-                  src={footerData.socialMedia.facebookIcon.asset.url}
+                  src={`${footerData.socialMedia.facebookIcon.asset.url}?w=100&h=100&auto=format&dpr=2&q=100`}
                   alt="Facebook"
                   className="social-icon facebook"
                   width={30}
@@ -194,7 +196,13 @@ const Footer: React.FC = () => {
 
       <div className="footer-bottom">
         <p>
-          &copy; 2024 Karlson Brødbakst. | <i>Designet og utviklet av <span><a href="https://deviro.no/" target="_blank">Deviro.no</a></span></i>
+          &copy; 2024 Karlson Brødbakst.
+        </p>
+        <p>
+          <i>Bilder tatt av <span><a href="https://www.wallinphoto.no/" target="_blank">WALLIN.PHOTO AS</a></span></i> 
+        </p>
+        <p>
+          <i>Designet og utviklet av <span><a href="https://deviro.no/" target="_blank">Deviro.no</a></span></i> 
         </p>
       </div>
     </footer>

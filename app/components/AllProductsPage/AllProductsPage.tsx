@@ -70,12 +70,14 @@ export default function AllProductsPage() {
                         <div key={product._id} className="product-card">
                             <div className="product-image-container">
                             <Image
-                                src={urlFor(product.images[0]).url()}  // Now this should work without any issues
-                                alt={product.name}
-                                className="product-image"
-                                width={400}
-                                height={500}
-                                />
+                            src={urlFor(product.images[0]).width(800).height(1000).quality(100).url()} 
+                            alt={product.name}
+                            className="product-image"
+                            width={400}
+                            height={500}
+                            quality={100}
+                            />
+
                                 <div className="product-overlay">
                                     <div className="overlay-content">
                                         <p>{product.description}</p>

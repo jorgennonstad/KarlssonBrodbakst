@@ -9,6 +9,7 @@ import Image from "next/image"; // Import Image from next/image
 import Navbar from "../components/NavBar/Navbar";
 
 
+
 const Catering = () => {
   // State to hold the menu items fetched from Sanity, with correct type
   const [menuItems, setMenuItems] = useState<CateringItem[]>([]);
@@ -72,7 +73,7 @@ Vennlig hilsen,
               {/* Displaying image if available */}
               {item.image && item.image.asset && (
                 <Image
-                  src={item.image.asset.url}
+                src={`${item.image.asset.url}?w=1000&h=800&auto=format&dpr=2&q=100`}
                   alt={item.title}
                   className="menu-item-image"
                   width={500}   // Specify width (adjust as necessary)

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     Sheet,
     SheetContent,
@@ -22,6 +22,18 @@ export default function ShoppingCartModal() {
     const [deliveryOption, setDeliveryOption] = useState<string>("hjemme-levering"); // ✅ Default to "hjemme-levering"
     const [postalCode, setPostalCode] = useState<string>(""); // ✅ Track postal code for "hjemme levering"
     const [errorMessage, setErrorMessage] = useState<string>(""); // ✅ Track error messages
+    const [validPostalCodes, setValidPostalCodes] = useState<string[]>([]); // New state to hold the valid postal codes
+
+    // Fetch valid postal codes from Sanity
+    const fetchValidPostalCodes = async () => {
+        const query = `*[_type == "deliveryAlternatives"][0]{validPostalCodes}`;
+        const data = await client.fetch(query);
+        setValidPostalCodes(data?.validPostalCodes || []);
+    };
+
+    useEffect(() => {
+        fetchValidPostalCodes();
+    }, []); // Fetch postal codes when the component mounts
 
     const fetchMaxLimit = async (priceId: string) => {
         const query = `*[_type == "product" && price_id == $priceId][0]{maxOrdersPerCustomer}`;
@@ -130,7 +142,12 @@ export default function ShoppingCartModal() {
                                                     <h3>{entry.name}</h3>
                                                     <p className="cart-item-price">Kr {entry.price}</p>
                                                 </div>
-                                                <p className="cart-item-description">{entry.description}</p>
+                                                <p className="cart-item-description">
+                                                    {entry.description && entry.description.length > 50 
+                                                        ? `${entry.description.slice(0, 50)}...` 
+                                                        : entry.description || ""}
+                                                </p>
+
                                             </div>
 
                                             <div className="cart-item-footer">
@@ -191,7 +208,12 @@ export default function ShoppingCartModal() {
                 {isPopupOpen && (
                     <div className="delivery-popup-overlay" onClick={handleOverlayClick}>
                         <div className="delivery-popup-content" onClick={(e) => e.stopPropagation()}>
-                            <h3 className="delivery-popup-header">Vi leverer kun til postnummer xxxx - xxxx</h3>
+                            <h3 className="delivery-popup-header">
+                                Vi leverer kun til postnummer: <br></br>
+                                {validPostalCodes.length > 0 
+                                    ? validPostalCodes.join(", ")
+                                    : "Henter postnummer..."}
+                            </h3>
 
                             <div className="delivery-options">
                                 <label>

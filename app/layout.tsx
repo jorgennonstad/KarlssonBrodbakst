@@ -11,7 +11,7 @@ const showComingSoon = false;  // Change this to `false` to show the normal cont
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Karlson Brødbakst",
+  title: "Karlsson Brødbakst | Bakeri og Catering",
   description: "Nystekt brød rett ut av ovnen levert på døra",
 };
 
