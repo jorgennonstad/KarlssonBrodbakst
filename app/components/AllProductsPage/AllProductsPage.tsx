@@ -10,7 +10,7 @@ import "./AllProductsPage.css";
 
 async function getAllProducts() {
     const query = `
-    *[_type == "product"]{
+    *[_type == "product"]|order(orderRank){
         _id,
         images,
         price,
