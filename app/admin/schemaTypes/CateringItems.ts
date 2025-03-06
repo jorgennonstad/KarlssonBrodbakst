@@ -1,3 +1,5 @@
+import { Rule } from '@sanity/types'; // Explicitly import Rule
+
 export default {
   name: "cateringItems",
   title: "CateringVarer",
@@ -8,7 +10,7 @@ export default {
       title: "Tittel",
       type: "string",
       description: "Navnet på cateringmenyen, f.eks. Brødplate.",
-      validation: (Rule) => Rule.required().error("Tittel er påkrevd."),
+      validation: (Rule: Rule) => Rule.required().error("Tittel er påkrevd."),
     },
     {
       name: "note",
@@ -22,14 +24,14 @@ export default {
       type: "array",
       of: [{ type: "string" }],
       description: "Liste med beskrivelser av rettene, f.eks. 'Nybakt surdeigsbrød med sprø skorpe'.",
-      validation: (Rule) => Rule.required().min(1).error("Minst én beskrivelse er påkrevd."),
+      validation: (Rule: Rule) => Rule.required().min(1).error("Minst én beskrivelse er påkrevd."),
     },
     {
       name: "price",
       title: "Pris",
       type: "string",
       description: "Prisen på menyen, f.eks. 'Kr. 249,-'.",
-      validation: (Rule) => Rule.required().error("Pris er påkrevd."),
+      validation: (Rule: Rule) => Rule.required().error("Pris er påkrevd."),
     },
     {
       name: "image",

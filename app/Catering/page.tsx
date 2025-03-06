@@ -18,7 +18,7 @@ const Catering = () => {
   useEffect(() => {
     console.log("1")
     const fetchMenuItems = async () => {
-      const query = `*[_type == "cateringItems"]{
+      const query = `*[_type == "cateringItems"]|order(orderRank){
         title,
         note,
         description,

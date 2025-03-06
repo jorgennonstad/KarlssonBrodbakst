@@ -86,6 +86,7 @@ export default function AllProductsPage() {
                                 <div className="product-link">
                                     <div className="product-title">
                                         <h2 className="product-title-text">{product.name}</h2>
+                                        <i><h3 className="product-title-price">{product.price} kr</h3></i>
                                     </div>
                                 </div>
                             </div>

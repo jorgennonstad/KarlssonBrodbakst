@@ -199,10 +199,10 @@ const Footer: React.FC = () => {
           &copy; 2024 Karlson Brødbakst.
         </p>
         <p>
-          <i>Bilder tatt av <span><a href="https://www.wallinphoto.no/" target="_blank">WALLIN.PHOTO AS</a></span></i> 
+          <i>Bilder tatt av <span><a href="https://www.wallinphoto.no/" target="_blank">WALLIN PHOTO AS</a></span></i> 
         </p>
         <p>
-          <i>Designet og utviklet av <span><a href="https://deviro.no/" target="_blank">Deviro.no</a></span></i> 
+          <i>Designet og utviklet av <span><a href="https://deviro.no/" target="_blank">DEVIRO SB</a></span></i> 
         </p>
       </div>
     </footer>
